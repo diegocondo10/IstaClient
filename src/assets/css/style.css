@@ -1,0 +1,25 @@
+body {
+    /* Ubicación de la imagen */
+    /*background-image: url(img/background.jpg);*/
+    /* Para dejar la imagen de fondo centrada, vertical y
+    
+    horizontalmente */
+    background-position: center center;
+    /* Para que la imagen de fondo no se repita */
+    background-repeat: no-repeat;
+    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
+    background-attachment: fixed;
+    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
+    background-size: cover;
+}
+
+.hover:hover {
+    background-color: darkcyan;
+    transition-duration: 1s;
+    transition-delay: 10ms;
+    opacity: 100;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
