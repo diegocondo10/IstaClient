@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
 
     let user = await this.userSrv.login(this.user);
     if (user != null) {
-      window.location.reload()
+      //this.router.navigate(['home'])
+      window.location.reload();
     } else {
       console.log("NO SE HA ENCONTRADO ESE USUARIO");
     }

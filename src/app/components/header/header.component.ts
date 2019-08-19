@@ -34,9 +34,9 @@ export class HeaderComponent implements OnInit {
 
   Login() {
     if (this.bottonName = "Cerrar Sesion") {
-      console.log("HOLA MUNDO");
       this.userSrv.LOGOUT()
-      window.location.reload();
+      this.router.navigate(['login'])
+      this.bottonName = "Iniciar Sesion"
     }
   }
 

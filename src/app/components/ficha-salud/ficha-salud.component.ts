@@ -17,12 +17,21 @@ export class FichaSaludComponent implements OnInit {
   constructor(
     private fichaSrv: FichaSaludService,
     private userSrv: UsersService
-  ) { }
+  ) {
+
+/*     
+    setTimeout(
+      () => {
+        console.log("CARGANDO");
+      }
+      , 10000) */
+
+   }
 
   async ngOnInit() {
     this.user = this.userSrv.getUserLoggedIn();
     this.ficha = await this.fichaSrv.buscarFicha(this.user.persona.id);
-    console.log(this.ficha);
+
 
   }
 

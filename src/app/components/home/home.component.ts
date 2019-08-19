@@ -18,15 +18,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.userSrv.getUserLoggedIn() || {
-      username: 'ANONIMO',
-      persona: {
-        Foto: ''
-      }
-    };
-    if (this.user.username == 'ANONIMO') {
-      this.router.navigate(['login']);
-    }
+    this.user = this.userSrv.getUserLoggedIn();
   }
 
 }

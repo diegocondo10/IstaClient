@@ -1,26 +1,31 @@
-<div class="container">
-    <h1 class="text-center display-4">Ficha De Salud</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-11 col-lg-8">
-            <div class="" *ngFor="let seccion of ficha.seccionSet">
-                <h6 class="mt-5 bg-success py-2 text-center">{{seccion.nombre}}</h6>
-                <div class="" *ngFor="let prgnt of seccion.detallepreguntasSet">
-                    <div *ngIf="prgnt.pregunta.tipoRespuesta.nombre == 'SI-NO'">
-                        <h6 class="mx-md-5 mt-5">
-                            {{prgnt.pregunta.pregunta}}
+<div *ngIf="ficha">
 
-                        </h6>
-                        <select class="mx-md-5 custom-select" name="" id="" style="width: 80px">
-                            <option [ngValue]="null" disabled>{{prgnt.respuesta}}</option>
-                            <option value="prgnt.respuesta">SI</option>
-                            <option value="prgnt.respuesta">NO</option>
-                        </select>
+    <div class="container">
+        <h1 class="text-center display-4">Ficha De Salud</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-11 col-lg-8">
+                <div class="" *ngFor="let seccion of ficha.seccionSet">
+                    <h6 class="mt-5 bg-success py-2 text-center">{{seccion.nombre}}</h6>
+                    <div class="" *ngFor="let prgnt of seccion.detallepreguntasSet">
+                        <div *ngIf="prgnt.pregunta.tipoRespuesta.nombre == 'SI-NO'">
+                            <h6 class="mx-md-5 mt-5">
+                                {{prgnt.pregunta.pregunta}}
+
+                            </h6>
+                            <select class="mx-md-5 custom-select" name="" id="" style="width: 80px">
+                                <option [ngValue]="null" disabled>{{prgnt.respuesta}}</option>
+                                <option value="prgnt.respuesta">SI</option>
+                                <option value="prgnt.respuesta">NO</option>
+                            </select>
+
+                        </div>
 
                     </div>
 
                 </div>
-
             </div>
         </div>
     </div>
+
+
 </div>
