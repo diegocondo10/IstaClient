@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FichaSalud } from '../../models/ficha-salud';
+import { FichaSaludService } from '../../services/ficha-salud.service';
+import { UsersService } from '../../services/users.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-ficha-salud',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FichaSaludComponent implements OnInit {
 
-  constructor() { }
+  public ficha: FichaSalud
+  public user: User
 
-  ngOnInit() {
+  constructor(
+    private fichaSrv: FichaSaludService,
+    private userSrv: UsersService
+  ) { }
+
+  async ngOnInit() {
+    this.user = this.userSrv.getUserLoggedIn();
+    this.ficha = await this.fichaSrv.buscarFicha(this.user.persona.id);
+    console.log(this.ficha);
+
   }
 
 }

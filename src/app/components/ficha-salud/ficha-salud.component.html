@@ -1,1 +1,26 @@
-<p>ficha-salud works!</p>
+<div class="container">
+    <h1 class="text-center display-4">Ficha De Salud</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-11 col-lg-8">
+            <div class="" *ngFor="let seccion of ficha.seccionSet">
+                <h6 class="mt-5">{{seccion.nombre}}</h6>
+                <div class="" *ngFor="let prgnt of seccion.detallepreguntasSet">
+                    <div *ngIf="prgnt.pregunta.tipoRespuesta.nombre == 'SI-NO'">
+                        <h6 class="ml-5 mt-5">
+                            {{prgnt.pregunta.pregunta}}
+
+                        </h6>
+                        <select class="mx-5 custom-select" name="" id="">
+                            <option [ngValue]="null" disabled>{{prgnt.respuesta}}</option>
+                            <option value="prgnt.respuesta">SI</option>
+                            <option value="prgnt.respuesta">NO</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
