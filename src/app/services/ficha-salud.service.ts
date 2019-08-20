@@ -3,6 +3,9 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { FichaSalud } from '../models/ficha-salud';
 import { Responses } from '../models/responses';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ApolloQueryResult } from 'apollo-client';
 
 const BUSCAR_FICHA = gql`
 query buscarFicha($personaId: Int!) {
@@ -41,20 +44,17 @@ export class FichaSaludService {
   ) { }
 
 
-  public async buscarFicha(personaId: number): Promise<FichaSalud> {
-    const query = this.apollo.query<Responses>(
+  public buscarFicha(personaId: number): Observable<FichaSalud> {
+    return this.apollo.watchQuery<Responses>(
       {
         query: BUSCAR_FICHA,
         variables: {
           personaId: personaId
         }
       }
-    );
-
-    const result = (await query.toPromise()).data.ficha
-    return result;
-
-
+    ).valueChanges.pipe(
+      map(({ data }) => data.ficha)
+    )
   }
 
 }
