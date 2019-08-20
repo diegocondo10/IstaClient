@@ -23,3 +23,11 @@ body {
 .mt-100 {
     margin-top: 100px;
 }
+
+.bg-ista {
+    background-color: #0e3b7e;
+}
+
+.select-80px {
+    width: 80px;
+}

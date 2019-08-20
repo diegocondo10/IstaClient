@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+
+
+    <div class="col-md-11 col-lg-10 col-xl-9 mt-2 mt-sm-3">
+
+
+        <div class="card">
+
+
+            <div class="card-header text-center bg-ista text-white">
+                <h6>{{seccion.nombre}}</h6>
+            </div>
+            <!--DIV CARD-HEADER-->
+
+            <div class="card-body border border-dark">
+
+
+                <div *ngFor="let detalle of seccion.detallepreguntasSet; let i = index">
+
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SI-NO'">
+                        <div class="ml-lg-4 my-3">
+
+                            <h6 class="text-dark">{{i+1}}. {{detalle.pregunta.pregunta}} </h6>
+                            <select class="custom-select select-80px" name="" id="{{detalle.id}}">
+
+                                <option [value]="detalle.id" disabled>{{detalle.respuesta}}</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+
+                            </select>
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <!--DIV CARD BODY-->
+
+
+
+        </div>
+        <!--DIV CARD-->
+
+
+
+
+
+
+    </div>
+
+
+
+
+</div>
