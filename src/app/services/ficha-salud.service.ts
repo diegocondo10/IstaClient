@@ -42,13 +42,12 @@ export class FichaSaludService {
 
 
   public async findFichaByPersonaID(personaId: number): Promise<FichaSalud> {
-    const query = this.apollo.query<Responses>(
+    const query = await this.apollo.query<Responses>(
       {
         query: BUSCAR_FICHA,
         variables: {
           personaId: personaId
-        },
-        fetchPolicy: 'cache-first'
+        }
       }
     )
 

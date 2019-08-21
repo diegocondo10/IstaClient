@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Seccion } from '../../../../models/seccion';
+import { Parametro } from '../../../../models/parametro';
 
 @Component({
   selector: 'app-seccion',
@@ -9,12 +10,9 @@ import { Seccion } from '../../../../models/seccion';
 export class SeccionComponent implements OnInit {
 
   @Input() seccion: Seccion;
-
   constructor() { }
 
   ngOnInit() {
-
-
   }
 
 }

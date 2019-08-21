@@ -17,7 +17,16 @@ const PARAMETROS_ALL = gql`
     }
   }
 }
-`
+`;
+
+const FIND_BY_TIPO_PARAM_ID = gql`
+query findParametroByTipoParamID($tipoParam: Int!) {
+  parametros(tipoParametroId: $tipoParam) {
+    id
+    descripcion
+  }
+}
+`;
 
 
 
@@ -38,6 +47,19 @@ export class ParametroService {
 
     return (await query.toPromise()).data.parametros
 
+  }
+
+
+  public async getParametrosByTipoId(id: number): Promise<Parametro[]> {
+
+    const query = await this.apollo.query<Responses>({
+      query: FIND_BY_TIPO_PARAM_ID,
+      variables: {
+        tipoParam: id
+      },
+      fetchPolicy: 'cache-first'
+    })
+    return (await query.toPromise()).data.parametros
   }
 
 }
