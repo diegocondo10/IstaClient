@@ -13,7 +13,7 @@ import { User } from '../../../../models/user';
 })
 export class LayoutComponent implements OnInit {
 
-  public ficha: Observable<FichaSalud>;
+  public ficha: FichaSalud;
   private user: User;
 
   constructor(
@@ -22,9 +22,9 @@ export class LayoutComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.user = this.userSrv.getUserLoggedIn();
-    this.ficha = this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
+    this.ficha = await this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
 
 
   }

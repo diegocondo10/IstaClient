@@ -1,6 +1,6 @@
-<div *ngIf="ficha | async as fichaSalud" class="container">
+<div *ngIf="ficha" class="container">
 
     <h1 class="display-4 text-center mt-5 mb-3">Ficha Salud</h1>
-    <app-seccion *ngFor="let seccion of fichaSalud.seccionSet" [seccion]="seccion"></app-seccion>
+    <app-seccion *ngFor="let seccion of ficha.seccionSet" [seccion]="seccion"></app-seccion>
 
 </div>

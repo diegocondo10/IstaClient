@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-5">
 
 
     <div class="col-md-11 col-lg-10 col-xl-9 mt-2 mt-sm-3">
@@ -18,9 +18,10 @@
                 <div *ngFor="let detalle of seccion.detallepreguntasSet; let i = index">
 
                     <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SI-NO'">
+
                         <div class="ml-lg-4 my-3">
 
-                            <h6 class="text-dark">{{i+1}}. {{detalle.pregunta.pregunta}} </h6>
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
                             <select class="custom-select select-80px" name="" id="{{detalle.id}}">
 
                                 <option [value]="detalle.id" disabled>{{detalle.respuesta}}</option>
@@ -28,12 +29,64 @@
                                 <option value="NO">NO</option>
 
                             </select>
+                        </div>
+                    </div>
 
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MESES'">
+
+                        <div class="ml-lg-4 my-3">
+
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}}</h6>
+                            <input class="form-control select-80px" type="number" value="{{detalle.respuesta}}" min="1"
+                                max="12">
+                        </div>
+                    </div>
+
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'ABIERTA'">
+
+                        <div class="ml-lg-4 my-3">
+
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}}</h6>
+                            <input class="form-control " type="text" value="{{detalle.respuesta}}">
+                        </div>
+                    </div>
+
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'PORCENTAJE'">
+
+                        <div class="ml-lg-4 my-3">
+
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
+                            <input class="form-control select-80px" type="number" value="{{detalle.respuesta}}" min="1"
+                                max="100">
 
                         </div>
+                    </div>
 
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'FECHA'">
 
+                        <div class="ml-lg-4 my-3">
 
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
+                            <input class="form-control" type="date" value="{{detalle.respuesta}}">
+                        </div>
+                    </div>
+
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MUY-MALA A MUY-BUENA'">
+
+                        <div class="ml-lg-4 my-3">
+
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SELECCION MULTIPLE'">
+
+                        <div class="ml-lg-4 my-3">
+
+                            <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
+
+                        </div>
                     </div>
 
 

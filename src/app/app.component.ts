@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title = 'IstaClient';
+  bottonName = 'Iniciar Sesion';
   constructor(
     private userSrv: UsersService,
     private router: Router
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.loginRequired()
   }
 
