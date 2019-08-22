@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { FichaSalud } from '../../../../models/ficha-salud';
 import { FichaSaludService } from '../../../../services/ficha-salud.service';
 import { User } from '../../../../models/user';
@@ -25,8 +24,6 @@ export class LayoutComponent implements OnInit {
   async ngOnInit() {
     this.user = this.userSrv.getUserLoggedIn();
     this.ficha = await this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
-
-
   }
 
 }

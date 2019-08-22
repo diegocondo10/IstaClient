@@ -51,16 +51,33 @@
     </div>
 </div>
 
-<div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MUY-MALA A MUY-BUENA'">
+
+
+<div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SELECCION MULTIPLE'">
 
     <div class="ml-lg-4 my-3">
 
         <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
 
+
+        <div class="form-group">
+
+            <div class="ml-4 " *ngFor="let parametro of parametros">
+
+                <small id="helpId" class="form-check">
+                    <input type="checkbox" class="form-check-input" name="" id="">
+                    {{parametro.descripcion}}
+                </small>
+
+            </div>
+
+        </div>
+        <!--OPCION MULTIPLE-->
     </div>
 </div>
 
-<div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SELECCION MULTIPLE'">
+
+<div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MUY-MALA A MUY-BUENA'">
 
     <div class="ml-lg-4 my-3">
 
