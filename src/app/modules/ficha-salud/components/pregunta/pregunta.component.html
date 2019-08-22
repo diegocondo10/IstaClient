@@ -81,7 +81,19 @@
 
     <div class="ml-lg-4 my-3">
 
-        <h6 class="text-dark">{{detalle.pregunta.pregunta}} </h6>
+        <h6 class="text-dark">{{detalle.pregunta.pregunta}}
+
+            <select class="custom-select select-120px" name="" id="">
+
+                <option [value]="detalle.id" disabled>{{detalle.respuesta}}</option>
+                <option value="">Muy Buena</option>
+                <option value="">Buena</option>
+                <option value="">Regular</option>
+                <option value="">Mala</option>
+                <option value="">Muy Mala</option>
+            </select>
+
+        </h6>
 
     </div>
 </div>

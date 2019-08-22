@@ -3,7 +3,6 @@ import { User } from '../../models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { AppComponent } from '../../app.component';
-import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +21,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.app.bottonName = 'Iniciar Sesion';
   }
 
   async login() {
