@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Seccion } from '../../../../models/seccion';
+import { SeccionFS } from '../../../../models/seccion-ficha-salud';
 import { Parametro } from '../../../../models/parametro';
 
 @Component({
@@ -9,7 +9,7 @@ import { Parametro } from '../../../../models/parametro';
 })
 export class SeccionComponent implements OnInit {
 
-  @Input() seccion: Seccion;
+  @Input() seccion: SeccionFS;
   constructor() { }
 
   ngOnInit() {

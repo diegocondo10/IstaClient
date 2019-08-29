@@ -3,4 +3,5 @@ export class TipoRespuesta {
     nombre?: string
     minChar?: number
     maxChar?: number
+    extra?: string
 }

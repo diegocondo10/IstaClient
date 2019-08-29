@@ -20,8 +20,6 @@ const PREGUNTAS = gql`
 }
 `
 
-
-
 @Injectable({
   providedIn: 'root'
 })

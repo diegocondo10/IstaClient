@@ -1,4 +1,4 @@
-export class TipoParametro {
+export class SeccionNombre {
     id?: number
     nombre?: string
 }

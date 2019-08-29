@@ -1,6 +1,6 @@
-import { TipoParametro } from './tipo-parametro';
+import { TipoRespuesta } from './tipo-respuesta';
 export class Parametro {
     id?: number
     descripcion?: string
-    TipoParametro?: TipoParametro
+    tipoRespuesta?: TipoRespuesta
 }
