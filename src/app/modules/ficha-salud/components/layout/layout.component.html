@@ -1,8 +1,12 @@
 <div *ngIf="ficha" class="container">
 
     <h1 class="display-4 text-center mt-5 mb-3">Ficha Salud</h1>
-    <app-seccion *ngFor="let seccion of ficha.seccionSet" [seccion]="seccion"></app-seccion>
-    <div class="text-center mb-5">
-            <button class="btn btn-success" routerLink="/home">Aceptar y Confirmar</button>
+
+    <div *ngFor="let item of ficha.seccionfsSet">
+        <app-seccion [seccion]="item"></app-seccion>
+
     </div>
+
+
+
 </div>

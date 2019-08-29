@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  bottonName = 'Cerrar Sesion';
+  public bottonName = 'Cerrar Sesion';
   constructor(
     private userSrv: UsersService,
     private router: Router

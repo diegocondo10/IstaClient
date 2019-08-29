@@ -6,22 +6,25 @@ import { Responses } from '../models/responses';
 
 const BUSCAR_FICHA = gql`
 query buscarFicha($personaId: Int!) {
-  ficha(personaId: $personaId) {
+  ficha(personaId: $personaId)  {
     id
-    seccionSet {
+    seccionfsSet {
       id
-      nombre
-      detallepreguntasSet {
+      seccionNombre {
         id
-        respuesta
-        pregunta {
+        nombre
+        preguntaSet {
           id
-          pregunta
+          numero
+          titulo
           tipoRespuesta {
             id
             nombre
-            minChar
-            maxChar
+            extra
+            parametroSet{
+              id
+              descripcion
+            }
           }
         }
       }

@@ -3,22 +3,25 @@
 
     <div class="col-md-11 col-lg-10 col-xl-9 mt-2 mt-sm-3">
 
-
         <div class="card">
 
 
             <div class="card-header text-center bg-ista text-white">
-                <h6>{{seccion.nombre}}</h6>
+
+                <h5>{{seccion.seccionNombre.nombre}}</h5>
+            
             </div>
             <!--DIV CARD-HEADER-->
 
             <div class="card-body border border-dark">
 
 
-                <div *ngFor="let detalle of seccion.detallepreguntasSet; let i = index">
+                <div *ngFor="let pregunta of seccion.seccionNombre.preguntaSet">
+                    <h6>{{pregunta.titulo}}</h6>
 
-                    <app-pregunta [detalle]="detalle"></app-pregunta>
-
+                    <div *ngFor="let param of pregunta.tipoRespuesta.parametroSet">
+                        <p>{{param.descripcion}}</p>
+                    </div>
 
                 </div>
 

@@ -7,5 +7,5 @@ export class FichaSalud {
     estadoEnvio?: string
     periodoIngreso?: PeriodoIngresoFicha
     persona?: Persona
-    seccionSet?: SeccionFS[]
+    seccionfsSet?: SeccionFS[]
 }

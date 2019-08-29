@@ -6,18 +6,19 @@ import { Responses } from '../models/responses';
 
 
 const PREGUNTAS = gql`
-{
-  preguntas {
+query preguntasPorSeccion($seccionID: Int!) {
+  preguntas(seccionId: $seccionID) {
     id
-    pregunta
+    titulo
+    numero
     tipoRespuesta {
       id
       nombre
-      minChar
-      minChar
+      extra
     }
   }
 }
+
 `
 
 @Injectable({
@@ -32,9 +33,12 @@ export class PreguntaService {
   ) { }
 
 
-  public async getAllPreguntas(): Promise<Pregunta[]> {
+  public async getPreguntasBySeccion(seccionID: number): Promise<Pregunta[]> {
     const query = await this.apollo.query<Responses>({
       query: PREGUNTAS,
+      variables: {
+        seccionID: seccionID
+      },
       fetchPolicy: 'cache-first'
     })
     return (await query.toPromise()).data.preguntas

@@ -30,36 +30,24 @@ import { FichaSaludModule } from './modules/ficha-salud/ficha-salud.module';
     FormsModule,
     FichaSaludModule,
   ],
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: 'http://127.0.0.1:8000/graphql'
-          })
-        }
-      },
-      deps: [HttpLink]
-    }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 
 
   constructor(
-    //apollo: Apollo,
-    //httpLink: HttpLink
+    apollo: Apollo,
+    httpLink: HttpLink
   ) {
-    /*     apollo.create({
-          link: httpLink.create({
-            uri: 'http://localhost:8000/graphql',
-            //uri: 'http://35.192.7.211:80/graphql',
-            method: 'GET'
-          }),
-          cache: new InMemoryCache()
-        }); */
+    apollo.create({
+      link: httpLink.create({
+        uri: 'http://localhost:8000/graphql',
+        //uri: 'http://35.192.7.211:80/graphql',
+        method: 'GET'
+      }),
+      cache: new InMemoryCache()
+    });
   }
 
 }

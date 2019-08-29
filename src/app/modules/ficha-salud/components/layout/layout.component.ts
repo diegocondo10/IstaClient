@@ -24,6 +24,7 @@ export class LayoutComponent implements OnInit {
   async ngOnInit() {
     this.user = this.userSrv.getUserLoggedIn();
     this.ficha = await this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
+    console.log(this.ficha);
   }
 
 }

@@ -7,27 +7,15 @@ import { Responses } from '../models/responses';
 import { map } from 'rxjs/operators';
 
 
-const PARAMETROS_ALL = gql`
-{
-  parametros {
-    id
-    descripcion
-    tipoParametro {
-      id
-    }
-  }
-}
-`;
-
-const FIND_BY_TIPO_PARAM_ID = gql`
-query findParametroByTipoParamID($tipoParam: Int!) {
-  parametros(tipoParametroId: $tipoParam) {
+const PARAMETROS_POR_TIPO = gql`
+query parametrosPorTipo($IDtipo: Int!) {
+  parametros(tipoRespuesta: $IDtipo) {
     id
     descripcion
   }
 }
-`;
 
+`;
 
 
 @Injectable({
@@ -39,27 +27,19 @@ export class ParametroService {
     private apollo: Apollo
   ) { }
 
-  public async getAllParametros(): Promise<Parametro[]> {
+  public async getParametrosPor(idTipo: number): Promise<Parametro[]> {
     const query = await this.apollo.query<Responses>({
-      query: PARAMETROS_ALL,
-      fetchPolicy: 'cache-first'
-    })
-
-    return (await query.toPromise()).data.parametros
-
-  }
-
-
-  public async getParametrosByTipoId(id: number): Promise<Parametro[]> {
-
-    const query = await this.apollo.query<Responses>({
-      query: FIND_BY_TIPO_PARAM_ID,
+      query: PARAMETROS_POR_TIPO,
       variables: {
-        tipoParam: id
+        IDtipo: idTipo
       },
       fetchPolicy: 'cache-first'
     })
+
     return (await query.toPromise()).data.parametros
+
   }
+
+
 
 }
