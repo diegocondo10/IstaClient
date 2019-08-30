@@ -4,6 +4,7 @@ import { TipoRespuesta } from './tipo-respuesta';
 import { Parametro } from './parametro';
 import { Pregunta } from './pregunta';
 import { Persona } from './persona';
+
 export class Responses {
     login?: User
     ficha?: FichaSalud
@@ -11,4 +12,7 @@ export class Responses {
     parametros?: Parametro[]
     preguntas?: Pregunta[]
     personas?: Persona[]
+}
+
+export class MutationRes {
 }

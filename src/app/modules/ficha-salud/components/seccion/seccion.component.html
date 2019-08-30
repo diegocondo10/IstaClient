@@ -1,7 +1,7 @@
 <div class="row justify-content-center mb-5">
 
 
-    <div class="col-md-11 col-lg-10 col-xl-9 mt-2 mt-sm-3">
+    <div class="col-12 col-md-11 mt-2 mt-sm-3">
 
         <div class="card">
 
@@ -9,20 +9,14 @@
             <div class="card-header text-center bg-ista text-white">
 
                 <h5>{{seccion.seccionNombre.nombre}}</h5>
-            
+
             </div>
             <!--DIV CARD-HEADER-->
 
             <div class="card-body border border-dark">
 
-
-                <div *ngFor="let pregunta of seccion.seccionNombre.preguntaSet">
-                    <h6>{{pregunta.titulo}}</h6>
-
-                    <div *ngFor="let param of pregunta.tipoRespuesta.parametroSet">
-                        <p>{{param.descripcion}}</p>
-                    </div>
-
+                <div *ngFor="let detalle of seccion.detallerespuestaSet">
+                    <app-pregunta [detalle]="detalle"></app-pregunta>
                 </div>
 
 

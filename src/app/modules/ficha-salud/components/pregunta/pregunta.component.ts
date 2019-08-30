@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Host } from '@angular/core';
 import { Parametro } from '../../../../models/parametro';
-import { ParametroService } from '../../../../services/parametro.service';
+import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
+import { DetalleRespuestaService } from '../../../../services/detalle-respuesta.service';
 
 @Component({
   selector: 'app-pregunta',
@@ -10,11 +11,11 @@ import { ParametroService } from '../../../../services/parametro.service';
 export class PreguntaComponent implements OnInit {
 
   public parametros: Parametro[];
-
-  public navbarCollapsed = true
+  @Input() detalle: DetalleRespuesta
 
   constructor(
-    public paramSrv: ParametroService
+    private detallePrgSrv: DetalleRespuestaService
+
   ) { }
 
   async ngOnInit() {
@@ -23,6 +24,20 @@ export class PreguntaComponent implements OnInit {
 
 
   }
+
+
+
+  check(parametro: Parametro) {
+    console.log(parametro);
+  }
+
+
+  async SiNo(value, detalle: DetalleRespuesta) {
+    this.detalle.respuestaSimple = value
+    await this.detallePrgSrv.updateResFS(this.detalle.id, value)
+    console.log(detalle);
+  }
+
 
 
 }

@@ -4,7 +4,6 @@ import { Pregunta } from '../../../../models/pregunta';
 import { PreguntaService } from '../../../../services/pregunta.service';
 import { Parametro } from '../../../../models/parametro';
 import { ParametroService } from '../../../../services/parametro.service';
-import { SeccionNombre } from '../../../../models/seccion-nombre';
 
 @Component({
   selector: 'app-seccion',
@@ -24,10 +23,7 @@ export class SeccionComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-
-    this.preguntas = await this.preguntaSrv.getPreguntasBySeccion(this.seccion.seccionNombre.id);
-
-
+    console.log(this.seccion.detallerespuestaSet);
 
 
   }

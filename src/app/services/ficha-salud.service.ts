@@ -6,14 +6,16 @@ import { Responses } from '../models/responses';
 
 const BUSCAR_FICHA = gql`
 query buscarFicha($personaId: Int!) {
-  ficha(personaId: $personaId)  {
+  ficha(personaId: $personaId){
     id
     seccionfsSet {
-      id
       seccionNombre {
         id
         nombre
-        preguntaSet {
+      }
+      detallerespuestaSet {
+        id
+        pregunta {
           id
           numero
           titulo
@@ -21,7 +23,7 @@ query buscarFicha($personaId: Int!) {
             id
             nombre
             extra
-            parametroSet{
+            parametroSet {
               id
               descripcion
             }
@@ -31,7 +33,6 @@ query buscarFicha($personaId: Int!) {
     }
   }
 }
-
 `;
 
 @Injectable({
