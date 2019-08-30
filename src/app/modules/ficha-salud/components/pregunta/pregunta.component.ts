@@ -21,8 +21,6 @@ export class PreguntaComponent implements OnInit {
   async ngOnInit() {
 
 
-
-
   }
 
 
@@ -33,7 +31,7 @@ export class PreguntaComponent implements OnInit {
 
 
   async SiNo(value, detalle: DetalleRespuesta) {
-    this.detalle.respuestaSimple = value
+    this.detalle.respuesta = value
     await this.detallePrgSrv.updateResFS(this.detalle.id, value)
     console.log(detalle);
   }

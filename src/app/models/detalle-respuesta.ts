@@ -3,8 +3,7 @@ import { SeccionFS } from './seccion-ficha-salud';
 import { Pregunta } from './pregunta';
 export class DetalleRespuesta {
     id?: number
-    respuestaSimple?: string
-    respuestaParam?: number
+    respuesta?: string
     parentesco?: Diagnostico
     seccion?: SeccionFS
     pregunta?: Pregunta

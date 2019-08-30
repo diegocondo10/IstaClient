@@ -15,6 +15,7 @@ query buscarFicha($personaId: Int!) {
       }
       detallerespuestaSet {
         id
+        respuesta
         pregunta {
           id
           numero

@@ -4,6 +4,7 @@ import { Pregunta } from '../../../../models/pregunta';
 import { PreguntaService } from '../../../../services/pregunta.service';
 import { Parametro } from '../../../../models/parametro';
 import { ParametroService } from '../../../../services/parametro.service';
+import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
 
 @Component({
   selector: 'app-seccion',
@@ -13,17 +14,23 @@ import { ParametroService } from '../../../../services/parametro.service';
 export class SeccionComponent implements OnInit {
 
   @Input() seccion: SeccionFS;
-  public preguntas: Pregunta[]
-
-  public parametros: Parametro[]
 
   constructor(
-    private preguntaSrv: PreguntaService,
-    private paramSrv: ParametroService
   ) { }
 
   async ngOnInit() {
-    console.log(this.seccion.detallerespuestaSet);
+
+    this.seccion.detallerespuestaSet = this.seccion.detallerespuestaSet
+      .sort(function (item1: DetalleRespuesta, item2: DetalleRespuesta) {
+        if (item1.pregunta.numero < item2.pregunta.numero) {
+          return -1
+        }
+        if (item1.pregunta.numero > item2.pregunta.numero) {
+          return 1
+        }
+        return 0
+      })
+
 
 
   }

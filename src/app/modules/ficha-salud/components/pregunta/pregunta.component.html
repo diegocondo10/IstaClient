@@ -52,7 +52,7 @@
 
         <select class="custom-select select-120px" name="" id="">
 
-            <option [value]="detalle.id" disabled>{{detalle.respuestaSimple}}</option>
+            <option [value]="detalle.id" disabled>{{detalle.respuesta}}</option>
             <option value="">Muy Buena</option>
             <option value="">Buena</option>
             <option value="">Regular</option>
@@ -66,7 +66,7 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'FECHA'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control" type="date" value="{{detalle.respuestaSimple}}">
+        <input class="form-control" type="date" value="{{detalle.respuesta}}">
     </div>
 </div>
 
@@ -74,7 +74,7 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'PORCENTAJE'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control select-80px" type="number" value="{{detalle.respuestaSimple}}" min="1" max="100">
+        <input class="form-control select-80px" type="number" value="{{detalle.respuesta}}" min="1" max="100">
     </div>
 </div>
 
@@ -83,7 +83,7 @@
 
     <div class="ml-lg-4 my-3">
 
-        <input class="form-control " type="text" value="{{detalle.respuestaSimple}}">
+        <input class="form-control " type="text" value="{{detalle.respuesta}}">
     </div>
 </div>
 
@@ -91,18 +91,17 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MESES'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control select-80px" type="number" value="{{detalle.respuestaSimple}}" min="1" max="12">
+        <input class="form-control select-80px" type="number" value="{{detalle.respuesta}}" min="1" max="12">
     </div>
 </div>
 
 
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SI - NO'">
-
     <div class="ml-lg-4 my-3">
         <select class="custom-select select-80px" name="" id="{{detalle.id}}"
             (change)="SiNo($event.target.value, detalle)">
 
-            <option [value]="detalle.id" disabled>{{detalle.respuestaSimple}}</option>
+            <option [value]="detalle.id" disabled>{{detalle.respuesta}}</option>
             <option value="SI">SI</option>
             <option value="NO">NO</option>
 
