@@ -30,12 +30,11 @@ export class PreguntaComponent implements OnInit {
   }
 
 
-  async SiNo(value, detalle: DetalleRespuesta) {
+  async respuesta(value, detalle: DetalleRespuesta) {
     this.detalle.respuesta = value
     await this.detallePrgSrv.updateResFS(this.detalle.id, value)
     console.log(detalle);
   }
-
 
 
 }
