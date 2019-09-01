@@ -15,11 +15,11 @@
         </div>
     </div>
 
-    <div *ngIf="ficha | async  as fichaSalud">
-        <div *ngFor="let seccion of fichaSalud | ficha">
-            <app-seccion [seccion]="seccion"></app-seccion>
+    <div *ngFor="let seccion of ficha.seccionfsSet">
 
-        </div>
+        <app-seccion [seccion]="seccion"></app-seccion>
+
     </div>
+
 
 </div>

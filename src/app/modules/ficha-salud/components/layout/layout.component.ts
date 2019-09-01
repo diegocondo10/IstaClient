@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { FichaSalud } from '../../../../models/ficha-salud';
 import { FichaSaludService } from '../../../../services/ficha-salud.service';
 import { User } from '../../../../models/user';
-import { Observable } from 'rxjs';
-import { ApolloQueryResult } from 'apollo-client';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -14,7 +13,8 @@ import { ApolloQueryResult } from 'apollo-client';
 })
 export class LayoutComponent implements OnInit, OnDestroy {
 
-  public ficha: Observable<ApolloQueryResult<FichaSalud>>;
+  public ficha: FichaSalud;
+  private subscriptions: Subscription[];
   private user: User;
 
   constructor(
@@ -23,14 +23,19 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  ngOnInit() {
-    this.user = this.userSrv.getUserLoggedIn();
-    this.ficha = this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
+  async ngOnInit() {
+    this.user = await this.userSrv.getUserLoggedIn();
+    const fichaSub = this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
+      .subscribe(({ data }) => {
+        this.ficha = data['ficha']
+      });
+
+    this.subscriptions.push(fichaSub)
+
   }
 
   ngOnDestroy() {
-
-    this.ficha
+    this.subscriptions.forEach(obj => obj.unsubscribe())
 
   }
 

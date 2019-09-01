@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { FichaSalud } from '../models/ficha-salud';
-import { Responses } from '../models/responses';
 
 const BUSCAR_FICHA = gql`
 query buscarFicha($personaId: Int!) {
