@@ -1,9 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SeccionFS } from '../../../../models/seccion-ficha-salud';
-import { Pregunta } from '../../../../models/pregunta';
-import { PreguntaService } from '../../../../services/pregunta.service';
-import { Parametro } from '../../../../models/parametro';
-import { ParametroService } from '../../../../services/parametro.service';
 import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
 
 @Component({

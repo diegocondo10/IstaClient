@@ -2,7 +2,6 @@ import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { User } from '../models/user';
-import { Responses } from '../models/responses';
 
 const LOGIN = gql`
 query login($username: String!, $password: String!) {
@@ -34,28 +33,13 @@ export class UsersService {
   ) { }
 
 
-  public async login(user: User)//: Promise<User> 
-  {
-    /*
-    const query = await this.apollo.query({
-      query: LOGIN,
-      variables: {
-        username: user.username,
-        password: user.password
-      }
-    });
-    const result: User = (await query.toPromise()).data['login'];
-    console.log(result);
-    this.LOGIN(result)
-    return result;
-    */
+  public async login(user: User) {
     const watch = await this.apollo.watchQuery({
       query: LOGIN,
       variables: {
         username: user.username,
         password: user.password
-      },
-      pollInterval: 10000
+      }
     })
     const result = (await watch.result()).data['login']
     this.LOGIN(result)

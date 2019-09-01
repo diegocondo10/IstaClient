@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Host } from '@angular/core';
 import { Parametro } from '../../../../models/parametro';
 import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
-import { DetalleRespuestaService } from '../../../../services/detalle-respuesta.service';
+import { DetalleRespuestaService } from '../../services/detalle-respuesta.service';
 
 @Component({
   selector: 'app-pregunta',

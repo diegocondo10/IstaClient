@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
 import { FichaSalud } from '../../../../models/ficha-salud';
-import { FichaSaludService } from '../../../../services/ficha-salud.service';
+import { FichaSaludService } from '../../services/ficha-salud.service';
 import { User } from '../../../../models/user';
 import { Subscription } from 'rxjs';
 

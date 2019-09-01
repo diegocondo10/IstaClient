@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { TipoRespuesta } from '../models/tipo-respuesta';
-import { Responses } from '../models/responses';
+import { TipoRespuesta } from '../../../models/tipo-respuesta';
 import { map } from 'rxjs/operators';
 
 const FIND_TIPO_RESPUESTA = gql`
@@ -31,13 +30,13 @@ export class TipoRespuestaService {
 
   public findTipoRespuestaByPreguntaID(preguntaID: number): Observable<TipoRespuesta> {
 
-    return this.apollo.watchQuery<Responses>({
+    return this.apollo.watchQuery({
       query: FIND_TIPO_RESPUESTA,
       variables: {
         preguntaId: preguntaID
       }
     }).valueChanges.pipe(
-      map((data) => data.data.tipoRespuesta)
+      map((data) => data.data['tipoRespuesta'])
     )
 
   }
