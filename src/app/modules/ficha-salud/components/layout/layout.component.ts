@@ -14,8 +14,10 @@ import { Subscription } from 'rxjs';
 export class LayoutComponent implements OnInit, OnDestroy {
 
   public ficha: FichaSalud;
-  private subscriptions: Subscription[];
+  private subscriptions: Subscription[] = []
   private user: User;
+
+  public loading: boolean
 
   constructor(
     private fichaSrv: FichaSaludService,
@@ -25,10 +27,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.user = await this.userSrv.getUserLoggedIn();
-    const fichaSub = this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
-      .subscribe(({ data }) => {
+    const fichaSub = await this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
+      .subscribe(({ data, loading }) => {
+        this.loading = loading
         this.ficha = data['ficha']
       });
+
+
 
     this.subscriptions.push(fichaSub)
 
@@ -36,7 +41,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.forEach(obj => obj.unsubscribe())
-
   }
 
 }

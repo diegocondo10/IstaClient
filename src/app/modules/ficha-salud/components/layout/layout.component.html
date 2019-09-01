@@ -15,11 +15,21 @@
         </div>
     </div>
 
-    <div *ngFor="let seccion of ficha.seccionfsSet">
 
-        <app-seccion [seccion]="seccion"></app-seccion>
 
-    </div>
+    <ng-container *ngIf="loading; else elseTemplate">
+        <h1>CARGANDO LA FICHA</h1>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <div *ngFor="let seccion of ficha.seccionfsSet">
+
+            <app-seccion [seccion]="seccion"></app-seccion>
+
+        </div>
+    </ng-template>
+
+
+
 
 
 </div>
