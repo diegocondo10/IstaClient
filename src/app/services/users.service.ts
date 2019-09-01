@@ -34,15 +34,30 @@ export class UsersService {
   ) { }
 
 
-  public async login(user: User): Promise<User> {
-    const query = await this.apollo.query<Responses>({
+  public async login(user: User)//: Promise<User> 
+  {
+    /*
+    const query = await this.apollo.query({
       query: LOGIN,
       variables: {
         username: user.username,
         password: user.password
       }
     });
-    const result: User = (await query.toPromise()).data.login;
+    const result: User = (await query.toPromise()).data['login'];
+    console.log(result);
+    this.LOGIN(result)
+    return result;
+    */
+    const watch = await this.apollo.watchQuery({
+      query: LOGIN,
+      variables: {
+        username: user.username,
+        password: user.password
+      },
+      pollInterval: 10000
+    })
+    const result = (await watch.result()).data['login']
     this.LOGIN(result)
     return result;
 

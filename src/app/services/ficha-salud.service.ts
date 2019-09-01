@@ -46,17 +46,15 @@ export class FichaSaludService {
   ) { }
 
 
-  public async findFichaByPersonaID(personaId: number): Promise<FichaSalud> {
-    const query = await this.apollo.query<Responses>(
+  public findFichaByPersonaID(personaId: number) {
+    return this.apollo.watchQuery(
       {
         query: BUSCAR_FICHA,
         variables: {
           personaId: personaId
         }
       }
-    )
-
-    return (await query.toPromise()).data.ficha;
+    ).valueChanges
 
 
   }

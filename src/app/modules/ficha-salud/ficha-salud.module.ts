@@ -6,6 +6,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { SeccionComponent } from './components/seccion/seccion.component';
 import { PreguntaComponent } from './components/pregunta/pregunta.component';
 import { ParametrosPersonaComponent } from './components/parametros-persona/parametros-persona.component';
+import { FichaPipe } from './pipes/ficha.pipe';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ParametrosPersonaComponent } from './components/parametros-persona/para
     LayoutComponent,
     SeccionComponent,
     PreguntaComponent,
-    ParametrosPersonaComponent
+    ParametrosPersonaComponent,
+    FichaPipe
   ],
   imports: [
     CommonModule,
