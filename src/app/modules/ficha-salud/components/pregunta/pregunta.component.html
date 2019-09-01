@@ -10,15 +10,13 @@
 
                     <small id="helpId" class="form-check">
                         <input type="checkbox" class="form-check-input" name="" id="{{parametro.id}}"
-                            (change)="check(parametro)">
+                            (change)="check($event.target.checked,parametro)" [checked]="parametro.checked">
                         {{parametro.descripcion}}
                     </small>
 
                 </div>
 
             </div>
-            <!--OPCION MULTIPLE CHECK-BOX-->
-            <app-parametros-persona></app-parametros-persona>
         </div>
 
     </div>
@@ -34,7 +32,8 @@
             <div class="ml-4 " *ngFor="let parametro of detalle.pregunta.tipoRespuesta.parametroSet">
 
                 <small id="helpId" class="form-check">
-                    <input type="radio" class="form-check-input" name="{{detalle.pregunta.titulo}}" id="">
+                    <input type="radio" class="form-check-input" name="{{detalle.pregunta.titulo}}" id=""
+                        [checked]="parametro.checked" (change)="check($event.target.checked,parametro)">
                     {{parametro.descripcion}}
                 </small>
 
@@ -50,9 +49,8 @@
 
     <div class="ml-lg-4 my-3">
 
-        <select class="custom-select select-250px" name="" id="">
-
-            <option [value]="detalle.id" disabled>Respuesta seleccionada: {{detalle.respuesta}}</option>
+        <select class="custom-select select-250px" name="" id="" [value]="detalle.respuesta"
+            (change)="respuesta($event.target.value, detalle)">
             <option value="">Muy Buena</option>
             <option value="">Buena</option>
             <option value="">Regular</option>
@@ -66,7 +64,8 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'FECHA'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control" type="date" value="{{detalle.respuesta}}" (change)="respuesta($event.target.value, detalle)">
+        <input class="form-control" type="date" [value]="detalle.respuesta"
+            (change)="respuesta($event.target.value, detalle)">
     </div>
 </div>
 
@@ -74,7 +73,8 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'PORCENTAJE'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control select-80px" type="number" value="{{detalle.respuesta}}" min="1" max="100" (change)="respuesta($event.target.value, detalle)">
+        <input class="form-control select-80px" type="number" [value]="detalle.respuesta" min="1" max="100"
+            (change)="respuesta($event.target.value, detalle)">
     </div>
 </div>
 
@@ -83,7 +83,8 @@
 
     <div class="ml-lg-4 my-3">
 
-        <input class="form-control " type="text" value="{{detalle.respuesta}}" (change)="respuesta($event.target.value, detalle)">
+        <input class="form-control " type="text" [value]="detalle.respuesta"
+            (change)="respuesta($event.target.value, detalle)">
     </div>
 </div>
 
@@ -91,7 +92,8 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MESES'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control select-80px" type="number" value="{{detalle.respuesta}}" min="1" max="9" (change)="respuesta($event.target.value, detalle)">
+        <input class="form-control select-80px" type="number" [value]="detalle.respuesta" min="1" max="9"
+            (change)="respuesta($event.target.value, detalle)">
     </div>
 </div>
 
@@ -99,12 +101,9 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SI - NO'">
     <div class="ml-lg-4 my-3">
         <select class="custom-select select-250px" name="" id="{{detalle.id}}"
-        (change)="respuesta($event.target.value, detalle)">
-
-            <option [value]="detalle.id" disabled>Respuesta seleccionada: {{detalle.respuesta}}</option>
+            (change)="respuesta($event.target.value, detalle)" [value]="detalle.respuesta">
             <option value="SI">SI</option>
             <option value="NO">NO</option>
-
         </select>
     </div>
 </div>

@@ -3,33 +3,33 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 
 
-const UPDATE_RES = gql`
-mutation updateRespuestaFS($ID: ID, $respuesta: String!) {
-  updResFs(id: $ID, respuesta: $respuesta) {
+const ADD_DEL_PARAM = gql`
+mutation addDelParam($detailRes: Int!, $param: Int!) {
+  addDelParametro(idDetalleRespuesta: $detailRes, idParametro: $param) {
     detalle {
       id
-      respuesta
     }
   }
 }
 `
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class DetalleRespuestaService {
+export class DetalleParametrosService {
 
   constructor(
     private apollo: Apollo
   ) { }
 
-  public async updateResFS(id: number, respuesta: string) {
 
+  public async addDelParam(idDetalleRes: number, idParam: number) {
     const mutation = await this.apollo.mutate({
-      mutation: UPDATE_RES,
+      mutation: ADD_DEL_PARAM,
       variables: {
-        ID: id,
-        respuesta: respuesta
+        detailRes: idDetalleRes,
+        param: idParam
       }
     })
 
@@ -37,5 +37,4 @@ export class DetalleRespuestaService {
     console.log(result);
 
   }
-
 }

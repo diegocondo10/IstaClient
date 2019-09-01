@@ -1,6 +1,7 @@
 import { TipoRespuesta } from './tipo-respuesta';
-export class Parametro {
+export type Parametro = {
     id?: number
     descripcion?: string
     tipoRespuesta?: TipoRespuesta
+    checked?: boolean
 }
