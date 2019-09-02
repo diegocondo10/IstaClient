@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import * as jsPDF from 'jspdf';
+
 
 @Component({
   selector: 'app-home',
@@ -19,6 +21,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userSrv.getUserLoggedIn();
+  }
+
+  generarPdf() {
+    const doc = new jsPDF();
+    doc.fromHTML(document.getElementById('home'),10,10);
+    doc.save('Reporte Prueba');
   }
 
 }
