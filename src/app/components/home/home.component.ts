@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   generarPdf() {
     const doc = new jsPDF();
-    doc.fromHTML(document.getElementById('home'),10,10);
+    doc.fromHTML(document.getElementById('home'), 10, 10);
     doc.save('Reporte Prueba');
   }
 
