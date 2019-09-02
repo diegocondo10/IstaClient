@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  public bottonName = 'Cerrar Sesion';
+  public bottonName: string = 'Cerrar Sesion';
   constructor(
     private userSrv: UsersService,
     private router: Router
@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   public loginRequired(): boolean {
     console.log("LOGIN REQUIRED")
     const user = this.userSrv.getUserLoggedIn();
-
     if (user == null) {
       this.router.navigate(['login'])
       return true;

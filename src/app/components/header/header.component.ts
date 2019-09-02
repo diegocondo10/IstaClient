@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
 
   public user: User;
   @Input() bottonName: string;
-  public showNav: boolean = false;
 
   constructor(
     private userSrv: UsersService,

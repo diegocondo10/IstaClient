@@ -27,7 +27,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.user = await this.userSrv.getUserLoggedIn();
-    const fichaSub = await this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
+
+    const fichaSub = this.fichaSrv.findFichaByPersonaID(this.user.persona.id)
       .subscribe(({ data, loading }) => {
         this.loading = loading
         this.ficha = data['ficha']
