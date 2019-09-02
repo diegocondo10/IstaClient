@@ -42,22 +42,6 @@ export class PreguntaComponent implements OnInit {
   async check(checked, parametro: Parametro) {
     parametro.checked = checked
     await this.detParamSrv.addDelParam(this.detalle.id, parametro.id)
-    /*    try {
-         const param = this.detalle.detalleparametrosSet
-           .filter((item: DetalleParametro) => item.parametro.id == parametro.id)[0]
-         console.log(param);
-         if (param == undefined) {
-           this.detalle.detalleparametrosSet.push(parametro)
-         } else {
-           const index = this.detalle.detalleparametrosSet.indexOf(param)
-           this.detalle.detalleparametrosSet.splice(index, 1);
-         }
-   
-       } catch (error) {
-         this.detalle.detalleparametrosSet.push(parametro)
-         //this.detalle.detalleparametrosSet.push(parametro)
-       }
-       console.log(this.detalle.detalleparametrosSet); */
   }
 
 
