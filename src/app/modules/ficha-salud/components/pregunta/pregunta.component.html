@@ -92,8 +92,21 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MESES'">
 
     <div class="ml-lg-4 my-3">
-        <input class="form-control select-80px" type="number" [value]="detalle.respuesta" min="1" max="9"
-            (change)="respuesta($event.target.value, detalle)">
+        <label for="">
+            <input class="form-control select-120px" type="number" [value]="detalle.respuesta" min="1" max="9"
+                (change)="respuesta($event.target.value, detalle)" placeholder="meses">
+        </label>
+    </div>
+</div>
+
+
+<div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'CARNET CONADIS'">
+
+    <div class="ml-lg-4 my-3">
+        <label for="">
+            <input class="form-control select-120px" type="text" [value]="detalle.respuesta" min="1" max="9"
+                (change)="respuesta($event.target.value, detalle)">
+        </label>
     </div>
 </div>
 
