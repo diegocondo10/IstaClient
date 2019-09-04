@@ -51,8 +51,8 @@
 
     <div class="ml-lg-4 my-3">
 
-        <select class="custom-select select-250px" name="" id="" [value]="detalle.respuesta" [required]="true"
-            (change)="respuesta($event.target.value, detalle)">
+        <select class="custom-select select-250px" name="" id="{{detalle.id}}"
+            (change)="respuesta($event.target.value, detalle)" [value]="detalle.respuesta">
             <option value="">Muy Buena</option>
             <option value="">Buena</option>
             <option value="">Regular</option>
