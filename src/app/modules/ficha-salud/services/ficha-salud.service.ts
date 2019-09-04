@@ -66,7 +66,8 @@ export class FichaSaludService {
         query: BUSCAR_FICHA,
         variables: {
           personaId: personaId
-        }
+        },
+        fetchPolicy: 'network-only'
       }
     ).valueChanges
 

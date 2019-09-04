@@ -23,19 +23,20 @@
 
 </div>
 
-<div *ngIf="detalle.pregunta.tipoRespuesta.extra == 'RADIO'">
+<div *ngIf="detalle.pregunta.tipoRespuesta.extra == 'RADIO-CMB'">
 
     <div class="my-3">
 
         <div class="form-group">
 
-            <div class="ml-4 " *ngFor="let parametro of detalle.pregunta.tipoRespuesta.parametroSet">
+            <div class="ml-4 ">
 
-                <small id="helpId" class="form-check">
-                    <input type="radio" class="form-check-input" name="{{detalle.pregunta.titulo}}" id=""
-                        [checked]="parametro.checked" (change)="check($event.target.checked,parametro)">
-                    {{parametro.descripcion}}
-                </small>
+                <select class="custom-select select-250px" name="" id="" [value]="detalle.respuesta" [required]="true"
+                    (change)="respuesta($event.target.value, detalle)">
+                    <option value="{{item.descripcion}}" *ngFor="let item of detalle.pregunta.tipoRespuesta.parametroSet">
+                        {{item.descripcion}}
+                    </option>
+                </select>
 
             </div>
 
