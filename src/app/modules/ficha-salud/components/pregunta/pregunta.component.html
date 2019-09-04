@@ -33,7 +33,8 @@
 
                 <select class="custom-select select-250px" name="" id="" [value]="detalle.respuesta" [required]="true"
                     (change)="respuesta($event.target.value, detalle)">
-                    <option value="{{item.descripcion}}" *ngFor="let item of detalle.pregunta.tipoRespuesta.parametroSet">
+                    <option value="{{item.descripcion}}"
+                        *ngFor="let item of detalle.pregunta.tipoRespuesta.parametroSet">
                         {{item.descripcion}}
                     </option>
                 </select>
@@ -46,7 +47,7 @@
 
 </div>
 
-<div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'MUY-MALA<>MALA<>REGULAR<>BUENA<>MUY BUENA'">
+<div *ngIf="detalle.pregunta.tipoRespuesta.extra == 'CMB'">
 
     <div class="ml-lg-4 my-3">
 
