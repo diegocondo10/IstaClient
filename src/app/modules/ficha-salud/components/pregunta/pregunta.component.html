@@ -120,3 +120,8 @@
         </select>
     </div>
 </div>
+
+
+<div *ngIf="detalle.pregunta.tipoRespuesta.extra == 'DIAGNOSTICO'">
+    <app-diagnostico-familiar [diagnosticos]="detalle.detallediagnosticoSet"></app-diagnostico-familiar>
+</div>

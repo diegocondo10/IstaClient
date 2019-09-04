@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 
 const BUSCAR_FICHA = gql`
 query buscarFicha($personaId: Int!) {
-  ficha(personaId: $personaId) {
+  ficha(personaId: $personaId){
     id
     seccionfsSet {
       seccionNombre {
@@ -28,14 +28,20 @@ query buscarFicha($personaId: Int!) {
             }
           }
         }
-        
         detalleparametrosSet {
           id
-          detalleRespuesta{
+          detalleRespuesta {
             id
           }
           parametro {
             id
+          }
+        }
+        detallediagnosticoSet {
+          id
+          diagnostico {
+            parentesco
+            diagnostico
           }
         }
       }
