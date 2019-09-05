@@ -46,6 +46,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   btnConfirmar() {
     this.fichaSrv.confirmarFicha(this.ficha.id, "CONFIRMADO")
+    this.router.navigate(['ficha-confirm'])
   }
 
 }
