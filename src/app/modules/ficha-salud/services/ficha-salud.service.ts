@@ -50,6 +50,17 @@ query buscarFicha($personaId: Int!) {
 }
 `;
 
+
+const CONFIRMAR_FICHA = gql`
+mutation confirmarFicha($ID: ID, $state: String!) {
+  ficha(ficha: {id: $ID, estadoEnvio: $state}, operation: UPDATE) {
+    ficha {
+      id
+    }
+  }
+}
+`;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -71,6 +82,19 @@ export class FichaSaludService {
       }
     ).valueChanges
 
+  }
+
+  public async confirmarFicha(IDficha: number, state: string) {
+    const mutation = await this.apollo.mutate({
+      mutation: CONFIRMAR_FICHA,
+      variables: {
+        ID: IDficha,
+        state: state
+      }
+    })
+
+    const result = (await mutation.toPromise()).data
+    console.log(result);
 
   }
 

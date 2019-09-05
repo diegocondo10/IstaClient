@@ -34,7 +34,7 @@ export class DetalleRespuestaService {
     })
 
     const result = (await mutation.toPromise()).data
-    console.log(result);
+    //console.log(result);
 
   }
 
