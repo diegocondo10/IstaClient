@@ -6,5 +6,6 @@ export class Pregunta {
     titulo?: string
     tipoRespuesta?: TipoRespuesta
     seccNom?: SeccionNombre
+    required?: boolean
 }
 

@@ -18,6 +18,7 @@ query buscarFicha($personaId: Int!) {
           id
           numero
           titulo
+          required
           tipoRespuesta {
             id
             nombre
