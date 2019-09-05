@@ -17,16 +17,19 @@
 
 
 
-    <ng-container *ngIf="loading; else elseTemplate">
-        <h1>CARGANDO LA FICHA</h1>
-    </ng-container>
-    <ng-template #elseTemplate>
+    <form #formFicha="ngForm">
         <div *ngFor="let seccion of ficha.seccionfsSet">
 
             <app-seccion [seccion]="seccion"></app-seccion>
 
         </div>
-    </ng-template>
+
+        <div class="text-center mb-5">
+            <button type="submit" class="btn btn-success" [disabled]="formFicha.invalid">Guardar y Confirmar</button>
+        </div>
+
+
+    </form>
 
 
 
