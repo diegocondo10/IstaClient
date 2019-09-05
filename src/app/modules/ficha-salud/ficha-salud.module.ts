@@ -9,6 +9,7 @@ import { ParametrosPersonaComponent } from './components/parametros-persona/para
 import { FichaPipe } from './pipes/ficha.pipe';
 import { DiagnosticoFamiliarComponent } from './components/diagnostico-familiar/diagnostico-familiar.component';
 import { FormsModule } from '@angular/forms';
+import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 
 
 
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     PreguntaComponent,
     ParametrosPersonaComponent,
     FichaPipe,
-    DiagnosticoFamiliarComponent
+    DiagnosticoFamiliarComponent,
+    ConfirmacionComponent
   ],
   imports: [
     CommonModule,

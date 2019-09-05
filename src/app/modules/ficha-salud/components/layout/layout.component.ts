@@ -44,4 +44,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(obj => obj.unsubscribe())
   }
 
+  btnConfirmar() {
+    this.fichaSrv.confirmarFicha(this.ficha.id, "CONFIRMADO")
+  }
+
 }
