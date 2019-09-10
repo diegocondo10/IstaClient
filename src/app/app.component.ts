@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
 
   public bottonName: string = 'Cerrar Sesion';
+  
   constructor(
     private userSrv: UsersService,
     private router: Router

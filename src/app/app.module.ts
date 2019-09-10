@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ApolloModule, Apollo, APOLLO_OPTIONS } from "apollo-angular";
+import { ApolloModule, Apollo } from "apollo-angular";
 import { HttpClientModule } from "@angular/common/http";
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
@@ -42,8 +42,8 @@ export class AppModule {
   ) {
     apollo.create({
       link: httpLink.create({
-        //uri: 'http://localhost:8000/graphql'
-        uri: 'http://35.192.7.211:8000/graphql'
+        uri: 'http://localhost:8000/graphql'
+        //uri: 'http://35.192.7.211:8000/graphql'
       }),
       cache: new InMemoryCache()
     });
