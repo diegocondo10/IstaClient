@@ -1,4 +1,4 @@
-<div *ngIf="ficha" class="container">
+<div *ngIf="ficha; else cargando" class="container">
 
     <h1 class="display-4 text-center mt-5 mb-3">Ficha Salud</h1>
 
@@ -38,3 +38,19 @@
 
 
 </div>
+
+<ng-template #cargando>
+
+    <div class="container mt-5 py-5">
+        <div class="jumbotron">
+
+
+            <div class="m-5 p-5 text-center">
+                <h1>Cargando...</h1>
+                <p>Por Favor Espere Un Momento</p>
+            </div>
+        </div>
+    </div>
+
+
+</ng-template>
