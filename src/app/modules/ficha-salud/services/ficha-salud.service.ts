@@ -40,10 +40,8 @@ query buscarFicha($personaId: Int!) {
         }
         detallediagnosticoSet {
           id
-          diagnostico {
-            parentesco
-            diagnostico
-          }
+          parentesco
+          diagnostico
         }
       }
     }
