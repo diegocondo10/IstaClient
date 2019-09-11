@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-ista">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border">
 
-    <a class="navbar-brand" [routerLink]="['home'] ">INICIO</a>
+    <a class="navbar-brand" [routerLink]="['home'] ">
+        <img class="img-fluid mb-1" src="../../../assets/img/icon.ico" alt="" width="25">
+        INICIO
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
         aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,15 +12,15 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
 
-        <!--         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" *ngIf="showNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="false">
                 <a class="nav-link" [routerLink]="['home']">Features</a>
             </li>
-        </ul> -->
+        </ul>
 
 
         <form *ngIf="bottonName != ''" class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-primary text-white" (click)="Login()">{{bottonName}}</button>
+            <button class="btn btn-outline-info" (click)="Login()">{{bottonName}}</button>
         </form>
     </div>
 </nav>

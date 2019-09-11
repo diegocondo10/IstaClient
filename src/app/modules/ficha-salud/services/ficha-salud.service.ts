@@ -42,6 +42,9 @@ query buscarFicha($personaId: Int!) {
           id
           parentesco
           diagnostico
+          detalleRespuesta{
+            id
+          }
         }
       }
     }

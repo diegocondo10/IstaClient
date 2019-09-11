@@ -20,7 +20,7 @@ mutation crearDiagnostico( $detalle:DetalleDiagnosticoInput!) {
 const DELETE = gql`
 mutation eliminarDiagnostico($detalle: DetalleDiagnosticoInput!) {
   diagnosticoFamiliar(detalle: $detalle, operation: DELETE) {
-    detalle {
+    detalle{
       id
     }
   }
@@ -32,14 +32,10 @@ mutation editarDiagnostico($detalle: DetalleDiagnosticoInput!) {
   diagnosticoFamiliar(detalle: $detalle, operation: UPDATE) {
     detalle {
       id
-      detalleRespuesta {
-        id
-      }
-      parentesco
-      diagnostico
     }
   }
 }
+
 `;
 
 
@@ -63,11 +59,12 @@ export class DetalleDiagnosticoService {
 
   public async deleteDetalleDiagnostico(detalle) {
     const mutation = await this.mutation(detalle, DELETE);
-    try {
-      await mutation.toPromise()
-    } catch (error) {
+    //try {
+    (await mutation.toPromise()).data
+    /*
+  } catch (error) {
 
-    }
+  }*/
   }
 
   public async updateDiagnostico(detalle) {

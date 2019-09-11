@@ -43,6 +43,7 @@ export class DiagnosticoFamiliarComponent implements OnInit {
     this.btn = option
 
     if (option == 'Eliminar') {
+      console.log(this.detail);
       this.disableModalInput = true
     } else {
       this.disableModalInput = false;
@@ -60,18 +61,24 @@ export class DiagnosticoFamiliarComponent implements OnInit {
         const result = await this.srv.createDetalleDiagnostico(this.detail)
         this.detail.id = result.id
         this.diagnosticos.push(this.detail)
+
         break;
 
       case "Editar"://Editar
         console.log("Editar");
 
-        const update = await this.srv.updateDiagnostico(this.detail);
+        const update = await this.srv.updateDiagnostico({
+          id: this.detail.id,
+          parentesco: this.detail.parentesco,
+          diagnostico: this.detail.diagnostico
+        });
         console.log(update);
         break;
 
       case "Eliminar"://Eliminar
         console.log("Eliminar");
-        this.srv.deleteDetalleDiagnostico(this.detail)
+
+        await this.srv.deleteDetalleDiagnostico({ id: this.detail.id })
 
         this.diagnosticos.splice(
           this.diagnosticos.indexOf(this.detail)

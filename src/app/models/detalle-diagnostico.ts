@@ -2,8 +2,8 @@
 import { DetalleRespuesta } from './detalle-respuesta';
 export type DetalleDiagnostico = {
     id?: number
-    diagnostico?: string
     parentesco?: string
+    diagnostico?: string
     detalleRespuesta?: DetalleRespuesta //ForeingKey
 
 }

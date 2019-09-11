@@ -1,4 +1,6 @@
-<h6>{{detalle.pregunta.numero}}. {{detalle.pregunta.titulo}}</h6>
+<h6>{{detalle.pregunta.numero}}. {{detalle.pregunta.titulo}}
+    <strong class="text-danger" *ngIf="detalle.pregunta.required">Obligatoria</strong>
+</h6>
 
 <div *ngIf="detalle.pregunta.tipoRespuesta.extra == 'CHECK'">
 
@@ -6,16 +8,14 @@
 
         <div class="form-group">
 
+            <!-- <h1>{{detalle.pregunta.tipoRespuesta.nombre}}</h1> -->
             <div class="ml-4" *ngFor="let parametro of detalle.pregunta.tipoRespuesta.parametroSet">
-
                 <small id="helpId" class="form-check">
                     <input type="checkbox" class="form-check-input" id="{{parametro.id}}"
                         (change)="check($event.target.checked, parametro)" [checked]="parametro.checked"
                         [required]="detalle.pregunta.required">
                     {{parametro.descripcion}}
                 </small>
-
-
 
             </div>
 
@@ -128,8 +128,9 @@
 
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SI - NO'">
     <div class="ml-lg-4 my-3">
-        <select class="custom-select select-250px" name="" id="{{detalle.id}}"
-            (change)="respuesta($event.target.value, detalle)" [value]="detalle.respuesta">
+        <select class="custom-select select-250px" name="detalle.pregunta.titulo" id="{{detalle.id}}"
+            (change)="respuesta($event.target.value, detalle)" [(ngModel)]="detalle.respuesta"
+            [required]="detalle.pregunta.required">
             <option value="SI">SI</option>
             <option value="NO">NO</option>
         </select>
