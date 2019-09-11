@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DetalleDiagnostico } from '../../../../models/detalle-diagnostico';
+import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
+import { DetalleDiagnosticoService } from '../../services/detalle-diagnostico.service';
 
 @Component({
   selector: 'app-diagnostico-familiar',
@@ -9,22 +11,29 @@ import { DetalleDiagnostico } from '../../../../models/detalle-diagnostico';
 export class DiagnosticoFamiliarComponent implements OnInit {
 
   @Input() diagnosticos: DetalleDiagnostico[]
+  @Input() idDetalle: number
   public detail: DetalleDiagnostico = this.resetDetail()
   public disableModalInput: boolean = false;
   public btn: string = 'Agregar';
 
 
-  constructor() { }
+  constructor(
+
+    private srv: DetalleDiagnosticoService
+
+  ) { }
 
   ngOnInit() {
 
   }
 
-  private resetDetail() {
+  private resetDetail(): DetalleDiagnostico {
     return {
-      diagnostico: {
-        parentesco: '',
-        diagnostico: ''
+      id: null,
+      diagnostico: '',
+      parentesco: '',
+      detalleRespuesta: {
+        id: this.idDetalle
       }
     }
   }
@@ -41,13 +50,17 @@ export class DiagnosticoFamiliarComponent implements OnInit {
   }
 
 
-  btnModal(option: string) {
+  async btnModal(option: string) {
 
 
 
     switch (option) {
       case "Agregar"://Agregar
         console.log("Agregar");
+        console.log(this.detail);
+
+        const result = await this.srv.createDetalleDiagnostico(this.detail)
+
 
         break;
 

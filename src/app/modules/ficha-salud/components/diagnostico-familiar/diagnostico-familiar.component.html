@@ -11,7 +11,7 @@
             <tbody class="border ">
 
                 <tr *ngFor="let item of diagnosticos">
-                    <td scope="row">{{item.diagnostico.parentesco}}</td>
+                    <td scope="row">{{item.parentesco}}</td>
                     <td scope="row" class="text-center">
                         <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modelId"
                             (click)="btnTbl(item, 'Editar')">
@@ -48,23 +48,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form>
+            <form #formulario="ngForm">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-form-label" for="exampleCheck1">Parentesco:</label>
-                        <input required type="text" class="form-control" id="exampleCheck1"
-                            [value]="detail.diagnostico.parentesco" [disabled]="disableModalInput">
+                        <input required type="text" class="form-control" id="exampleCheck1" name="parentesco"
+                            [(ngModel)]="detail.parentesco" [disabled]="disableModalInput">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label" for="exampleCheck1">Diagnostico:</label>
-                        <textarea required class="form-control" name="" id="" cols="30" rows="4"
-                            [value]="detail.diagnostico.diagnostico" [disabled]="disableModalInput"></textarea>
+                        <textarea required class="form-control" name="diagnostico" id="" cols="30" rows="4"
+                            [(ngModel)]="detail.diagnostico" [disabled]="disableModalInput"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="formulario.invalid"
                         (click)="btnModal(btn)">{{btn}}</button>
 
                 </div>

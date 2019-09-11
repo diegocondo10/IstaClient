@@ -140,5 +140,6 @@
 
 
 <div *ngIf="detalle.pregunta.tipoRespuesta.extra == 'DIAGNOSTICO'">
-    <app-diagnostico-familiar [diagnosticos]="detalle.detallediagnosticoSet"></app-diagnostico-familiar>
+    <app-diagnostico-familiar [diagnosticos]="detalle.detallediagnosticoSet" [idDetalle]="detalle.id">
+    </app-diagnostico-familiar>
 </div>
