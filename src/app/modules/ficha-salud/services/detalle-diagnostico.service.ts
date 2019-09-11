@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { DetalleDiagnostico } from '../../../models/detalle-diagnostico';
 
 const CREATE = gql`
 mutation crearDiagnostico( $detalle:DetalleDiagnosticoInput!) {
@@ -12,10 +11,32 @@ mutation crearDiagnostico( $detalle:DetalleDiagnosticoInput!) {
       diagnostico
       detalleRespuesta {
         id
-        pregunta {
-          id
-        }
       }
+    }
+  }
+}
+`;
+
+const DELETE = gql`
+mutation eliminarDiagnostico($detalle: DetalleDiagnosticoInput!) {
+  diagnosticoFamiliar(detalle: $detalle, operation: DELETE) {
+    detalle {
+      id
+    }
+  }
+}
+`;
+
+const UPDATE = gql`
+mutation editarDiagnostico($detalle: DetalleDiagnosticoInput!) {
+  diagnosticoFamiliar(detalle: $detalle, operation: UPDATE) {
+    detalle {
+      id
+      detalleRespuesta {
+        id
+      }
+      parentesco
+      diagnostico
     }
   }
 }
@@ -34,17 +55,33 @@ export class DetalleDiagnosticoService {
 
   public async createDetalleDiagnostico(detalle) {
 
-    console.log(detalle);
+    const mutation = await this.mutation(detalle, CREATE);
 
-    const mutation = await this.apollo.mutate({
-      mutation: CREATE,
+    return (await mutation.toPromise()).data['diagnosticoFamiliar']['detalle']
+
+  }
+
+  public async deleteDetalleDiagnostico(detalle) {
+    const mutation = await this.mutation(detalle, DELETE);
+    try {
+      await mutation.toPromise()
+    } catch (error) {
+
+    }
+  }
+
+  public async updateDiagnostico(detalle) {
+    const mutation = await this.mutation(detalle, UPDATE)
+    return (await mutation.toPromise()).data['diagnosticoFamiliar']['detalle']
+  }
+
+  private async mutation(detalle, query) {
+    return await this.apollo.mutate({
+      mutation: query,
       variables: {
         detalle: detalle
       }
     })
-
-    const result = (await mutation.toPromise()).data
-    console.log(result);
   }
 
 

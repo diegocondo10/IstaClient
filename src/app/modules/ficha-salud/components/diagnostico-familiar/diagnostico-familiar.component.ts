@@ -57,20 +57,27 @@ export class DiagnosticoFamiliarComponent implements OnInit {
     switch (option) {
       case "Agregar"://Agregar
         console.log("Agregar");
-        console.log(this.detail);
-
         const result = await this.srv.createDetalleDiagnostico(this.detail)
-
-
+        this.detail.id = result.id
+        this.diagnosticos.push(this.detail)
         break;
 
       case "Editar"://Editar
         console.log("Editar");
 
+        const update = await this.srv.updateDiagnostico(this.detail);
+        console.log(update);
         break;
 
       case "Eliminar"://Eliminar
         console.log("Eliminar");
+        this.srv.deleteDetalleDiagnostico(this.detail)
+
+        this.diagnosticos.splice(
+          this.diagnosticos.indexOf(this.detail)
+          , 1
+        )
+
         break;
 
       default:
