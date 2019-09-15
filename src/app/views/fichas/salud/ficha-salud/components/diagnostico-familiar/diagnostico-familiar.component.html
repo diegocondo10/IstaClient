@@ -1,0 +1,74 @@
+<div class="container text-center my-4">
+    <div class="row justify-content-center">
+        <table class="table table-striped col-12 table-responsive">
+            <thead class="thead-inverse border ">
+                <tr>
+                    <th>Parentesco</th>
+                    <th>Editar / Ver Detalles</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody class="border ">
+
+                <tr *ngFor="let item of diagnosticos">
+                    <td scope="row">{{item.parentesco}}</td>
+                    <td scope="row" class="text-center">
+                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modelId"
+                            (click)="btnTbl(item, 'Editar')">
+                            Editar
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modelId"
+                            (click)="btnTbl(item, 'Eliminar')">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn bg-facebook text-white" data-toggle="modal" data-target="#modelId"
+        (click)="btnTbl(null,'Agregar')">
+        Agregar Diagnostico Familiar
+    </button>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Diagnostico Familiar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form #formulario="ngForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-form-label" for="exampleCheck1">Parentesco:</label>
+                        <input required type="text" class="form-control" id="exampleCheck1" name="parentesco"
+                            [(ngModel)]="detail.parentesco" [disabled]="disableModalInput">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label" for="exampleCheck1">Diagnostico:</label>
+                        <textarea required class="form-control" name="diagnostico" id="" cols="30" rows="4"
+                            [(ngModel)]="detail.diagnostico" [disabled]="disableModalInput"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="formulario.invalid"
+                        (click)="btnModal(btn)">{{btn}}</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
