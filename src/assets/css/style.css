@@ -1,18 +1,3 @@
-body {
-    /* Ubicación de la imagen */
-    /*background-image: url(img/background.jpg);*/
-    /* Para dejar la imagen de fondo centrada, vertical y
-    
-    horizontalmente */
-    background-position: center center;
-    /* Para que la imagen de fondo no se repita */
-    background-repeat: no-repeat;
-    /* La imagen se fija en la ventana de visualización para que la altura de la imagen no supere a la del contenido */
-    background-attachment: fixed;
-    /* La imagen de fondo se reescala automáticamente con el cambio del ancho de ventana del navegador */
-    background-size: cover;
-}
-
 .hover:hover {
     background-color: darkcyan;
     transition-duration: 1s;
@@ -38,4 +23,13 @@ body {
 
 .select-250px {
     width: 250px;
+}
+
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+.input-err-12 {
+    color: #aa0e0e;
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bold
 }
