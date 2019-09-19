@@ -32,19 +32,6 @@ export class PreguntaComponent implements OnInit {
     this.parametros = await this.detalle.detalleparametrosSet
     await this.parametros.forEach(obj => this.changeState(obj))
 
-    if (this.detalle.pregunta.dependeDe) {
-
-
-      const res = this.detalle.pregunta.dependeDe['respuestaDepente']
-      if (res == 'SI') {
-        console.log(res);
-        this.disabledPrg = false
-      } else {
-        this.disabledPrg = true
-      }
-
-    }
-
   }
 
   private changeState(detalle: DetalleParametro) {
@@ -66,33 +53,13 @@ export class PreguntaComponent implements OnInit {
 
   async respuesta() {
 
-    if (this.detalle.pregunta.dependeDe) {
-
-
-      const res = this.detalle.pregunta.dependeDe['respuestaDepente']
-
-      if (res == 'SI') {
-        this.disabledPrg = false
-      } else {
-        this.disabledPrg = true
-      }
-
-    } else {
-      if (this.detalle.respuesta == 'SI') {
-        this.disabledPrg = false
-      } else {
-        this.disabledPrg = false
-      }
-    }
-
-
-    console.log(this.disabledPrg);
 
     await this.detPrgSrv.updateResFS(this.detalle.id, this.detalle.respuesta)
   }
 
   async btnAgregarOtro() {
     try {
+      
       const result: DetalleParametro = await this.fichaSrv.agregarOtroParametro({
         nombre: this.otro.charAt(0).toUpperCase() + this.otro.slice(1),
         idTipo: this.detalle.id,
