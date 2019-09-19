@@ -20,6 +20,7 @@ query buscarFicha($personaId: Int!) {
           observacion
           dependeDe {
             id
+            numero
           }
           tipoRespuesta {
             id

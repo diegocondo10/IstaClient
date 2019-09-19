@@ -14,7 +14,7 @@ export class SeccionComponent implements OnInit {
   constructor(
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
 
     this.seccion.detallerespuestaSet = this.seccion.detallerespuestaSet
       .sort(function (item1: DetalleRespuesta, item2: DetalleRespuesta) {
@@ -27,6 +27,24 @@ export class SeccionComponent implements OnInit {
         return 0
       })
 
+    this.seccion.detallerespuestaSet.forEach(detalle => {
+      if (detalle.pregunta.dependeDe) {
+        const detalleBusqueda = this.seccion.detallerespuestaSet.filter(item => item.pregunta.numero == detalle.pregunta.dependeDe.numero)[0]
+        detalle.pregunta.dependeDe = detalleBusqueda.pregunta
+        detalle.pregunta.dependeDe['respuestaDepente'] = detalleBusqueda.respuesta
+
+        /*         console.log(`-----> pregunta: ${detalle.pregunta.numero}`);
+                console.log(`-----> depende: ${detalle.pregunta.dependeDe.numero}`);
+                console.log(`-----> depende: ${detalle.pregunta.dependeDe['respuestaDepente']}`);
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log("");
+                console.log(""); */
+
+      }
+
+    })
 
 
   }

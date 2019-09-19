@@ -1,4 +1,8 @@
-<!-- <ng-template [ngIf]="disabledPrg == false"> -->
+<!-- <ng-template [ngIf]="disabledPrg == false && detalle.pregunta.dependeDe != null">
+
+ -->
+
+
 <h6>{{detalle.pregunta.numero}}. {{detalle.pregunta.titulo}}
     <strong class="text-danger" *ngIf="detalle.pregunta.required">Obligatoria</strong>
 </h6>
@@ -156,4 +160,5 @@
     <app-diagnostico-familiar [diagnosticos]="detalle.detallediagnosticoSet" [idDetalle]="detalle.id">
     </app-diagnostico-familiar>
 </div>
-<!-- </ng-template> -->
+<!-- 
+</ng-template> -->

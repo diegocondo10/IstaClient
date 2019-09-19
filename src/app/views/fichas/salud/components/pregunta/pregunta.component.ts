@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Host } from '@angular/core';
+import { Component, OnInit, Input, Host, Output, EventEmitter } from '@angular/core';
 import { Parametro } from '../../../../../models/parametro';
 import { DetalleRespuesta } from '../../../../../models/detalle-respuesta';
 import { DetalleRespuestaService } from '../../../services/detalle-respuesta.service';
@@ -6,7 +6,7 @@ import { DetalleParametrosService } from '../../../services/detalle-parametros.s
 import { DetalleParametro } from '../../../../../models/detalle-parametros';
 import { FichaSaludService } from '../../services/ficha-salud.service';
 import { UsersService } from '../../../../../services/users.service';
-import { SeccionComponent } from '../seccion/seccion.component';
+import { SeccionFS } from '../../../../../models/seccion-ficha-salud';
 
 @Component({
   selector: 'app-pregunta',
@@ -18,9 +18,6 @@ export class PreguntaComponent implements OnInit {
   public parametros: Parametro[];
   public otro: string
   @Input() detalle: DetalleRespuesta
-
-  public errorMsg: string = ''
-
   public disabledPrg: boolean;
 
 
@@ -29,14 +26,24 @@ export class PreguntaComponent implements OnInit {
     private detParamSrv: DetalleParametrosService,
     private fichaSrv: FichaSaludService,
     private userSrv: UsersService,
-    @Host() private host: SeccionComponent
   ) { }
 
   async ngOnInit() {
-    this.parametros = this.detalle.detalleparametrosSet
-    this.parametros.forEach(obj => this.changeState(obj))
+    this.parametros = await this.detalle.detalleparametrosSet
+    await this.parametros.forEach(obj => this.changeState(obj))
 
-    this.disabledPrg = this.valorDependeDe()
+    if (this.detalle.pregunta.dependeDe) {
+
+
+      const res = this.detalle.pregunta.dependeDe['respuestaDepente']
+      if (res == 'SI') {
+        console.log(res);
+        this.disabledPrg = false
+      } else {
+        this.disabledPrg = true
+      }
+
+    }
 
   }
 
@@ -58,6 +65,29 @@ export class PreguntaComponent implements OnInit {
 
 
   async respuesta() {
+
+    if (this.detalle.pregunta.dependeDe) {
+
+
+      const res = this.detalle.pregunta.dependeDe['respuestaDepente']
+
+      if (res == 'SI') {
+        this.disabledPrg = false
+      } else {
+        this.disabledPrg = true
+      }
+
+    } else {
+      if (this.detalle.respuesta == 'SI') {
+        this.disabledPrg = false
+      } else {
+        this.disabledPrg = false
+      }
+    }
+
+
+    console.log(this.disabledPrg);
+
     await this.detPrgSrv.updateResFS(this.detalle.id, this.detalle.respuesta)
   }
 
@@ -81,24 +111,6 @@ export class PreguntaComponent implements OnInit {
      
            }, 3000); */
       alert("YA EXISTE UN PARAMETRO CON ESE NOMBRE!!")
-    }
-
-
-  }
-
-
-
-  public valorDependeDe() {
-    try {
-      const id = this.detalle.pregunta.dependeDe['id']
-
-      const result = this.host.seccion.detallerespuestaSet.filter(item => item.pregunta.id == id)[0]
-      if (result == undefined || result.respuesta == 'SI' || result == null) {
-        return false;
-      }
-      return true
-
-    } catch (error) {
     }
 
 
