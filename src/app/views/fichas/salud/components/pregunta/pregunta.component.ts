@@ -18,7 +18,7 @@ export class PreguntaComponent implements OnInit {
   public parametros: Parametro[];
   public otro: string
   @Input() detalle: DetalleRespuesta
-  public disabledPrg: boolean;
+  public disabledPrg: boolean = false;
 
 
   constructor(
@@ -59,7 +59,7 @@ export class PreguntaComponent implements OnInit {
 
   async btnAgregarOtro() {
     try {
-      
+
       const result: DetalleParametro = await this.fichaSrv.agregarOtroParametro({
         nombre: this.otro.charAt(0).toUpperCase() + this.otro.slice(1),
         idTipo: this.detalle.id,
