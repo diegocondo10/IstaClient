@@ -35,7 +35,6 @@ mutation editarDiagnostico($detalle: DetalleDiagnosticoInput!) {
     }
   }
 }
-
 `;
 
 

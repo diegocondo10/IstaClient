@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
-import { Apollo } from 'apollo-angular';
 
-const BUSCAR_FICHA = gql`
+export const BUSCAR_FICHA = gql`
 query buscarFicha($personaId: Int!) {
-  ficha(personaId: $personaId){
+  ficha(personaId: $personaId) {
     id
     seccionfsSet {
       seccionNombre {
@@ -19,6 +17,10 @@ query buscarFicha($personaId: Int!) {
           numero
           titulo
           required
+          observacion
+          dependeDe {
+            id
+          }
           tipoRespuesta {
             id
             nombre
@@ -42,7 +44,7 @@ query buscarFicha($personaId: Int!) {
           id
           parentesco
           diagnostico
-          detalleRespuesta{
+          detalleRespuesta {
             id
           }
         }
@@ -50,10 +52,11 @@ query buscarFicha($personaId: Int!) {
     }
   }
 }
+
 `;
 
 
-const CONFIRMAR_FICHA = gql`
+export const CONFIRMAR_FICHA = gql`
 mutation confirmarFicha($ID: ID, $state: String!) {
   ficha(ficha: {id: $ID, estadoEnvio: $state}, operation: UPDATE) {
     ficha {
@@ -63,41 +66,16 @@ mutation confirmarFicha($ID: ID, $state: String!) {
 }
 `;
 
-@Injectable({
-  providedIn: 'root'
-})
-export class FichaSaludService {
-
-  constructor(
-    private apollo: Apollo
-  ) { }
-
-
-  public findFichaByPersonaID(personaId: number) {
-    return this.apollo.watchQuery(
-      {
-        query: BUSCAR_FICHA,
-        variables: {
-          personaId: personaId
-        },
-        fetchPolicy: 'network-only'
+export const PARAMETRO_OTRO = gql`
+mutation agregarParametro($params: CrearParametrosInput!) {
+  crearParametro(params: $params) {
+    detalle {
+      id
+      parametro {
+        id
+        descripcion
       }
-    ).valueChanges
-
+    }
   }
-
-  public async confirmarFicha(IDficha: number, state: string) {
-    const mutation = await this.apollo.mutate({
-      mutation: CONFIRMAR_FICHA,
-      variables: {
-        ID: IDficha,
-        state: state
-      }
-    })
-
-    const result = (await mutation.toPromise()).data
-    console.log(result);
-
-  }
-
 }
+`;

@@ -2,9 +2,9 @@ import { OnInit, Component } from '@angular/core';
 import { FichaSalud } from '../../../../../models/ficha-salud';
 import { Subscription } from 'rxjs';
 import { User } from '../../../../../models/user';
-import { FichaSaludService } from '../../../services/ficha-salud.service';
 import { UsersService } from '../../../../../services/users.service';
 import { Router } from '@angular/router';
+import { FichaSaludService } from '../../services/ficha-salud.service';
 
 @Component({
   selector: 'app-layout-ficha-salud',

@@ -11,6 +11,17 @@
 
 .bg-ista {
     background-color: #0c3168;
+    color: white;
+}
+
+.btn-ista {
+    background-color: #0c3168;
+    color: white;
+}
+
+.btn-ista:hover {
+    color: white;
+    font-weight: bold;
 }
 
 .select-80px {

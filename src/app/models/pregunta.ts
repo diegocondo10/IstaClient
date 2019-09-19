@@ -7,5 +7,6 @@ export class Pregunta {
     tipoRespuesta?: TipoRespuesta
     seccNom?: SeccionNombre
     required?: boolean
+    dependeDe?: Pregunta
 }
 
