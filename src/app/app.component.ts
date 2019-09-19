@@ -13,22 +13,11 @@ export class AppComponent implements OnInit {
 
   constructor(
 
-    private router: Router,
-
-    private loginSrv: UsersService
+    private router: Router
 
   ) { }
 
-  async ngOnInit() {
-
-    const user = this.loginSrv.getUserLoggedIn()
-
-    if (user == null) {
-      this.router.navigate(['login'])
-    }
-
-
-
+  ngOnInit() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
