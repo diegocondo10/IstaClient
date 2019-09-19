@@ -45,6 +45,6 @@ export class LayoutFichaSaludComponent implements OnInit {
 
   btnConfirmar() {
     this.fichaSrv.confirmarFicha(this.ficha.id, "CONFIRMADO")
-    this.router.navigate(['ficha-confirm'])
+    this.router.navigate(['fichas', 'confirmar'])
   }
 }
