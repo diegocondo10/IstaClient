@@ -14,13 +14,25 @@
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/fichas" routerLinkActive="active">Fichas</a>
+                <a class="nav-link" routerLink="/fichas" routerLinkActive="active"><strong>Fichas</strong></a>
             </li>
         </ul>
 
 
         <form class="form-inline">
-            <button class="btn btn-outline-info" (click)="Login()">Cerrar Sesion</button>
+            <!--             <div class="form-group mr-3">
+                <img class="img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt=""
+                    width="50">
+
+                <p class="mt-2">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</p>
+
+            </div> -->
+            <img class="img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt="" width="50">
+            <h6 class="mt-2 mx-3">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</h6>
+
+            <div class="form-group">
+                <button class="btn btn-outline-info" (click)="logOut()">Cerrar Sesion</button>
+            </div>
         </form>
     </div>
 </nav>

@@ -19,15 +19,13 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-
-
+    this.user = this.userSrv.getUserLoggedIn()
   }
 
-  Login() {
+  logOut() {
 
     this.userSrv.LOGOUT()
     this.router.navigate(['login'])
-    this.bottonName = "Iniciar Sesion"
 
   }
 
