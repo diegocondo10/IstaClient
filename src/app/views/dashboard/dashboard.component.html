@@ -1,0 +1,16 @@
+<div id="home" class="container mt-3">
+    <h1 class="display-3 text-center ">Bienvenido</h1>
+    <div class="row justify-content-center border py-5">
+        <div class="col-md-4 align-self-center">
+            <img class="img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt="">
+
+        </div>
+        <div class="col-md-6 text-center">
+            <h1 class="font-weight-normal">Nombres:</h1>
+            <h3 class="font-weight-light"> {{user.persona.primerNombre}} {{user.persona.segundoNombre}}</h3>
+            <h1 class="font-weight-normal">Apellidos:</h1>
+            <h3 class="font-weight-light"> {{user.persona.primerApellido}} {{user.persona.segundoApellido}}</h3>
+        </div>
+
+    </div>
+</div>

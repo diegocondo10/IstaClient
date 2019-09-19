@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border">
 
-    <a class="navbar-brand" [routerLink]="['home'] ">
-        <img class="img-fluid mb-1" src="../../../assets/img/icon.ico" alt="" width="25">
+    <a class="navbar-brand" routerLink="/dash">
+        <img class="img-fluid mb-1" src="../../../assets/img/icon.ico" alt="" width="16">
         INICIO
     </a>
 
@@ -13,14 +13,16 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
 
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" *ngIf="false">
-                <a class="nav-link" [routerLink]="['home']">Features</a>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/fichas" routerLinkActive="active">Fichas</a>
             </li>
         </ul>
 
 
-        <form *ngIf="bottonName != ''" class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-info" (click)="Login()">{{bottonName}}</button>
+        <form class="form-inline">
+            <button class="btn btn-outline-info" (click)="Login()">Cerrar Sesion</button>
         </form>
     </div>
 </nav>
+
+<router-outlet></router-outlet>

@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { FichaSaludModule } from './modules/ficha-salud/ficha-salud.module';
+import { FichasModule } from './views/fichas/fichas.module';
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import { FichaSaludModule } from './modules/ficha-salud/ficha-salud.module';
     HttpLinkModule,
     HttpClientModule,
     FormsModule,
-    FichaSaludModule,
+    FichasModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

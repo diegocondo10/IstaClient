@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Host } from '@angular/core';
-import { Parametro } from '../../../../models/parametro';
-import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
-import { DetalleRespuestaService } from '../../services/detalle-respuesta.service';
-import { DetalleParametro } from '../../../../models/detalle-parametros';
-import { DetalleParametrosService } from '../../services/detalle-parametros.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Parametro } from '../../../../../models/parametro';
+import { DetalleRespuesta } from '../../../../../models/detalle-respuesta';
+import { DetalleRespuestaService } from '../../../services/detalle-respuesta.service';
+import { DetalleParametrosService } from '../../../services/detalle-parametros.service';
+import { DetalleParametro } from '../../../../../models/detalle-parametros';
 
 @Component({
   selector: 'app-pregunta',

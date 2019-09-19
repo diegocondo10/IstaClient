@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DetalleDiagnostico } from '../../../../models/detalle-diagnostico';
-import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
-import { DetalleDiagnosticoService } from '../../services/detalle-diagnostico.service';
+import { DetalleDiagnostico } from '../../../../../models/detalle-diagnostico';
+import { DetalleDiagnosticoService } from '../../../services/detalle-diagnostico.service';
 
 @Component({
   selector: 'app-diagnostico-familiar',

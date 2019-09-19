@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SeccionFS } from '../../../../models/seccion-ficha-salud';
-import { DetalleRespuesta } from '../../../../models/detalle-respuesta';
+import { OnInit, Input, Component } from '@angular/core';
+import { SeccionFS } from '../../../../../models/seccion-ficha-salud';
+import { DetalleRespuesta } from '../../../../../models/detalle-respuesta';
 
 @Component({
   selector: 'app-seccion',
