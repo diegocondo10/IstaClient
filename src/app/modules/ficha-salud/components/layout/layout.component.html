@@ -1,0 +1,56 @@
+<div *ngIf="ficha; else cargando" class="container">
+
+    <h1 class="display-4 text-center mt-5 mb-3">Ficha Salud</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-11 py-5 border border-dark">
+            <h6>
+                1. Sr./Srta. estudiante, LEA detenidamente el formulario y complete TODOS los casilleros con la
+                información solicitada.
+            </h6>
+            <h6>
+                2. Los datos obtenidos en este documento son OBLIGATORIOS para los estudiantes y de carácter
+                CONFIDENCIAL.
+            </h6>
+        </div>
+    </div>
+
+
+
+    <form #formFicha="ngForm">
+        <div *ngFor="let seccion of ficha.seccionfsSet">
+
+            <app-seccion [seccion]="seccion"></app-seccion>
+
+        </div>
+
+        <div class="text-center mb-5">
+            <button type="submit" class="btn btn-success" [disabled]="formFicha.invalid"
+                (click)="btnConfirmar()">Guardar
+                y Confirmar</button>
+        </div>
+
+
+    </form>
+
+
+
+
+
+</div>
+
+<ng-template #cargando>
+
+    <div class="container mt-5 py-5">
+        <div class="jumbotron">
+
+
+            <div class="m-5 p-5 text-center">
+                <h1>Cargando...</h1>
+                <p>Por Favor Espere Un Momento</p>
+            </div>
+        </div>
+    </div>
+
+
+</ng-template>

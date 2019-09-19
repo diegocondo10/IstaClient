@@ -1,29 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 import { UsersService } from './services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'body',
-  template: '<router-outlet></router-outlet>',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
 
-
+  public bottonName: string = 'Cerrar Sesion';
+  
   constructor(
-
+    private userSrv: UsersService,
     private router: Router
-
-  ) { }
-
-  ngOnInit() {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
+  ) {
 
   }
+
+  ngOnInit() {
+    this.loginRequired()
+  }
+
+  public loginRequired(): boolean {
+    console.log("LOGIN REQUIRED")
+    const user = this.userSrv.getUserLoggedIn();
+    if (user == null) {
+      this.router.navigate(['login'])
+      return true;
+    }
+    return false;
+  }
+
 }
