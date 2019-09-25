@@ -43,7 +43,9 @@ export class UsersService {
         password: user.password
       }
     })
-    const result = (await watch.result()).data['login']
+
+    const result = (await watch.result()).data['appPersonas']['login']
+    console.log(result);
     this.LOGIN(result)
     return result;
 
