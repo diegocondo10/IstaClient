@@ -41,7 +41,8 @@ export class UsersService {
       variables: {
         username: user.username,
         password: user.password
-      }
+      },
+      fetchPolicy: 'network-only'
     })
 
     const result = (await watch.result()).data['appPersonas']['login']

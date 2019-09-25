@@ -18,7 +18,7 @@
                 <small id="helpId" class="form-check">
                     <input type="checkbox" class="form-check-input" id="{{parametro.id}}"
                         (change)="check($event.target.checked, parametro)" [checked]="parametro.checked"
-                        [required]="detalle.pregunta.required" [disabled]="disabledPrg">
+                        [required]="detalle.pregunta.required" [disabled]="detalle.pregunta['disabled']">
                     {{parametro.descripcion}}
                 </small>
             </div>
@@ -27,9 +27,10 @@
             <form #addPregunta="ngForm" class="form-inline">
                 <div class="form-group ml-4 mt-1">
                     <input class="form-control form-control-sm  select-250px" type="text" name="inOtro"
-                        #inOtro="ngModel" required minlength="4" [(ngModel)]="otro" [disabled]="disabledPrg">
+                        #inOtro="ngModel" required minlength="4" [(ngModel)]="otro"
+                        [disabled]="detalle.pregunta['disabled']">
                     <button class="btn btn-ista btn-sm" (click)="btnAgregarOtro()"
-                        [disabled]="addPregunta.invalid || disabledPrg">Agregar Otro</button>
+                        [disabled]="detalle.pregunta['disabled']">Agregar Otro</button>
 
                 </div>
             </form>
@@ -50,7 +51,8 @@
             <div class="ml-4 ">
 
                 <select class="custom-select custom-select-sm select-250px" name="" id=""
-                    [(ngModel)]="detalle.respuesta" [required]="true" (change)="respuesta()" [disabled]="disabledPrg">
+                    [(ngModel)]="detalle.respuesta" [required]="true" (change)="respuesta()"
+                    [disabled]="detalle.pregunta['disabled']">
                     <option [value]="item.descripcion" *ngFor="let item of detalle.pregunta.tipoRespuesta.parametroSet">
                         {{item.descripcion}}
                     </option>
@@ -69,7 +71,7 @@
     <div class="ml-lg-4 my-3">
 
         <select class="custom-select custom-select-sm select-250px" name="" id="{{detalle.id}}" (change)="respuesta()"
-            [disabled]="disabledPrg" [(ngModel)]="detalle.respuesta">
+            [disabled]="detalle.pregunta['disabled']" [(ngModel)]="detalle.respuesta">
             <option value="Muy Buena">Muy Buena</option>
             <option value="Buena">Buena</option>
             <option value="Regular">Regular</option>
@@ -83,7 +85,7 @@
 
     <div class="ml-4 my-3">
         <input class="form-control form-control-sm" type="date" [(ngModel)]="detalle.respuesta" (change)="respuesta()"
-            [disabled]="disabledPrg">
+            [disabled]="detalle.pregunta['disabled']">
     </div>
 </div>
 
@@ -92,7 +94,7 @@
 
     <div class="ml-4 my-3">
         <input class="form-control form-control-sm select-80px" type="number" [(ngModel)]="detalle.respuesta" min="1"
-            [disabled]="disabledPrg" max="100" (change)="respuesta()">
+            [disabled]="detalle.pregunta['disabled']" max="100" (change)="respuesta()">
     </div>
 </div>
 
@@ -102,7 +104,7 @@
     <div class="ml-lg-4 my-3">
 
         <input class="form-control form-control-sm " type="text" [(ngModel)]="detalle.respuesta" (change)="respuesta()"
-            [disabled]="disabledPrg">
+            [disabled]="detalle.pregunta['disabled']">
     </div>
 </div>
 
@@ -111,7 +113,7 @@
     <div class="ml-lg-4 my-3">
 
         <input class="form-control form-control-sm " type="number" min="1" max="120" [(ngModel)]="detalle.respuesta"
-            [disabled]="disabledPrg" (change)="respuesta()">
+            [disabled]="detalle.pregunta['disabled']" (change)="respuesta()">
     </div>
 </div>
 
@@ -121,8 +123,7 @@
     <div class="ml-lg-4 my-3">
         <label for="">
             <input class="form-control form-control-sm select-120px" type="number" [(ngModel)]="detalle.respuesta"
-                [disabled]="disabledPrg" min="1" max="9" (change)="respuesta()" placeholder="Meses"
-                [disabled]="disabledPrg">
+                [disabled]="detalle.pregunta['disabled']" min="1" max="9" (change)="respuesta()" placeholder="Meses">
         </label>
     </div>
 </div>
@@ -133,7 +134,7 @@
     <div class="ml-lg-4 my-3">
         <label for="">
             <input class="form-control form-control-sm select-120px" type="text" [value]="detalle.respuesta" min="1"
-                [disabled]="disabledPrg" max="9" #carnet="ngModel" [(ngModel)]="detalle.respuesta"
+                [disabled]="detalle.pregunta['disabled']" max="9" #carnet="ngModel" [(ngModel)]="detalle.respuesta"
                 (change)="respuesta()">
         </label>
         <p class="error-input" *ngIf="carnet.hasError('required') && carnet.touched">Este es
@@ -145,7 +146,7 @@
 <div *ngIf="detalle.pregunta.tipoRespuesta.nombre == 'SI - NO'">
     <div class="ml-lg-4 my-3">
         <select class="custom-select custom-select-sm select-250px" name="detalle.pregunta.titulo" id="{{detalle.id}}"
-            [disabled]="disabledPrg" [(ngModel)]="detalle.respuesta" (change)="respuesta()"
+            [disabled]="detalle.pregunta['disabled']" [(ngModel)]="detalle.respuesta" (change)="respuesta()"
             [required]="detalle.pregunta.required">
             <option value="SI">SI</option>
             <option value="NO">NO</option>

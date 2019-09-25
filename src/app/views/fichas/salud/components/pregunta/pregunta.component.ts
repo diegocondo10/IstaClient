@@ -20,6 +20,10 @@ export class PreguntaComponent implements OnInit {
   @Input() detalle: DetalleRespuesta
   public disabledPrg: boolean = false;
 
+  @Output() detalleOut = new EventEmitter<DetalleRespuesta>()
+
+
+
 
   constructor(
     private detPrgSrv: DetalleRespuestaService,
@@ -53,6 +57,8 @@ export class PreguntaComponent implements OnInit {
 
   async respuesta() {
 
+    console.log(this.detalle);
+
 
     await this.detPrgSrv.updateResFS(this.detalle.id, this.detalle.respuesta)
   }
@@ -74,9 +80,6 @@ export class PreguntaComponent implements OnInit {
       this.otro = '';
 
     } catch (error) {
-      /*      setInterval(async () => {
-     
-           }, 3000); */
       alert("YA EXISTE UN PARAMETRO CON ESE NOMBRE!!")
     }
 

@@ -14,7 +14,7 @@ export class SeccionComponent implements OnInit {
   constructor(
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.seccion.detallerespuestaSet = this.seccion.detallerespuestaSet
       .sort(function (item1: DetalleRespuesta, item2: DetalleRespuesta) {
@@ -27,26 +27,31 @@ export class SeccionComponent implements OnInit {
         return 0
       })
 
-    this.seccion.detallerespuestaSet.forEach(detalle => {
-      if (detalle.pregunta.dependeDe) {
-        const detalleBusqueda = this.seccion.detallerespuestaSet.filter(item => item.pregunta.numero == detalle.pregunta.dependeDe.numero)[0]
-        detalle.pregunta.dependeDe = detalleBusqueda.pregunta
-        detalle.pregunta.dependeDe['respuestaDepente'] = detalleBusqueda.respuesta
+    this.desactivarPreguntasDependientes()
+  }
 
-        /*         console.log(`-----> pregunta: ${detalle.pregunta.numero}`);
-                console.log(`-----> depende: ${detalle.pregunta.dependeDe.numero}`);
-                console.log(`-----> depende: ${detalle.pregunta.dependeDe['respuestaDepente']}`);
-                console.log("");
-                console.log("");
-                console.log("");
-                console.log("");
-                console.log(""); */
 
+  async desactivarPreguntasDependientes() {
+    await this.seccion.detallerespuestaSet.forEach(detalle => {
+      let preguntaPadre = detalle.pregunta.dependeDe
+      if (preguntaPadre) {
+        const result = this.seccion.detallerespuestaSet.filter(item => item.pregunta.numero == preguntaPadre.numero)[0];
+        if (result.respuesta == 'SI') {
+          detalle.pregunta['disabled'] = false;
+        } else {
+          detalle.pregunta['disabled'] = true;
+        }
+
+      } else {
+        detalle.pregunta['disabled'] = false;
+      }
+
+      if (detalle.pregunta.required) {
+        detalle.pregunta['disabled'] = false;
       }
 
     })
-
-
   }
+
 
 }
