@@ -20,11 +20,6 @@ export class PreguntaComponent implements OnInit {
   @Input() detalle: DetalleRespuesta
   public disabledPrg: boolean = false;
 
-  @Output() detalleOut = new EventEmitter<DetalleRespuesta>()
-
-
-
-
   constructor(
     private detPrgSrv: DetalleRespuestaService,
     private detParamSrv: DetalleParametrosService,
@@ -56,10 +51,6 @@ export class PreguntaComponent implements OnInit {
 
 
   async respuesta() {
-
-    console.log(this.detalle);
-
-
     await this.detPrgSrv.updateResFS(this.detalle.id, this.detalle.respuesta)
   }
 
