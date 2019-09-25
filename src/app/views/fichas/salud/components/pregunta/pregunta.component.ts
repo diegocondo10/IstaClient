@@ -6,7 +6,7 @@ import { DetalleParametrosService } from '../../../services/detalle-parametros.s
 import { DetalleParametro } from '../../../../../models/detalle-parametros';
 import { FichaSaludService } from '../../services/ficha-salud.service';
 import { UsersService } from '../../../../../services/users.service';
-import { SeccionFS } from '../../../../../models/seccion-ficha-salud';
+
 
 @Component({
   selector: 'app-pregunta',

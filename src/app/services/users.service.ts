@@ -5,16 +5,18 @@ import { User } from '../models/user';
 
 const LOGIN = gql`
 query login($username: String!, $password: String!) {
-  login(username: $username, password: $password) {
-    username
-    persona {
-      id
-      identificacion
-      primerNombre
-      segundoNombre
-      primerApellido
-      segundoApellido
-      Foto
+  appPersonas {
+    login(username: $username, password: $password) {
+      username
+      persona {
+        id
+        identificacion
+        primerNombre
+        segundoNombre
+        primerApellido
+        segundoApellido
+        Foto
+      }
     }
   }
 }
