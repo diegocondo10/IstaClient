@@ -1,0 +1,71 @@
+<app-nav-bar></app-nav-bar>
+
+
+<div class="container mt-5">
+    <div class="row">
+
+
+
+
+
+
+
+
+        <div class="col-12">
+
+            <ng-container *ngIf="loading; else loadingTerminado">
+
+                <h1 class="display-4 text-center mt-100">CARGANDO</h1>
+
+            </ng-container>
+
+            <ng-template #loadingTerminado>
+
+
+                <h1 class="text-center display-4 my-5">
+                    Eventos
+                    <a routerLink="/calendario/evento-add">
+                        <i class="fas fa-plus-circle text-success hov-pointer"></i>
+                    </a>
+
+                </h1>
+
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Titutlo</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let evento of eventos">
+                            <th scope="row">{{evento.id}}</th>
+                            <td>
+                                <a routerLink="/calendario/evento-add">
+                                    {{evento.titulo}}
+                                </a>
+                            </td>
+                            <td>{{evento.color}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </ng-template>
+
+
+        </div>
+
+
+
+
+        <!--DIV COL-12 TABLE-->
+    </div>
+    <!--DIV ROW-->
+</div>
+<!--DIV CONTAINER-->
