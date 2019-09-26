@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     CalendarioAcadRoutingModule,
     FullCalendarModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class CalendarioAcadModule { }

@@ -1,3 +1,6 @@
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
 .hover:hover {
     background-color: darkcyan;
     transition-duration: 1s;
