@@ -17,6 +17,10 @@ const routes: Routes = [
       {
         path: 'fichas',
         loadChildren: () => import('./views/fichas/fichas.module').then(m => m.FichasModule)
+      },
+      {
+        path: 'calendario',
+        loadChildren: () => import('./views/calendario-acad/calendario-acad.module').then(m => m.CalendarioAcadModule)
       }
     ]
   },
