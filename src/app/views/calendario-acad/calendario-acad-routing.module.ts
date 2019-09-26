@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: '', component: CalendarioAcadComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: 'eventos', component: EventosListComponent },
-  { path: 'evento-add', component: EventosFormComponent }
+  { path: 'evento-add', component: EventosFormComponent },
+  { path: 'evento-edit/:id', component: EventosFormComponent }
 
 ];
 

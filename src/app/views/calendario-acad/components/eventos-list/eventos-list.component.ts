@@ -21,4 +21,12 @@ export class EventosListComponent implements OnInit {
     this.loading = false;
   }
 
+  async btnEliminar(evento: Evento) {
+    await this.srv.deleteEvento(evento)
+    const indice = this.eventos.indexOf(evento)
+
+    this.eventos.splice(indice, 1);
+
+  }
+
 }

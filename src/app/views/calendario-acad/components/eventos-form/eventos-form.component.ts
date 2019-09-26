@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Evento } from '../../models/calendario-models';
 import { CalendarioService } from '../../services/calendario.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-eventos-form',
@@ -10,20 +11,33 @@ import { CalendarioService } from '../../services/calendario.service';
 export class EventosFormComponent implements OnInit {
 
   public evento: Evento = {};
+  public id: number
 
   constructor(
-    private srv: CalendarioService
+    private srv: CalendarioService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    this.id = this.route.snapshot.params['id']
+    console.log(this.id);
+    if (this.id) {
+      this.evento = await this.srv.getEventoById(this.id);
+    }
 
   }
 
 
   async guardar() {
-    const result = await this.srv.addEvento(this.evento);
-    console.log(result);
+    if (this.id != null) {
+      console.log("EDITAR");
+      await this.srv.editEvento(this.evento);
+    } else {
+      console.log("AGREGAR");
+      await this.srv.addEvento(this.evento);
+    }
+    this.router.navigate(['calendario', 'eventos'])
   }
 
 

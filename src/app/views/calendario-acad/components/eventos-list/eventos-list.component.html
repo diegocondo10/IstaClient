@@ -44,13 +44,13 @@
                         <tr *ngFor="let evento of eventos">
                             <th scope="row">{{evento.id}}</th>
                             <td>
-                                <a routerLink="/calendario/evento-add">
+                                <a routerLink="/calendario/evento-edit/{{evento.id}}">
                                     {{evento.titulo}}
                                 </a>
                             </td>
                             <td>{{evento.color}}</td>
                             <td>
-                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                                <button class="btn btn-sm btn-danger" (click)="btnEliminar(evento)">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>
