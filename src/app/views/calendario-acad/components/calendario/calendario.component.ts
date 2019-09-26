@@ -11,7 +11,7 @@ export class CalendarioComponent implements OnInit {
   constructor() { }
   calendarPlugins = [dayGridPlugin]; // important!
   calendarEvents = [
-    { title: 'event 1', date: '2019-04-01' }
+    { title: 'event 1', start: '2019-04-01', end: '2019-04-01', color: '#cb3234'}
   ];
   modifyTitle(eventIndex, newTitle) {
     this.calendarEvents[eventIndex].title = newTitle;
