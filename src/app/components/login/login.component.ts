@@ -23,9 +23,10 @@ export class LoginComponent implements OnInit {
 
   async login() {
 
-    let user = await this.userSrv.login(this.user);
+    let user: User = await this.userSrv.login(this.user);
     if (user != null) {
-      this.router.navigate(['dash'])
+      //this.router.navigate(['dash'])
+      alert(user)
     }
 
   }
