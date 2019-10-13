@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { BUSCAR_FICHA, CONFIRMAR_FICHA, PARAMETRO_OTRO } from './queries';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
-export class FichaSaludService {
+export class SaludService {
 
   constructor(
     private apollo: Apollo
   ) { }
-
 
   public findFichaByPersonaID(personaId: number) {
     return this.apollo.watchQuery(
@@ -24,7 +20,7 @@ export class FichaSaludService {
         },
         fetchPolicy: 'network-only'
       }
-    ).valueChanges
+    )
 
   }
 
@@ -53,5 +49,4 @@ export class FichaSaludService {
     return (await mutations.toPromise()).data['crearParametro']['detalle']
 
   }
-
 }

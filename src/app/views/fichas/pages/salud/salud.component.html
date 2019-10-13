@@ -1,0 +1,57 @@
+<div class="container">
+
+    <h1 class="display-4 text-center my-4">FICHA DE SALUD</h1>
+
+    <ng-container *ngIf="ficha | async as fichaAsync; else cargando">
+
+        <div class="row justify-content-center">
+            <div class="col py-3 border border-dark">
+                <div class="text-justify">
+                    <h6>
+                        1. Sr./Srta. estudiante, LEA detenidamente el formulario y complete TODOS los casilleros con la
+                        información solicitada.
+                    </h6>
+                    <h6>
+                        2. Los datos obtenidos en este documento son OBLIGATORIOS para los estudiantes y de carácter
+                        CONFIDENCIAL.
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+
+        <form [formGroup]="form" class="my-4 border">
+
+            <div *ngFor="let seccion of fichaAsync['seccionfsSet']" class="card border border-dark mb-5">
+                <div class="card-header text-center bg-ista">
+                    <h3 class="font-weight-light">{{seccion.seccionNombre.nombre}}</h3>
+                </div>
+                <!--TITULO DE LA SECCION-->
+
+                <div class="card-body">
+
+                    <div class="form-group" *ngFor="let detalle of seccion.detallerespuestaSet">
+                        <app-pregunta [detalle]="detalle"></app-pregunta>
+                    </div>
+                </div>
+                <!--CONTENIDO DE LA SECCION-->
+
+            </div>
+            <!--DIV SECCIONES DE LA FICHA-->
+
+            <div class="text-center my-4">
+                <button class="btn btn-success">Guardar y Confirmar</button>
+            </div>
+        </form>
+
+
+    </ng-container>
+    <!--VALIDACION DE LA CARGA DE LA INFORMACION-->
+
+    <ng-template #cargando>
+        <loading [info]="{description:'POR FAVOR ESPERE'}"></loading>
+    </ng-template>
+
+
+</div>
+<!--CONTAINER-->

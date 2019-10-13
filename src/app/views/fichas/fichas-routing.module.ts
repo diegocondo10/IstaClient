@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LayoutFichaSaludComponent } from './salud/components/layout-ficha-salud/layout-ficha-salud.component';
 import { FichasComponent } from './fichas.component';
-import { ConfirmacionComponent } from './salud/components/confirmacion/confirmacion.component';
+import { SaludComponent } from './pages/salud/salud.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', redirectTo: 'dashboard', pathMatch: 'full'
+  },
+  {
+    path: '', component: FichasComponent,
     children: [
-      { path: 'salud', component: LayoutFichaSaludComponent },
-      { path: '', component: FichasComponent },
-      { path: 'confirmar', component: ConfirmacionComponent },
+      {
+        path: 'dashboard', component: DashboardComponent
+      },
+      {
+        path: 'salud', component: SaludComponent
+      },
     ]
-
   },
 
 ];

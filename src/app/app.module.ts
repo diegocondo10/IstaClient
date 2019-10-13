@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { FichasModule } from './views/fichas/fichas.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { FichasModule } from './views/fichas/fichas.module';
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -27,8 +27,7 @@ import { FichasModule } from './views/fichas/fichas.module';
     ApolloModule,
     HttpLinkModule,
     HttpClientModule,
-    FormsModule,
-    FichasModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

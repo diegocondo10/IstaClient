@@ -1,9 +1,10 @@
-import { OnInit, OnDestroy, Component } from '@angular/core';
+import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-fichas',
-  templateUrl: './fichas.component.html',
-  styleUrls: ['./fichas.component.css']
+  template: '<router-outlet></router-outlet>'
 })
 export class FichasComponent {
+
 }
