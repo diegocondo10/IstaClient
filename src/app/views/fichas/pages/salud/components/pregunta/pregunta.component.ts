@@ -13,20 +13,19 @@ export class PreguntaComponent implements OnInit {
   @Input() public pregunta: PreguntaFs
   @Input() form: FormGroup
 
-  public paramsFor: ParametroFs[]
-
-
   public formControl: FormControl
+
   public respuestaJson: string
 
   public respuestSimple: RespuestaSimple = {}
+
   public respuestaParams: RespuestaParametros = {
     parametros: new Map<number, ParametroFs>()
   }
+
   public respuestaDiagnos: RespuestaDiagnosticos = {
     diagnosticos: []
   }
-
 
   constructor(
     private srv: SaludService
@@ -35,7 +34,6 @@ export class PreguntaComponent implements OnInit {
   ngOnInit() {
 
     this.respuestaJson = this.pregunta.respuestaPersona.respuestas
-    this.paramsFor = this.pregunta.parametros
     if (this.respuestaJson) {
 
       const res = JSON.parse(this.respuestaJson)
@@ -49,9 +47,12 @@ export class PreguntaComponent implements OnInit {
         const parametros = res['parametros'] as ParametroFs[]
 
         parametros.forEach(obj => {
+
           const param = this.pregunta.parametros.filter(item => item.id == obj.id)[0]
-          param.check = true
-          this.respuestaParams.parametros.set(obj.id, obj)
+          if (param) {
+            param.check = true
+            this.respuestaParams.parametros.set(obj.id, obj)
+          }
         });
 
       } else if (res['diagnosticos']) {
@@ -95,12 +96,11 @@ export class PreguntaComponent implements OnInit {
 
   }
 
-
-
   verificarPregunta(pregunta: PreguntaFs): FormControl {
     if (pregunta.required) {
       return new FormControl('', Validators.required)
     }
   }
+
 
 }
