@@ -33,6 +33,46 @@ export class PreguntaComponent implements OnInit {
 
   ngOnInit() {
 
+
+  }
+
+  generarRespuestaParams(event) {
+    const params = this.respuestaParams.parametros
+
+    if (params.get(event.value)) {
+      params.delete(event.value)
+
+    } else {
+
+      const paramPreg = this.pregunta.parametros.filter(item => item.id == event.value)[0]
+      params.set(paramPreg.id, paramPreg)
+
+    }
+
+    return [...params.values()]
+  }
+
+  async check(event) {
+    const result = this.generarRespuestaParams(event)
+
+    let json = null
+    if (result.length > 0) {
+      json = '{"parametros":'
+      json += JSON.stringify(result).replace(/,"__typename":"ParametroFsType"/g, "")
+      json += '}'
+    }
+    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json)
+
+  }
+
+  select(event) {
+
+    const respuesta = this.pregunta.parametros.filter(item => item.id == event.vallue)[0]
+    console.log(respuesta);
+  }
+
+  verificarPreguntas() {
+
     this.respuestaJson = this.pregunta.respuestaPersona.respuestas
     if (this.respuestaJson) {
 
@@ -56,49 +96,9 @@ export class PreguntaComponent implements OnInit {
         });
 
       } else if (res['diagnosticos']) {
-
         this.respuestaDiagnos = res['diagnosticos']
-
       }
 
-    }
-
-  }
-
-  async check(event) {
-
-    const params = this.respuestaParams.parametros
-
-    if (params.get(event.value)) {
-      params.delete(event.value)
-
-    } else {
-
-      const paramPreg = this.pregunta.parametros.filter(item => item.id == event.value)[0]
-      params.set(paramPreg.id, paramPreg)
-
-    }
-
-    const result = [...params.values()]
-
-    let json = null
-    if (result.length > 0) {
-      json = '{"parametros":'
-      json += JSON.stringify(result).replace(/,"__typename":"ParametroFsType"/g, "")
-      json += '}'
-    }
-    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json)
-
-  }
-
-  simple(event) {
-    console.log(event.value);
-
-  }
-
-  verificarPregunta(pregunta: PreguntaFs): FormControl {
-    if (pregunta.required) {
-      return new FormControl('', Validators.required)
     }
   }
 

@@ -1,44 +1,47 @@
-<label for="">{{pregunta.posicion}}. {{pregunta.titulo}}</label>
-
-<ng-container [ngSwitch]="pregunta.tipo | lowercase">
-
-    <div class="form-group" *ngSwitchCase="'checkbox'">
-        <label class="custom-control custom-checkbox" *ngFor="let parametro of pregunta.parametros">
-            <input type="checkbox" [name]="pregunta.id" [id]="parametro.id" [value]="parametro.id"
-                [checked]="parametro.check" (change)="check($event.target)">
-            {{parametro.titulo}}
-        </label>
-    </div>
-    <!--PREGUNTAS DE SELECCION MULTIPLE-->
+<ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
-    <div class="form-group" *ngSwitchCase="'select'">
+        <small id="helpId" class="form-text help-text mb-3 font-weight-bold">{{pregunta.ayuda}}</small>
 
-
-        <select class="form-control form-control-sm select-120px" name="" id="" (change)="simple($event.target)">
-            <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
+        <div *ngSwitchCase="'checkbox'">
+            <label class="custom-control custom-checkbox" *ngFor="let parametro of pregunta.parametros">
+                <input type="checkbox" [name]="pregunta.id" [id]="parametro.id" [value]="parametro.id"
+                    [checked]="parametro.check" (change)="check($event.target)">
                 {{parametro.titulo}}
-            </option>
-        </select>
+            </label>
+        </div>
+        <!--PREGUNTAS DE SELECCION MULTIPLE-->
 
 
-    </div>
+        <div *ngSwitchCase="'select'">
 
 
-    <div *ngSwitchCase="'month'">
-        <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
-            [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step">
-    </div>
-
-    <div *ngSwitchCase="'number'">
-        <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
-            [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step">
-    </div>
+            <select class="form-control form-control-sm select-120px" name="" id="" (change)="select($event.target)">
+                <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
+                    {{parametro.titulo}}
+                </option>
+            </select>
 
 
+        </div>
 
-    <div *ngSwitchDefault>
-        <input type="text" class="form-control form-control-sm" name="" id="" aria-describedby="helpId" placeholder="">
-        <small id="helpId" class="form-text text-muted">{{pregunta.ayuda}}</small>
-    </div>
+
+        <div *ngSwitchCase="'month'">
+            <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
+                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step">
+        </div>
+
+        <div *ngSwitchCase="'number'">
+            <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
+                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step">
+        </div>
+
+
+
+<!--         <div *ngSwitchDefault>
+            <input type="text" class="form-control form-control-sm" name="" id="" aria-describedby="helpId"
+                placeholder="">
+            <small id="helpId" class="form-text text-muted">{{pregunta.ayuda}}</small>
+        </div> -->
+    </label>
 </ng-container>
