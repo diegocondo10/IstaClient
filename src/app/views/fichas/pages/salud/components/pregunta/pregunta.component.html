@@ -1,6 +1,7 @@
 <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
+    <label for="">{{pregunta.posicion}}. {{pregunta.titulo}}
         <small id="helpId" class="form-text help-text mb-3 font-weight-bold">{{pregunta.ayuda}}</small>
 
         <div *ngSwitchCase="'checkbox'">
