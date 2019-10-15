@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SaludService } from './services/salud.service';
 import { UsersService } from '../../../../services/users.service';
-import { Observable } from 'rxjs';
-import { FichaSalud } from '../../../../models/ficha-salud';
-import { map } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
+import { SeccionFs, PersonaFs } from '../../../../models/appFichas';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-salud',
@@ -14,7 +14,8 @@ import { FormGroup } from '@angular/forms';
 export class SaludComponent implements OnInit {
 
 
-  public ficha: Observable<FichaSalud>
+  public ficha: Observable<SeccionFs[]>
+  public personaFs: PersonaFs
 
   public form: FormGroup = new FormGroup({})
 
@@ -24,13 +25,10 @@ export class SaludComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-
-    this.ficha = this.srv.findFichaByPersonaID(this.userSrv.getUserLoggedIn().persona.id)
-      .valueChanges
-      .pipe(map(({ data }) => data['ficha'] as FichaSalud))
-
-
-
+    this.ficha = this.srv.buscarFichaSalud(this.userSrv.getUserLoggedIn().persona.id)
+      .pipe(
+        map(({ data }) => data['appFs']['fichaSalud'])
+      )
   }
 
 }

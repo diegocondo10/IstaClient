@@ -2,7 +2,7 @@
 
     <h1 class="display-4 text-center my-4">FICHA DE SALUD</h1>
 
-    <ng-container *ngIf="ficha | async as fichaAsync; else cargando">
+    <ng-container *ngIf="ficha |async as fichaAsync ; else cargando">
 
         <div class="row justify-content-center">
             <div class="col py-3 border border-dark">
@@ -22,16 +22,15 @@
 
         <form [formGroup]="form" class="my-4 border">
 
-            <div *ngFor="let seccion of fichaAsync['seccionfsSet']" class="card border border-dark mb-5">
+            <div *ngFor="let seccion of fichaAsync" class="card border border-dark mb-5">
                 <div class="card-header text-center bg-ista">
-                    <h3 class="font-weight-light">{{seccion.seccionNombre.nombre}}</h3>
+                    <h3 class="font-weight-light">{{seccion.posicion}}. {{seccion.nombre}}</h3>
                 </div>
                 <!--TITULO DE LA SECCION-->
 
                 <div class="card-body">
-
-                    <div class="form-group" *ngFor="let detalle of seccion.detallerespuestaSet">
-                        <app-pregunta [detalle]="detalle"></app-pregunta>
+                    <div class="form-group" *ngFor="let pregunta of seccion['preguntafsSet']">
+                        <app-pregunta [pregunta]="pregunta" [form]="form"></app-pregunta>
                     </div>
                 </div>
                 <!--CONTENIDO DE LA SECCION-->

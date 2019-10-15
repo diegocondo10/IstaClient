@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { BUSCAR_FICHA, CONFIRMAR_FICHA, PARAMETRO_OTRO } from './queries';
+import { BUSCAR_FICHA, UPDATE_RESPUESTA_FS } from './queries';
 
 @Injectable({
   providedIn: 'root'
@@ -11,42 +11,27 @@ export class SaludService {
     private apollo: Apollo
   ) { }
 
-  public findFichaByPersonaID(personaId: number) {
-    return this.apollo.watchQuery(
-      {
-        query: BUSCAR_FICHA,
-        variables: {
-          personaId: personaId
-        },
-        fetchPolicy: 'network-only'
-      }
-    )
+  public buscarFichaSalud(personaId: number) {
+    return this.apollo.query({
+      query: BUSCAR_FICHA,
+      variables: {
+        personaId: personaId
+      },
+      fetchPolicy: 'no-cache'
+    })
 
   }
 
-  public async confirmarFicha(IDficha: number, state: string) {
+  public async updateRespuestaFs(id: number, respuesta: String) {
     const mutation = await this.apollo.mutate({
-      mutation: CONFIRMAR_FICHA,
+      mutation: UPDATE_RESPUESTA_FS,
       variables: {
-        ID: IDficha,
-        state: state
+        id: id,
+        respuesta: respuesta
       }
-    })
-
-    const result = (await mutation.toPromise()).data
-    console.log(result);
-
+    });
+    await mutation.toPromise()
   }
 
-  public async agregarOtroParametro(params) {
-    const mutations = await this.apollo.mutate({
-      mutation: PARAMETRO_OTRO,
-      variables: {
-        params: params
-      }
-    })
 
-    return (await mutations.toPromise()).data['crearParametro']['detalle']
-
-  }
 }

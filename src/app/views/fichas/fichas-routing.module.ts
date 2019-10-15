@@ -12,14 +12,12 @@ const routes: Routes = [
   },
   {
     path: '', component: FichasComponent,
-    children: [
-      {
-        path: 'dashboard', component: DashboardComponent
-      },
-      {
-        path: 'salud', component: SaludComponent
-      },
-    ]
+  },
+  {
+    path: 'dashboard', component: DashboardComponent
+  },
+  {
+    path: 'salud', component: SaludComponent
   },
 
 ];
