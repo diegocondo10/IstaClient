@@ -1,55 +1,59 @@
 <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
-    <label for="">{{pregunta.posicion}}. {{pregunta.titulo}}
-        <strong class="text-danger" *ngIf="pregunta.required">
-            (OBLIGATORIA)
-        </strong>
-        <small id="helpId" class="form-text help-text mb-3 font-weight-bold">{{pregunta.ayuda}}</small>
+  <label for="">{{pregunta.posicion}}. {{pregunta.titulo}}
+    <strong class="text-danger" *ngIf="pregunta.required">
+      (OBLIGATORIA)
+    </strong>
+    <small id="helpId" class="form-text help-text mb-3 font-weight-bold pl-3">{{pregunta.ayuda}}</small>
 
-        <div *ngSwitchCase="'checkbox'">
-            <label class="custom-control custom-checkbox input-check-ficha"
-                *ngFor="let parametro of pregunta.parametros">
-                <input type="checkbox" [name]="pregunta.id" [id]="parametro.id" [value]="parametro.id"
-                    [checked]="parametro.check" (change)="check($event.target)">
-                {{parametro.titulo}}
-            </label>
-        </div>
-        <!--PREGUNTAS DE SELECCION MULTIPLE-->
+    <div *ngSwitchCase="'checkbox'">
+      <label
+        class="custom-control custom-checkbox input-check-ficha"
+        *ngFor="let parametro of pregunta.parametros"
+      >
+        <input type="checkbox" [name]="pregunta.id" [id]="parametro.id" [value]="parametro.id"
+               [checked]="parametro.check" (change)="check($event.target)">
+        {{parametro.titulo}}
+      </label>
+    </div>
+    <!--RESPUESTAS DE SELECCION MULTIPLE-->
 
+    <div *ngSwitchCase="'select'">
 
-        <div *ngSwitchCase="'select'">
+      <select
+        class="form-control form-control-sm select-120px"
+        name=""
+        id=""
+        [value]="resTemplate.parametro.id"
+        (change)="select($event.target)"
+      >
+        <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
+          {{parametro.titulo}}
+        </option>
+      </select>
 
-
-            <select class="form-control form-control-sm select-120px" name="" id="" [value]="respuesta.parametro.id"
-                (change)="select($event.target)">
-                <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
-                    {{parametro.titulo}}
-                </option>
-            </select>
-
-
-        </div>
-
-
-        <div *ngSwitchCase="'month'">
-            <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
-                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
-                (change)="simple($event.target)">
-        </div>
-
-        <div *ngSwitchCase="'number'">
-            <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
-                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
-                (change)="simple($event.target)">
-        </div>
+    </div>
+    <!--RESPUESTA EN COMBO BOX-->
 
 
+    <div *ngSwitchCase="'month'">
+      <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
+             [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
+             (change)="simple($event.target)">
+    </div>
 
-        <!--         <div *ngSwitchDefault>
-            <input type="text" class="form-control form-control-sm" name="" id="" aria-describedby="helpId"
-                placeholder="">
-            <small id="helpId" class="form-text text-muted">{{pregunta.ayuda}}</small>
-        </div> -->
-    </label>
+    <div *ngSwitchCase="'number'">
+      <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
+             [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
+             (change)="simple($event.target)">
+    </div>
+
+
+    <!--         <div *ngSwitchDefault>
+        <input type="text" class="form-control form-control-sm" name="" id="" aria-describedby="helpId"
+            placeholder="">
+        <small id="helpId" class="form-text text-muted">{{pregunta.ayuda}}</small>
+    </div> -->
+  </label>
 </ng-container>

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { PreguntaFs, RespuestaSimple, RespuestaParametros, RespuestaDiagnosticos, ParametroFs, RespuestaJSON } from '../../../../../../models/appFichas';
-import { SaludService } from '../../services/salud.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ParametroFs, PreguntaFs, RespuestaJSON} from '../../../../../../models/appFichas';
+import {SaludService} from '../../services/salud.service';
 
 @Component({
   selector: 'app-pregunta',
@@ -10,99 +10,109 @@ import { SaludService } from '../../services/salud.service';
 })
 export class PreguntaComponent implements OnInit {
 
-  @Input() public pregunta: PreguntaFs
-  @Input() form: FormGroup
+  @Input() public pregunta: PreguntaFs;
+  @Input() form: FormGroup;
 
-  public formControl: FormControl
-
-  public JSONstring: string
-
-  public respuesta: RespuestaJSON = {
+  public formControl: FormControl;
+  public resTemplate: RespuestaJSON = {
     parametro: {},
     parametros: new Map<number, ParametroFs>()
-  }
+  };
+  public res: RespuestaJSON;
 
 
   constructor(
     private srv: SaludService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.verificarPreguntas()
-
+    this.verificarPreguntas();
   }
 
-  generarRespuestaParams(event) {
-    const params = this.respuesta.parametros
+  verificarPreguntas(): void {
+    const JSONstring = this.pregunta.respuestaPersona.respuestas;
 
-    if (params.get(event.value)) {
-      params.delete(event.value)
+    if (JSONstring) {
+      this.res = JSON.parse(JSONstring);
 
-    } else {
+      if (this.res.parametro) {
 
-      const paramPreg = this.pregunta.parametros.filter(item => item.id == event.value)[0]
-      params.set(paramPreg.id, paramPreg)
+        this.resTemplate.parametro = this.res.parametro;
 
+      } else if (this.res.parametros) {
+
+        this.res.parametros.forEach(obj => this.checkParams(obj));
+
+      } else if (this.res.diagnosticos) {
+
+        this.resTemplate.diagnosticos = this.res.diagnosticos;
+
+      }
     }
 
-    return [...params.values()]
   }
 
+  /*
+  * FUNCIONES DE CALLBACKS Y PROCESOS QUE SE REPITEN
+  * */
+
+  filterParam = (item, event): boolean => item.id === event.value;
+
+  checkParams(obj: ParametroFs): void {
+    const
+      param = this.pregunta.parametros.filter(item => item.id === obj.id)[0];
+
+    if (param) {
+      param.check = true;
+      this.resTemplate.parametros.set(obj.id, obj);
+    }
+  }
+
+  generarJSONparametros(result): string {
+    return JSON.stringify(result).replace(/,"__typename":"ParametroFsType"/g, '');
+  }
+
+
+  /*
+  *   EVENTOS DEL TEMPLATE
+  * */
   async check(event) {
-    const result = this.generarRespuestaParams(event)
+    const params = this.resTemplate.parametros;
 
-    let json = null
-    if (result.length > 0) {
-      json = '{"parametros":'
-      json += JSON.stringify(result).replace(/,"__typename":"ParametroFsType"/g, "")
-      json += '}'
+    if (!params.delete(event.value)) {
+
+      const paramPreg = this.pregunta.parametros
+        .filter((item) => this.filterParam(item, event))[0];
+
+      params.set(paramPreg.id, paramPreg);
+
     }
-    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json)
+
+    const result = [...params.values()];
+
+    let json = null;
+    if (result.length > 0) {
+      json = '{"parametros":';
+      json += this.generarJSONparametros(result);
+      json += '}';
+    }
+    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
 
   }
 
   async select(event) {
-    const result = this.pregunta.parametros.filter(item => item.id == event.value)[0]
+    const result = this.pregunta.parametros
+      .filter(item => this.filterParam(item, event))[0];
 
-    let json = '{"parametro":'
-    json += JSON.stringify(result).replace(/,"__typename":"ParametroFsType"/g, "")
-    json += '}'
-    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json)
+    let json = '{"parametro":';
+    json += this.generarJSONparametros(result);
+    json += '}';
 
+    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
   }
 
   async simple(event) {
     console.log(event.value);
   }
-
-  verificarPreguntas() {
-    this.JSONstring = this.pregunta.respuestaPersona.respuestas
-
-    if (this.JSONstring) {
-
-      const res = JSON.parse(this.JSONstring)
-
-      if (res['parametro']) {
-        this.respuesta.parametro = res['parametro']
-
-      } else if (res['parametros']) {
-
-        const parametros = res['parametros'] as ParametroFs[]
-        parametros.forEach(obj => {
-          const param = this.pregunta.parametros.filter(item => item.id == obj.id)[0]
-          if (param) {
-            param.check = true
-            this.respuesta.parametros.set(obj.id, obj)
-          }
-        });
-
-      } else if (res['diagnosticos']) {
-        this.respuesta.diagnosticos = res['diagnosticos']
-
-      }
-
-    }
-  }
-
-
 }

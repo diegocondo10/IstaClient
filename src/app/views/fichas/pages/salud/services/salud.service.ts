@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { BUSCAR_FICHA, UPDATE_RESPUESTA_FS } from './queries';
+import {Injectable} from '@angular/core';
+import {Apollo} from 'apollo-angular';
+import {BUSCAR_FICHA, UPDATE_RESPUESTA_FS} from './queries';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,8 @@ export class SaludService {
 
   constructor(
     private apollo: Apollo
-  ) { }
+  ) {
+  }
 
   public buscarFichaSalud(personaId: number) {
     return this.apollo.query({
@@ -18,11 +19,11 @@ export class SaludService {
         personaId: personaId
       },
       fetchPolicy: 'no-cache'
-    })
+    });
 
   }
 
-  public async updateRespuestaFs(id: number, respuesta: String) {
+  public async updateRespuestaFs(id: number, respuesta: string) {
     const mutation = await this.apollo.mutate({
       mutation: UPDATE_RESPUESTA_FS,
       variables: {
@@ -30,7 +31,7 @@ export class SaludService {
         respuesta: respuesta
       }
     });
-    await mutation.toPromise()
+    await mutation.toPromise();
   }
 
 
