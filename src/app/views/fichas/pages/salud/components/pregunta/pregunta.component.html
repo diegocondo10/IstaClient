@@ -34,12 +34,14 @@
 
         <div *ngSwitchCase="'month'">
             <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
-                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step">
+                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
+                (change)="simple($event.target)">
         </div>
 
         <div *ngSwitchCase="'number'">
             <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
-                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step">
+                [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
+                (change)="simple($event.target)">
         </div>
 
 

@@ -61,8 +61,6 @@ export class PreguntaComponent implements OnInit {
 
   }
 
-
-
   async select(event) {
     const result = this.pregunta.parametros.filter(item => item.id == event.value)[0]
 
@@ -71,6 +69,10 @@ export class PreguntaComponent implements OnInit {
     json += '}'
     await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json)
 
+  }
+
+  async simple(event) {
+    console.log(event.value);
   }
 
   verificarPreguntas() {
@@ -82,10 +84,10 @@ export class PreguntaComponent implements OnInit {
 
       if (res['parametro']) {
         this.respuesta.parametro = res['parametro']
+
       } else if (res['parametros']) {
 
         const parametros = res['parametros'] as ParametroFs[]
-
         parametros.forEach(obj => {
           const param = this.pregunta.parametros.filter(item => item.id == obj.id)[0]
           if (param) {
@@ -96,6 +98,7 @@ export class PreguntaComponent implements OnInit {
 
       } else if (res['diagnosticos']) {
         this.respuesta.diagnosticos = res['diagnosticos']
+
       }
 
     }
