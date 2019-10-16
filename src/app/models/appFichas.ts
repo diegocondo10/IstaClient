@@ -57,7 +57,7 @@ export interface RespuestaFs {
 }
 
 export interface RespuestaSimple {
-    respuesta?: string
+    respuesta?: ParametroFs
 }
 
 export interface RespuestaParametros {
@@ -71,4 +71,13 @@ export interface Diagnostico {
 }
 export interface RespuestaDiagnosticos {
     diagnosticos?: Diagnostico[]
+}
+
+
+export interface RespuestaJSON {
+    parametro?: ParametroFs
+    parametros?: Map<number, ParametroFs>
+    diagnosticos?: Diagnostico[]
+    respuestaSelect?: { id?: number, titulo?: string }
+
 }

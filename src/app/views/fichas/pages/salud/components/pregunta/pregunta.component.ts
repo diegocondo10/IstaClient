@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PreguntaFs, RespuestaSimple, RespuestaParametros, RespuestaDiagnosticos, RespuestaFs, ParametroFs } from '../../../../../../models/appFichas';
+import { FormGroup, FormControl } from '@angular/forms';
+import { PreguntaFs, RespuestaSimple, RespuestaParametros, RespuestaDiagnosticos, ParametroFs, RespuestaJSON } from '../../../../../../models/appFichas';
 import { SaludService } from '../../services/salud.service';
 
 @Component({
@@ -15,29 +15,25 @@ export class PreguntaComponent implements OnInit {
 
   public formControl: FormControl
 
-  public respuestaJson: string
+  public JSONstring: string
 
-  public respuestSimple: RespuestaSimple = {}
-
-  public respuestaParams: RespuestaParametros = {
+  public respuesta: RespuestaJSON = {
+    parametro: {},
     parametros: new Map<number, ParametroFs>()
   }
 
-  public respuestaDiagnos: RespuestaDiagnosticos = {
-    diagnosticos: []
-  }
 
   constructor(
     private srv: SaludService
   ) { }
 
   ngOnInit() {
-
+    this.verificarPreguntas()
 
   }
 
   generarRespuestaParams(event) {
-    const params = this.respuestaParams.parametros
+    const params = this.respuesta.parametros
 
     if (params.get(event.value)) {
       params.delete(event.value)
@@ -65,38 +61,41 @@ export class PreguntaComponent implements OnInit {
 
   }
 
-  select(event) {
 
-    const respuesta = this.pregunta.parametros.filter(item => item.id == event.vallue)[0]
-    console.log(respuesta);
+
+  async select(event) {
+    const result = this.pregunta.parametros.filter(item => item.id == event.value)[0]
+
+    let json = '{"parametro":'
+    json += JSON.stringify(result).replace(/,"__typename":"ParametroFsType"/g, "")
+    json += '}'
+    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json)
+
   }
 
   verificarPreguntas() {
+    this.JSONstring = this.pregunta.respuestaPersona.respuestas
 
-    this.respuestaJson = this.pregunta.respuestaPersona.respuestas
-    if (this.respuestaJson) {
+    if (this.JSONstring) {
 
-      const res = JSON.parse(this.respuestaJson)
+      const res = JSON.parse(this.JSONstring)
 
-      if (res['respuesta']) {
-
-        this.respuestSimple.respuesta = res['respuesta']
-
+      if (res['parametro']) {
+        this.respuesta.parametro = res['parametro']
       } else if (res['parametros']) {
 
         const parametros = res['parametros'] as ParametroFs[]
 
         parametros.forEach(obj => {
-
           const param = this.pregunta.parametros.filter(item => item.id == obj.id)[0]
           if (param) {
             param.check = true
-            this.respuestaParams.parametros.set(obj.id, obj)
+            this.respuesta.parametros.set(obj.id, obj)
           }
         });
 
       } else if (res['diagnosticos']) {
-        this.respuestaDiagnos = res['diagnosticos']
+        this.respuesta.diagnosticos = res['diagnosticos']
       }
 
     }
