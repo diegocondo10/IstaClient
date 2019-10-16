@@ -12,8 +12,8 @@
         class="custom-control custom-checkbox input-check-ficha"
         *ngFor="let parametro of pregunta.parametros"
       >
-        <input type="checkbox" [name]="pregunta.id" [id]="parametro.id" [value]="parametro.id"
-               [checked]="parametro.check" (change)="check($event.target)">
+        <input type="checkbox" [id]="parametro.id" [value]="parametro.id" [checked]="parametro.check"
+               (change)="check($event.target)">
         {{parametro.titulo}}
       </label>
     </div>
@@ -42,18 +42,19 @@
              [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
              (change)="simple($event.target)">
     </div>
+    <!--RESPUESTA MES -->
 
     <div *ngSwitchCase="'number'">
-      <input class="form-control form-control-sm select-120px" type="number" [name]="pregunta.titulo"
+      <input class="form-control form-control-sm select-120px" type="number"
              [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
              (change)="simple($event.target)">
     </div>
+    <!--RESPUESTA NUMERO -->
 
+    <div *ngSwitchCase="'text'">
+      <input class="form-control form-control-sm" type="text" [id]="pregunta.id"
+             (change)="simple($event.target)">
+    </div>
 
-    <!--         <div *ngSwitchDefault>
-        <input type="text" class="form-control form-control-sm" name="" id="" aria-describedby="helpId"
-            placeholder="">
-        <small id="helpId" class="form-text text-muted">{{pregunta.ayuda}}</small>
-    </div> -->
   </label>
 </ng-container>

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {ParametroFs, PreguntaFs, RespuestaJSON} from '../../../../../../models/appFichas';
-import {SaludService} from '../../services/salud.service';
+import {ParametroFs, PreguntaFs, RespuestaJSON} from '../../../../models/appFichas';
+import {SaludService} from '../services/salud.service';
 
 @Component({
   selector: 'app-pregunta',

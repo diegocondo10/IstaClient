@@ -32,7 +32,6 @@ query buscarFichaSalud($personaId: Int!) {
 `;
 
 
-
 export const UPDATE_RESPUESTA_FS = gql`
 mutation updateRespuestaFs($id: Int!, $respuesta: JSONString) {
   appFs {

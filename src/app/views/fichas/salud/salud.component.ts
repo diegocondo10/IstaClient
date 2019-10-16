@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {SaludService} from './services/salud.service';
-import {UsersService} from '../../../../services/users.service';
+import {UsersService} from '../../../services/users.service';
 import {FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {SeccionFs} from '../../../../models/appFichas';
+import {SeccionFs} from '../../../models/appFichas';
 
 @Component({
   selector: 'app-salud',

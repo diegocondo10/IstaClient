@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {FichasComponent} from './fichas.component';
-import {SaludComponent} from './pages/salud/salud.component';
-import {DashboardComponent} from './pages/dashboard/dashboard.component';
+import {SaludComponent} from './salud/salud.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
