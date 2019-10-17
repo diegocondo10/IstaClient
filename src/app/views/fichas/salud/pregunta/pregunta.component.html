@@ -1,7 +1,7 @@
 <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
-  <label for="">{{pregunta.posicion}}. {{pregunta.titulo}}
+  <label [for]="pregunta.id">{{pregunta.posicion}}. {{pregunta.titulo}}
     <strong class="text-danger" *ngIf="pregunta.required">
       (OBLIGATORIA)
     </strong>
@@ -11,11 +11,12 @@
 
   <div *ngSwitchCase="'checkbox'">
     <div class="custom-control custom-checkbox " *ngFor="let parametro of pregunta.parametros">
-      <input type="checkbox" [id]="parametro.id" [value]="parametro.id" [checked]="parametro.check"
-             (change)="check($event.target)">
-      <label class="pl-1 input-check-ficha" [for]="parametro.id">{{parametro.titulo}}</label>
+      <label class="pl-1 input-check-ficha" [for]="parametro.id">
+        <input type="checkbox" [id]="parametro.id" [value]="parametro.id" [checked]="parametro.check"
+               (change)="check($event.target)">
+        {{parametro.titulo}}</label>
     </div>
-    
+
   </div>
   <!--RESPUESTAS DE SELECCION MULTIPLE-->
 
@@ -24,7 +25,7 @@
     <select
       class="form-control form-control-sm select-120px"
       name=""
-      id=""
+      [id]="pregunta.id"
       [value]="resTemplate.parametro.id"
       (change)="select($event.target)"
     >

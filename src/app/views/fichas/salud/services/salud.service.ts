@@ -23,15 +23,16 @@ export class SaludService {
 
   }
 
-  public async updateRespuestaFs(id: number, respuesta: string) {
-    const mutation = await this.apollo.mutate({
+  public updateRespuestaFs(id: number, respuesta: string) {
+    this.apollo.mutate({
       mutation: UPDATE_RESPUESTA_FS,
       variables: {
         id: id,
         respuesta: respuesta
       }
-    });
-    await mutation.toPromise();
+    }).toPromise()
+      .then();
+
   }
 
 

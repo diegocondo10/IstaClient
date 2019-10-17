@@ -57,24 +57,11 @@ export interface RespuestaFs {
   pregunta?: PreguntaFs;
 }
 
-export interface RespuestaSimple {
-  respuesta?: ParametroFs;
-}
-
-export interface RespuestaParametros {
-  parametros?: Map<number, ParametroFs>;
-}
-
 export interface Diagnostico {
   parentesco?: string;
   diagnostico?: string;
   medicacion?: 'SI' | 'NO';
 }
-
-export interface RespuestaDiagnosticos {
-  diagnosticos?: Diagnostico[];
-}
-
 
 export interface RespuestaJSON {
   parametro?: ParametroFs;

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {FichasComponent} from './fichas.component';
 import {SaludComponent} from './salud/salud.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -11,12 +11,14 @@ const routes: Routes = [
   },
   {
     path: '', component: FichasComponent,
-  },
-  {
-    path: 'dashboard', component: DashboardComponent
-  },
-  {
-    path: 'salud', component: SaludComponent
+    children: [
+      {
+        path: 'dashboard', component: DashboardComponent
+      },
+      {
+        path: 'salud', component: SaludComponent
+      },
+    ]
   },
 
 ];

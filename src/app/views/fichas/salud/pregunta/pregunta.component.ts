@@ -30,7 +30,7 @@ export class PreguntaComponent implements OnInit {
     this.verificarPreguntas();
   }
 
-  verificarPreguntas(): void {
+  private verificarPreguntas(): void {
     const JSONstring = this.pregunta.respuestaPersona.respuestas;
 
     if (JSONstring) {
@@ -54,19 +54,19 @@ export class PreguntaComponent implements OnInit {
   }
 
   /*
-  * FUNCIONES DE CALLBACKS Y PROCESOS QUE SE REPITEN
-  * */
+   * FUNCIONES DE CALLBACKS Y PROCESOS QUE SE REPITEN
+   * */
 
-  filterParam = (item, event): boolean => item.id === event.value;
+  private filterParam = (item, event): boolean => item.id === event.value;
 
-  checkParams(obj: ParametroFs): void {
-    const
-      param = this.pregunta.parametros.filter(item => item.id === obj.id)[0];
+  private checkParams(obj: ParametroFs): void {
+    const param = this.pregunta.parametros.filter(item => item.id === obj.id)[0];
 
     if (param) {
       param.check = true;
       this.resTemplate.parametros.set(obj.id, obj);
     }
+
   }
 
   generarJSONparametros(result): string {
@@ -77,7 +77,7 @@ export class PreguntaComponent implements OnInit {
   /*
   *   EVENTOS DEL TEMPLATE
   * */
-  async check(event) {
+  check(event) {
     const params = this.resTemplate.parametros;
 
     if (!params.delete(event.value)) {
@@ -86,7 +86,6 @@ export class PreguntaComponent implements OnInit {
         .filter((item) => this.filterParam(item, event))[0];
 
       params.set(paramPreg.id, paramPreg);
-
     }
 
     const result = [...params.values()];
@@ -97,11 +96,11 @@ export class PreguntaComponent implements OnInit {
       json += this.generarJSONparametros(result);
       json += '}';
     }
-    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
+    this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
 
   }
 
-  async select(event) {
+  select(event) {
     const result = this.pregunta.parametros
       .filter(item => this.filterParam(item, event))[0];
 
@@ -109,10 +108,10 @@ export class PreguntaComponent implements OnInit {
     json += this.generarJSONparametros(result);
     json += '}';
 
-    await this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
+    this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
   }
 
-  async simple(event) {
+  simple(event) {
     console.log(event.value);
   }
 }
