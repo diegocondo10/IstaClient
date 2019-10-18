@@ -1,12 +1,12 @@
-import {Persona} from './persona';
+import { Persona } from "../../../models/persona";
 
 export interface SeccionFs {
   id?: number;
   nombre?: string;
   posicion?: string;
   activo?: boolean;
+  preguntafsSet: PreguntaFs[];
 }
-
 
 export interface PreguntaFs {
   id?: number;
@@ -52,7 +52,7 @@ export interface PersonaFs {
 
 export interface RespuestaFs {
   id?: number;
-  respuestas?: string;
+  respuestas?: string | ParametroFs | ParametroFs[] | Diagnostico[];
   personaFs?: PersonaFs;
   pregunta?: PreguntaFs;
 }
@@ -60,12 +60,6 @@ export interface RespuestaFs {
 export interface Diagnostico {
   parentesco?: string;
   diagnostico?: string;
-  medicacion?: 'SI' | 'NO';
+  medicacion?: "SI" | "NO";
 }
 
-export interface RespuestaJSON {
-  parametro?: ParametroFs;
-  parametros?: Map<number, ParametroFs>;
-  diagnosticos?: Diagnostico[];
-  respuestaSelect?: { id?: number, titulo?: string };
-}
