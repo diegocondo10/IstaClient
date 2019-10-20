@@ -21,9 +21,6 @@ export class FichaSaludComponent implements OnInit {
    * FUNCIONES DE CALLBACKS Y PROCESOS QUE SE REPITEN
    * */
 
-  private filterParam = (item, event): boolean => item.id === event.value;
-
-
   generarJSONparametros(result): string {
     return JSON.stringify(result)
       .replace(/,"__typename":"ParametroFsType"/g, "")
