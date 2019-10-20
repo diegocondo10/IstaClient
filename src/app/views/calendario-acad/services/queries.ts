@@ -65,3 +65,28 @@ mutation eliminarEvento($id: Int!, $titulo: String!, $descripcion: String!, $col
   }
 }
 `
+
+
+export const GET_CALENDARIO_BY_PERIODO = gql`
+query buscarCalendarioPorPeriodo($idPeriodo: Int!) {
+  appCalendarioAcademico {
+    calendario(idPeriodo: $idPeriodo) {
+      id
+      fechaInicio
+      fechaFin
+      activo
+      detallecalendarioSet {
+        id
+        fechaInicio
+        fechaFin
+        evento {
+          titulo
+          descripcion
+          color
+        }
+      }
+    }
+  }
+}
+
+`
