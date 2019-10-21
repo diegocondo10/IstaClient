@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { GET_EVENTOS, ADD_EVENTO, GET_EVENTO_BY_ID, EDIT_EVENTO, DELETE_EVENTO, GET_CALENDARIO_BY_ID } from './queries';
+import { GET_EVENTOS, ADD_EVENTO, GET_EVENTO_BY_ID, EDIT_EVENTO, DELETE_EVENTO, GET_CALENDARIO_BY_PERIODO } from './queries';
 import { Evento } from '../models/calendario-models';
 
 @Injectable({
@@ -11,6 +11,21 @@ export class CalendarioService {
   constructor(
     private apollo: Apollo
   ) { }
+
+
+  public async getCalendarioBy(idPeriodo: number) {
+    const query = await this.apollo.query({
+      query: GET_CALENDARIO_BY_PERIODO,
+      variables: {
+        idPeriodo: idPeriodo
+      }
+    });
+
+    const promise = await query.toPromise()
+
+    return promise.data['appCalendarioAcademico']['calendario']
+
+  }
 
 
   public async getEventos() {
@@ -24,8 +39,6 @@ export class CalendarioService {
     return promise.data['appCalendarioAcademico']['eventos'] as Evento[];
 
   }
-
-
 
   public async getEventoById(id: number): Promise<Evento> {
     const query = await this.apollo.query({

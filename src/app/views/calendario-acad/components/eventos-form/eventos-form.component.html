@@ -1,7 +1,3 @@
-<app-nav-bar></app-nav-bar>
-
-
-
 <div class="container border-primary align-content-center mt-5">
     <h3 class=" text-center display-4">¡CREA TU EVENTO AQUÍ!</h3>
 
@@ -19,24 +15,20 @@
                 <div class="form-group">
 
                     <label>Descripción:</label>
-                    <input class="form-control" type="text" name="descripcionIn" required
-                        [(ngModel)]="evento.descripcion">
+                    <input class="form-control" type="text" name="descripcionIn" required [(ngModel)]="evento.descripcion">
 
                 </div>
                 <div class="form-group">
 
                     <label>Color:</label>
 
-                    <input class="form-control select-80px" type="color" name="colorIn" required
-                        [(ngModel)]="evento.color">
+                    <input class="form-control select-80px" type="color" name="colorIn" required [(ngModel)]="evento.color">
 
 
                 </div>
                 <div class="form-row justify-content-around ">
-                    <button class="btn btn-warning col-5" type="submit"
-                        routerLink="/calendario/eventos">Cancelar</button>
-                    <button class="btn btn-ista col-5" type="submit" [disabled]="form.invalid"
-                        (click)="guardar()">Guardar</button>
+                    <button class="btn btn-warning col-5" type="submit" routerLink="/calendario/eventos">Cancelar</button>
+                    <button class="btn btn-ista col-5" type="submit" [disabled]="form.invalid" (click)="guardar()">Guardar</button>
                 </div>
             </form>
 

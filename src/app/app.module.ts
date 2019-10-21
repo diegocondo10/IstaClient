@@ -12,6 +12,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FichasModule } from './views/fichas/fichas.module';
+import { DetalleCalendarioComponent } from './components/detalle-calendario/detalle-calendario.component';
+import { FormComponent } from './components/detalle-calendario/form.component';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ export class AppModule {
     apollo.create({
       link: httpLink.create({
         //uri: 'http://localhost:8000/graphql',
-        uri: 'http://35.192.7.211:8000/graphql'
+        uri: 'http://35.192.7.211:8000/graphql',
+        method: 'POST'
       }),
       cache: new InMemoryCache()
     });

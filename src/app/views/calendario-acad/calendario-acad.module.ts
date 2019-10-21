@@ -9,10 +9,20 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { EventosListComponent } from './components/eventos-list/eventos-list.component';
 import { EventosFormComponent } from './components/eventos-form/eventos-form.component';
 import { FormsModule } from '@angular/forms';
+import { DetalleCalendarioComponent } from '../../components/detalle-calendario/detalle-calendario.component';
+import { FormComponent } from '../../components/detalle-calendario/form.component';
 
 
 @NgModule({
-  declarations: [CalendarioAcadComponent, CalendarioComponent, NavBarComponent, EventosListComponent, EventosFormComponent],
+  declarations: [
+    CalendarioAcadComponent,
+    CalendarioComponent,
+    NavBarComponent,
+    EventosListComponent,
+    EventosFormComponent,
+    DetalleCalendarioComponent,
+    FormComponent
+  ],
   imports: [
     CommonModule,
     CalendarioAcadRoutingModule,

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { CalendarioService } from '../../services/calendario.service';
+import { CalendarioAcad, DetalleCalendario } from '../../models/calendario-models';
+
 
 @Component({
   selector: 'app-calendario',
@@ -8,17 +11,30 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 })
 export class CalendarioComponent implements OnInit {
 
-  constructor() { }
+  public calendario: CalendarioAcad
+
+  constructor(
+    private srv: CalendarioService
+  ) { }
   calendarPlugins = [dayGridPlugin]; // important!
   calendarEvents = [
-    { title: 'event 1', start: '2019-04-01', end: '2019-04-01', color: '#cb3234'}
+    {
+     
+    }
   ];
-  modifyTitle(eventIndex, newTitle) {
-    this.calendarEvents[eventIndex].title = newTitle;
+ 
+  async ngOnInit() {
+
+    this.calendario = await this.srv.getCalendarioBy(21)
+    this.calendario[0].detallecalendarioSet.forEach((obj: DetalleCalendario) => {
+      this.calendarEvents = this.calendarEvents.concat({
+        title: obj.evento.titulo,
+        color: obj.evento.color,
+        start: obj.fechaInicio + "",
+        end: obj.fechaFin + ""
+      })
+    })
+    console.log(this.calendarEvents);
   }
-  ngOnInit() {
-
-  }
-
-
+ 
 }

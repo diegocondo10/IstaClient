@@ -20,8 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'calendario',
-        loadChildren: () => import('./views/calendario-acad/calendario-acad.module').then(m => m.CalendarioAcadModule),
-
+        loadChildren: () => import('./views/calendario-acad/calendario-acad.module').then(m => m.CalendarioAcadModule)
       }
     ]
   },
