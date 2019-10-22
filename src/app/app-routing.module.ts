@@ -12,17 +12,15 @@ const routes: Routes = [
     children: [
       {
         path: "dash",
-        loadChildren: () =>
-          import("./views/dashboard/dashboard.module").then(
-            m => m.DashboardModule
-          )
+        loadChildren: () => import("./views/dashboard/dashboard.module").then(m => m.DashboardModule)
       },
       {
         path: "fichas",
-        loadChildren: () =>
-          import("./components/fichas-dashboard/fichas-dashboard.module").then(
-            m => m.FichasDashboardModule
-          )
+        loadChildren: () => import("./components/fichas-dashboard/fichas-dashboard.module").then(m => m.FichasDashboardModule)
+      },
+      {
+        path: 'calendario',
+        loadChildren: () => import('./views/calendario-acad/calendario-acad.module').then(m => m.CalendarioAcadModule)
       }
     ]
   }

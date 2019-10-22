@@ -20,7 +20,6 @@ const routes: Routes = [
       { path: 'detalle-list', component: DetalleCalendarioComponent },
       { path: 'detalle-add', component: FormComponent },
       { path: 'detalle-edit/:id', component: FormComponent },
-
     ]
   },
 
