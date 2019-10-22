@@ -20,7 +20,7 @@
 
                 </h1>
 
-                <table class="table table-sm">
+                <table class="table table-sm text-center">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">ID</th>
@@ -37,9 +37,14 @@
                                     {{evento.titulo}}
                                 </a>
                             </td>
-                            <td>{{evento.color}}</td>
                             <td>
-                                <button class="btn btn-sm btn-danger" (click)="btnEliminar(evento)">Eliminar</button>
+                                <div [ngStyle]="{'background-color': evento.color}">
+                                    COLOR
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger btn-block"
+                                    (click)="btnEliminar(evento)">Eliminar</button>
                             </td>
                         </tr>
                     </tbody>

@@ -31,10 +31,8 @@ export class EventosFormComponent implements OnInit {
 
   async guardar() {
     if (this.id != null) {
-      console.log("EDITAR");
       await this.srv.editEvento(this.evento);
     } else {
-      console.log("AGREGAR");
       await this.srv.addEvento(this.evento);
     }
     this.router.navigate(['calendario', 'eventos'])

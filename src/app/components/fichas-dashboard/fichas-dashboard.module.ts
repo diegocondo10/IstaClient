@@ -8,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [FichasDashboardComponent, FichaSaludComponent],
-  imports: [CommonModule, FormsModule, FichasDashboardRoutingModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    FichasDashboardRoutingModule
+  ]
 })
 export class FichasDashboardModule { }

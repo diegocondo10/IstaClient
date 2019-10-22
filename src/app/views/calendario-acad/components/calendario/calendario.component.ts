@@ -19,22 +19,27 @@ export class CalendarioComponent implements OnInit {
   calendarPlugins = [dayGridPlugin]; // important!
   calendarEvents = [
     {
-     
+
     }
   ];
- 
+
   async ngOnInit() {
 
     this.calendario = await this.srv.getCalendarioBy(21)
-    this.calendario[0].detallecalendarioSet.forEach((obj: DetalleCalendario) => {
+
+    this.calendario.detallecalendarioSet.forEach((obj: DetalleCalendario) => {
       this.calendarEvents = this.calendarEvents.concat({
         title: obj.evento.titulo,
         color: obj.evento.color,
         start: obj.fechaInicio + "",
         end: obj.fechaFin + ""
       })
-    })
-    console.log(this.calendarEvents);
+    });
+
   }
- 
+
+  select($event) {
+    console.log($event);
+  }
+
 }

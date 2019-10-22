@@ -1,24 +1,29 @@
-<div class="container my-5">
+<div class="container" *ngIf="calendario">
+    <div class="row">
+        <div class="col-12">
 
-    <div class="row justify-content-end">
+            <div class="text-center">
+                <h2>{{calendario.periodo.nombre}}</h2>
 
-        <div class="col-11">
+                <div class="row justify-content-center">
+                    <button class="btn btn-dark btn-sm" routerLink="/calendario/detalle-add/{{calendario.id}}">
+                        Agregar Eventos Al Calendario
+                    </button>
+                    <button class="btn btn-info btn-sm">
+                        <a class="text-decoration-none text-white" href="http://35.192.7.211:8000/calendario/reporte"
+                            target="_blank">
+                            Generar Reporte
+                        </a>
+                    </button>
+                </div>
 
-            <h1 class="display-4">CALENDARIO</h1>
+            </div>
 
-            <!--             <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="
-              [ 
-              { title: 'PRUEBA DE CALENDARIO1', start: '2019-09-26', end: '2019-09-26', color:'#cb3234'},
-        { title: 'PRUEBA DE CALENDARIO2', start: '2019-09-26', end: '2019-09-28', color:'#FFFF00'},
-        { title: 'PRUEBA DE CALENDARIO3', start: '2019-09-26', end: '2019-10-28', color:'#66FF00'}
-                ]">
-            </full-calendar> -->
-            <full-calendar defaultView="dayGridMonth" [plugins]="calendarPlugins" [events]="calendarEvents">
+            <full-calendar id="mycalendar" defaultView="dayGridMonth" [plugins]="calendarPlugins"
+                [events]="calendarEvents" (drop)="select($event)">
             </full-calendar>
 
 
         </div>
-
     </div>
-
 </div>
