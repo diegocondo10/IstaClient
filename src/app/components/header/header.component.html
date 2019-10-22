@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light border">
+<nav class="navbar navbar-expand-sm navbar-light bg-light border ">
 
     <a class="navbar-brand" routerLink="/dash">
-        <img class="img-fluid mb-1" src="../../../assets/img/icon.ico" alt="" width="16">
+        <img class="img-fluid mb-1" src="./assets/img/icon.ico" alt="" width="16">
         INICIO
     </a>
 
@@ -14,7 +14,7 @@
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/fichas" routerLinkActive="active"><strong>Fichas</strong></a>
+                <a class="nav-link" routerLink="/fichas/" routerLinkActive="active"><strong>Fichas</strong></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/calendario" routerLinkActive="active"><strong>Calendario</strong></a>
@@ -33,4 +33,4 @@
     </div>
 </nav>
 
-<router-outlet></router-outlet>
+<router-outlet header></router-outlet>
