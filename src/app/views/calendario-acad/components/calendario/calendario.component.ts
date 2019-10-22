@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarioService } from '../../services/calendario.service';
 import { CalendarioAcad, DetalleCalendario } from '../../models/calendario-models';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UsersService } from '../../../../services/users.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class CalendarioComponent implements OnInit {
 
   constructor(
     private srv: CalendarioService,
+    public userSrv: UsersService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
