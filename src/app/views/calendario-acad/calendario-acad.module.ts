@@ -11,6 +11,7 @@ import { EventosFormComponent } from './components/eventos-form/eventos-form.com
 import { FormsModule } from '@angular/forms';
 import { DetalleCalendarioComponent } from '../../components/detalle-calendario/detalle-calendario.component';
 import { FormComponent } from '../../components/detalle-calendario/form.component';
+import { ReporteComponent } from './components/reporte/reporte.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FormComponent } from '../../components/detalle-calendario/form.componen
     EventosListComponent,
     EventosFormComponent,
     DetalleCalendarioComponent,
-    FormComponent
+    FormComponent,
+    ReporteComponent
   ],
   imports: [
     CommonModule,

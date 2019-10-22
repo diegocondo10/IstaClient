@@ -6,6 +6,7 @@ import { EventosListComponent } from './components/eventos-list/eventos-list.com
 import { EventosFormComponent } from './components/eventos-form/eventos-form.component';
 import { DetalleCalendarioComponent } from '../../components/detalle-calendario/detalle-calendario.component';
 import { FormComponent } from '../../components/detalle-calendario/form.component';
+import { ReporteComponent } from './components/reporte/reporte.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'detalle-list', component: DetalleCalendarioComponent },
       { path: 'detalle-add', component: FormComponent },
       { path: 'detalle-edit/:id', component: FormComponent },
+      { path: 'reporte', component: ReporteComponent },
 
     ]
   },
