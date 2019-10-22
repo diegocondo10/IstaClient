@@ -1,0 +1,123 @@
+<div class="container">
+
+    <h1 class="display-4 text-center mt-4">FICHA DE SALUD</h1>
+
+    <ng-container *ngIf="ficha; else cargando">
+
+        <div class="row justify-content-center my-5">
+            <div class="col py-3 border border-dark">
+                <div class="text-justify">
+                    <h6>
+                        1. Sr./Srta. estudiante, LEA detenidamente el formulario y complete TODOS los casilleros con la
+                        información solicitada.
+                    </h6>
+                    <h6>
+                        2. Los datos obtenidos en este documento son OBLIGATORIOS para los estudiantes y de carácter
+                        CONFIDENCIAL.
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+
+        <form class="border" #form="ngForm">
+
+            <div *ngFor="let seccion of ficha" class="card border border-dark mb-5">
+
+                <div class="card-header text-center bg-ista">
+                    <h3 class="font-weight-light">{{seccion.posicion}}. {{seccion.nombre}}</h3>
+                </div>
+                <!--TITULO DE LA SECCION-->
+
+                <div class="card-body">
+                    <div class="form-group" *ngFor="let pregunta of seccion.preguntafsSet">
+                        <!--FOR DE LAS PREGUNTAS-->
+                        <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
+
+
+                            <label [for]="pregunta.id">{{pregunta.posicion}}. {{pregunta.titulo}}
+                                <strong class="text-danger" *ngIf="pregunta.required">
+                                    (OBLIGATORIA)
+                                </strong>
+                                <small id="helpId" class="form-text help-text pl-3">{{pregunta.ayuda}}</small>
+                            </label>
+                            <!-- TITULO DE LA PREGUNTA-->
+
+                            <div *ngSwitchCase="'checkbox'">
+                                <div class="custom-control custom-checkbox "
+                                    *ngFor="let parametro of pregunta.parametros">
+                                    <label class="pl-1 input-check-ficha" [for]="parametro.id">
+                                        <input type="checkbox" [id]="parametro.id" [value]="parametro.id"
+                                            [checked]="parametro.check"
+                                            (change)="check(pregunta,parametro, $event.target)">
+                                        {{parametro.titulo}}</label>
+                                </div>
+
+                            </div>
+                            <!--RESPUESTAS DE SELECCION MULTIPLE-->
+
+
+                            <div *ngSwitchCase="'select'">
+
+
+                                <select class="form-control form-control-sm select-120px" [name]="pregunta.id"
+                                    [id]="pregunta.id" (change)="select(pregunta, $event.target)"
+                                    value="pregunta.respuestaPersona.respuestas.id">
+                                    <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
+                                        {{parametro.titulo}}
+                                    </option>
+                                </select>
+
+                            </div>
+                            <!--RESPUESTA EN COMBO BOX-->
+
+
+
+                            <div *ngSwitchCase="'month'">
+                                <input class="form-control form-control-sm select-120px" type="number"
+                                    [name]="pregunta.titulo" [id]="pregunta.id" [min]="pregunta.min"
+                                    [max]="pregunta.max" [step]="pregunta.step" (change)="simple($event.target)">
+                            </div>
+                            <!--RESPUESTA MES -->
+
+
+                            <div *ngSwitchCase="'number'">
+                                <input class="form-control form-control-sm select-120px" type="number"
+                                    [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
+                                    (change)="simple($event.target)">
+                            </div>
+                            <!--RESPUESTA NUMERO -->
+
+
+                            <div *ngSwitchCase="'text'">
+                                <input class="form-control form-control-sm" type="text" [id]="pregunta.id"
+                                    (change)="simple($event.target)">
+                            </div>
+
+
+                        </ng-container>
+                        <!--SWICHT CASE DE LOS TIPOS DE PREGUNTA-->
+
+                    </div>
+                </div>
+                <!--CONTENIDO DE LA SECCION-->
+
+            </div>
+            <!--DIV SECCIONES DE LA FICHA-->
+
+            <div class="text-center my-4">
+                <button class="btn btn-success" [disabled]="form.invalid">Guardar y Confirmar</button>
+            </div>
+        </form>
+
+
+    </ng-container>
+    <!--VALIDACION DE LA CARGA DE LA INFORMACION-->
+
+    <ng-template #cargando>
+        <!--         <loading [info]="{description:'POR FAVOR ESPERE'}"></loading> -->
+    </ng-template>
+
+
+</div>
+<!--CONTAINER-->

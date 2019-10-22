@@ -3,6 +3,8 @@
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "no-string-literal": false,
+    "object-literal-shorthand": false,
     "deprecation": {
       "severity": "warning"
     },

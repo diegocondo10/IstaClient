@@ -75,6 +75,10 @@ query buscarCalendarioPorPeriodo($idPeriodo: Int!) {
       fechaInicio
       fechaFin
       activo
+      periodo {
+        id
+        nombre
+      }
       detallecalendarioSet {
         id
         fechaInicio
@@ -84,6 +88,22 @@ query buscarCalendarioPorPeriodo($idPeriodo: Int!) {
           descripcion
           color
         }
+      }
+    }
+  }
+}
+
+`
+
+
+export const ADD_DETALLE_CALENDAR = gql`
+mutation agregarEventoAlCalendario($input: DetalleInput!) {
+  appCalendarioAcad {
+    addDetalle(input: $input) {
+      detalle {
+        id
+        fechaInicio
+        fechaFin
       }
     }
   }

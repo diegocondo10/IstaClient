@@ -1,0 +1,77 @@
+header,
+.main {
+    width: 70%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table .rojo {
+    background-color: red;
+}
+
+table .amarillo {
+    background-color: yellow;
+}
+
+table .verde {
+    background-color: green;
+}
+
+table .marron {
+    background-color: rgb(201, 204, 49);
+}
+
+table .celeste {
+    background-color: rgb(17, 209, 223);
+}
+
+table .purpura {
+    background-color: rgb(187, 78, 230);
+}
+
+table .rosado {
+    background-color: rgb(207, 131, 201);
+}
+
+table .durazno {
+    background-color: rgb(224, 185, 99);
+}
+
+.div {
+    border: 1px solid black;
+    border-collapse: collapse;
+    overflow: hidden;
+    padding: 0;
+}
+
+.imgIzquierda {
+    width: 200px;
+    float: left;
+    margin-top: 10px;
+}
+
+.imgDerecha {
+    width: 130px;
+    float: right;
+    margin: 1px;
+    margin-right: 2px;
+}
+
+.margin {
+    margin: 2px;
+}
+
+h5 {
+    margin: 1px;
+    text-align: center;
+    line-height: 26px;
+    size: 10px;
+}
