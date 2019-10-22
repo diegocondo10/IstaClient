@@ -7,36 +7,36 @@ export interface Evento {
 }
 
 export interface PeriodoLectivo {
-    id: number
-    //carrera: Carrera
-    nombre: string
-    fechaInicio: Date
-    fechaFin: Date
-    observacion: string
-    estado: Boolean
-    activo: Boolean
-    numCierre: number
-    //cursosSet: [Curso]
-    //tipodenotaSet: [TipoDeNota]
-    //permisoingresofsSet: [PermisoIngresoFs]
-    //calendario: Calendario
+    id?: number
+    //carrera?: Carrera
+    nombre?: string
+    fechaInicio?: Date
+    fechaFin?: Date
+    observacion?: string
+    estado?: Boolean
+    activo?: Boolean
+    numCierre?: number
+    //cursosSet?: [Curso]
+    //tipodenotaSet?: [TipoDeNota]
+    //permisoingresofsSet?: [PermisoIngresoFs]
+    //calendario?: Calendario
 }
 
 export interface CalendarioAcad {
-    id: number
-    fechaInicio: Date
-    fechaFin: Date
-    activo: Boolean
-    periodo: PeriodoLectivo
-    eventos: Evento[]
-    detallecalendarioSet: DetalleCalendario[]
+    id?: number
+    fechaInicio?: Date
+    fechaFin?: Date
+    activo?: Boolean
+    periodo?: PeriodoLectivo
+    eventos?: Evento[]
+    detallecalendarioSet?: DetalleCalendario[]
 }
 
 export interface DetalleCalendario {
-    id: number
-    fechaInicio: Date
-    fechaFin: Date
-    activo: Boolean
-    calendario: CalendarioAcad
-    evento: Evento
+    id?: number
+    fechaInicio?: Date
+    fechaFin?: Date
+    activo?: Boolean
+    calendario?: CalendarioAcad
+    evento?: Evento
 }

@@ -1,4 +1,5 @@
-<div class="container">
+<!-- <div class="container">
+
     <form action="">
         <h3>Agregar Detalle Calendario</h3>
         <br><br>
@@ -75,4 +76,59 @@
             <button class="btn btn-primary" style="margin: 5px;">GUARDAR</button>
         </div>
     </form>
+</div> -->
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <h1 class="text-center mb-2">CREAR EVENTOS PARA EL CALENDARIO</h1>
+
+            <form #form="ngForm">
+
+                <div class="form-group">
+                    <label for="fechaInicioIn">Fecha de Inicio del Evento:</label>
+                    <input required type="datetime-local" name="fechaInicioIn" class="form-control"
+                        aria-describedby="helpId" [(ngModel)]="detalleCal.fechaInicio">
+                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                </div>
+
+                <div class="form-group">
+                    <label for="fechaInicioIn">Fecha de Fin del Evento:</label>
+                    <input required type="datetime-local" name="fechaFinIn" class="form-control"
+                        aria-describedby="helpId" [(ngModel)]="detalleCal.fechaFin">
+                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="">Seleccione el Evento</label>
+                    <select required class="custom-select custom-select-sm" name="eventoSelect" [(ngModel)]="evento.id">
+                        <option [value]="evento.id" *ngFor="let evento of eventos">{{evento.titulo}}</option>
+                    </select>
+                </div>
+
+                <div class="form-row justify-content-center text-center">
+
+                    <div class="col-md-5 mb-2">
+                        <button class="btn btn-info" (click)="guardar('')" [disabled]="form.invalid">Guardar Y Agregar
+                            Otro</button>
+                    </div>
+
+                    <div class="col-md-5">
+                        <button class="btn btn-info" (click)="guardar(null)" [disabled]="form.invalid">Guardar</button>
+                    </div>
+
+                </div>
+
+
+            </form>
+
+
+
+
+        </div>
+    </div>
 </div>
