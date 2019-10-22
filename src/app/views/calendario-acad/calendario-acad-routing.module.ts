@@ -7,14 +7,16 @@ import { EventosFormComponent } from './components/eventos-form/eventos-form.com
 import { FormComponent } from '../../components/detalle-calendario/form.component';
 import { ReporteComponent } from './components/reporte/reporte.component';
 import { DetalleCalendarioComponent } from 'src/app/components/detalle-calendario/detalle-calendario.component';
+import { DashComponentsComponent } from 'src/app/components/dash-components/dash-components.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'lista', pathMatch: 'full' },
+  { path: '', redirectTo: 'dash', pathMatch: 'full' },
   {
     path: '', component: CalendarioAcadComponent,
     children: [
-      { path: 'lista', component: CalendarioComponent },
+      { path: 'dash', component: DashComponentsComponent },
+      { path: 'lista/:idPeriodo', component: CalendarioComponent },
       { path: 'eventos', component: EventosListComponent },
       { path: 'evento-add', component: EventosFormComponent },
       { path: 'evento-edit/:id', component: EventosFormComponent },
@@ -22,7 +24,6 @@ const routes: Routes = [
       { path: 'detalle-add', component: FormComponent },
       { path: 'detalle-edit/:id', component: FormComponent },
       { path: 'reporte', component: ReporteComponent },
-
       { path: 'detalle-add/:idCalendario', component: FormComponent },
     ]
   },

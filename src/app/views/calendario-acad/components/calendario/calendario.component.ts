@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarioService } from '../../services/calendario.service';
 import { CalendarioAcad, DetalleCalendario } from '../../models/calendario-models';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,21 +13,22 @@ import { CalendarioAcad, DetalleCalendario } from '../../models/calendario-model
 export class CalendarioComponent implements OnInit {
 
   public calendario: CalendarioAcad
+  calendarPlugins = [dayGridPlugin]; // important!
+  calendarEvents = [{}];
+  private idPeriodo: number
 
   constructor(
-    private srv: CalendarioService
+    private srv: CalendarioService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
-  calendarPlugins = [dayGridPlugin]; // important!
-  calendarEvents = [
-    {
-
-    }
-  ];
 
   async ngOnInit() {
 
-    this.calendario = await this.srv.getCalendarioBy(21)
+    this.idPeriodo = this.route.snapshot.params['idPeriodo']
 
+
+    this.calendario = await this.srv.getCalendarioBy(this.idPeriodo)
     this.calendario.detallecalendarioSet.forEach((obj: DetalleCalendario) => {
       this.calendarEvents = this.calendarEvents.concat({
         title: obj.evento.titulo,

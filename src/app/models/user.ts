@@ -6,4 +6,5 @@ export class User {
     estado?: boolean;
     loggedIn?: boolean;
     persona?: Persona;
+    roles?: string[]
 }

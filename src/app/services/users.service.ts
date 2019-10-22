@@ -2,12 +2,14 @@ import gql from "graphql-tag";
 import { Injectable } from "@angular/core";
 import { Apollo } from "apollo-angular";
 import { User } from "../models/user";
+import { MIS_PERIODOS_LECTIVOS } from './queries';
 
 const LOGIN = gql`
   query login($username: String!, $password: String!) {
     appPersonas {
       login(username: $username, password: $password) {
         username
+        roles
         persona {
           id
           identificacion
@@ -15,7 +17,6 @@ const LOGIN = gql`
           segundoNombre
           primerApellido
           segundoApellido
-          Foto
         }
       }
     }
@@ -28,7 +29,7 @@ const LOGIN = gql`
 export class UsersService {
   private currentUser: User;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   public async login(user: User) {
     const watch = await this.apollo.watchQuery({
@@ -64,4 +65,45 @@ export class UsersService {
     }
     return this.currentUser;
   }
+
+  public getRoles() {
+    return this.getUserLoggedIn().roles
+  }
+
+  public hasRole(rolName: string) {
+    const result = this.getRoles().filter(item => item === rolName)
+    if (result.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  public async getPeriodos() {
+
+    let rol = ""
+
+    if (this.hasRole("ALUMNO")) {
+      rol = "ALUMNO"
+    } else if (this.hasRole("DOCENTE")) {
+      rol = "DOCENTE"
+    } else if (this.hasRole("COORDINADOR")) {
+      rol = "COORDINADOR"
+    }
+
+    const query = await this.apollo.query({
+      query: MIS_PERIODOS_LECTIVOS,
+      variables: {
+        cedula: this.getUserLoggedIn().persona.identificacion,
+        rol: rol
+      }
+    });
+
+
+    const promise = await query.toPromise()
+
+    return promise.data['appNotas']['periodos']
+
+  }
+
+
 }

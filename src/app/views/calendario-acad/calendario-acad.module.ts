@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { DetalleCalendarioComponent } from '../../components/detalle-calendario/detalle-calendario.component';
 import { FormComponent } from '../../components/detalle-calendario/form.component';
 import { ReporteComponent } from './components/reporte/reporte.component';
+import { DashComponentsComponent } from '../../components/dash-components/dash-components.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -23,13 +25,15 @@ import { ReporteComponent } from './components/reporte/reporte.component';
     EventosFormComponent,
     DetalleCalendarioComponent,
     FormComponent,
-    ReporteComponent
+    ReporteComponent,
+    DashComponentsComponent
   ],
   imports: [
     CommonModule,
     CalendarioAcadRoutingModule,
     FullCalendarModule,
     FormsModule,
+    SharedModule
   ]
 })
 export class CalendarioAcadModule { }

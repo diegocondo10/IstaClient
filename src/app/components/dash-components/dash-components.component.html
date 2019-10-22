@@ -1,0 +1,48 @@
+<div class="container">
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h1 class="text-center">MIS PERIODOS LECTIVOS</h1>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-12" *ngIf="periodos; else cargando">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th class="">Carrera</th>
+                        <th class="">Fecha de Inicio</th>
+                        <th class="">Fecha de Fin</th>
+                        <th class="">Coordinador/a</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let periodo of periodos">
+                        <td>
+                            <a routerLink="/calendario/lista/{{periodo.id}}">{{periodo.carrera.nombre}}</a>
+                        </td>
+                        <td>
+                            {{periodo.fechaInicio}}
+                        </td>
+                        <td>
+                            {{periodo.fechaFin}}
+                        </td>
+                        <td>
+                            {{periodo.carrera.docenteCoordinador.persona.primerNombre}}
+                            {{periodo.carrera.docenteCoordinador.persona.primerApellido}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ng-template #cargando>
+                <h1>CARGANDO</h1>
+            </ng-template>
+
+
+
+        </div>
+    </div>
+
+</div>

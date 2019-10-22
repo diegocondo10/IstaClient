@@ -18,7 +18,8 @@ export class CalendarioService {
       query: GET_CALENDARIO_BY_PERIODO,
       variables: {
         idPeriodo: idPeriodo
-      }
+      },
+      fetchPolicy:'no-cache'
     });
 
     const promise = await query.toPromise()
@@ -31,7 +32,7 @@ export class CalendarioService {
   public async getEventos() {
     const query = await this.apollo.query({
       query: GET_EVENTOS,
-      fetchPolicy: 'network-only'
+      fetchPolicy: 'no-cache'
     });
 
     const promise = await query.toPromise()
