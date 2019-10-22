@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { UsersService } from './services/users.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from './services/users.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +16,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginRequired()
+    this.loginRequired();
   }
 
   public loginRequired(): boolean {
     const user = this.userSrv.getUserLoggedIn();
     if (user == null) {
-      this.router.navigate(['login'])
+      this.router.navigate(['login']);
       return true;
     }
     return false;
