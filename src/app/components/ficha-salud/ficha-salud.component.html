@@ -24,16 +24,16 @@
 
       <div *ngFor="let seccion of ficha" class="card border border-dark mb-5">
 
-        <div *ngIf="seccion.posicion == 11" class="card-header text-center bg-ista">
+        <div class="card-header text-center bg-ista">
           <h3 class="font-weight-light">{{seccion.posicion}}. {{seccion.nombre}}</h3>
         </div>
         <!--TITULO DE LA SECCION-->
 
-        <div class="card-body" *ngIf="seccion.posicion == 11">
+        <div class="card-body">
           <div class="form-group" *ngFor="let pregunta of seccion.preguntafsSet">
             <!--FOR DE LAS PREGUNTAS-->
 
-            <ng-container *ngIf="pregunta.posicion == 45" class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
+            <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
               <label [for]="pregunta.titulo">{{pregunta.posicion}}. {{pregunta.titulo}}
