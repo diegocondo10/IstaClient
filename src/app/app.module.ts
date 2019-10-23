@@ -12,6 +12,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
 
+
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent, HomeComponent],
   imports: [
