@@ -119,9 +119,14 @@ export class FichaSaludComponent implements OnInit {
   }
 
   abrirModal(accion: 'add' | 'upt', pregunta: PreguntaFs, diagnostico?: Diagnostico) {
-    this.diagnostico = diagnostico || this.diagnostico;
     this.accion = accion;
     this.pregunta = pregunta;
+    if (accion === 'upt') {
+      this.diagnostico = diagnostico;
+    } else {
+
+      this.diagnostico = {};
+    }
   }
 
 
