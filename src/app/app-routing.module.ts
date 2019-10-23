@@ -4,7 +4,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { HeaderComponent } from "./components/header/header.component";
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "inicio" },
+  { path: "", pathMatch: "full", redirectTo: "dash" },
   { path: "login", component: LoginComponent },
   {
     path: "",
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
