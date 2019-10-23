@@ -24,13 +24,20 @@ export class FichaSaludService {
     const promise = await query.toPromise();
     const ficha = promise.data['appFs']['fichaSalud'] as SeccionFs[];
 
+
     ficha.forEach(seccion => seccion.preguntafsSet.forEach(pregunta => {
+      pregunta.seccion = seccion;
+      if (pregunta.dependeDe) {
+        pregunta.dependeDe = seccion.preguntafsSet.filter(item => item.id === pregunta.dependeDe.id)[0];
+      }
+    }));
 
+    ficha.forEach(seccion => seccion.preguntafsSet.forEach(pregunta => {
       const JSONstring = pregunta.respuestaPersona.respuestas as string;
-
       pregunta.respuestaPersona['select'] = {};
       pregunta.respuestaPersona['simple'] = '';
       pregunta.respuestaPersona['diagnosticos'] = [];
+
       if (JSONstring) {
 
         const res = JSON.parse(JSONstring);
@@ -41,6 +48,16 @@ export class FichaSaludService {
 
           pregunta.respuestaPersona['select'] = res.parametro as ParametroFs;
 
+          switch (pregunta.respuestaPersona['select'].titulo) {
+            case 'SI':
+              this.activarPreguntas(pregunta, false);
+              break;
+
+            case 'NO':
+              this.activarPreguntas(pregunta, true);
+              break;
+          }
+
         } else if (res.parametros) {
 
           res.parametros.forEach(parametro => this.checkParams(pregunta, parametro));
@@ -50,12 +67,14 @@ export class FichaSaludService {
         }
       }
 
-      if (pregunta.dependeDe) {
-        pregunta.dependeDe = seccion.preguntafsSet.filter(item => item.id === pregunta.dependeDe.id)[0];
-      }
     })); // FOR DE LAS SECCIONES
     return ficha;
 
+  }
+
+  activarPreguntas(preguntaPadre: PreguntaFs, disabled: boolean) {
+    const preguntasHijas = preguntaPadre.seccion.preguntafsSet.filter(item => item.dependeDe === preguntaPadre);
+    preguntasHijas.forEach(obj => obj['disabled'] = disabled);
   }
 
   private checkParams(pregunta: PreguntaFs, parametro: ParametroFs): void {

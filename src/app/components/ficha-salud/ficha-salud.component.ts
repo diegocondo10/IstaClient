@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FichaSaludService} from './services/ficha-salud.service';
 import {UsersService} from '../../services/users.service';
 import {SeccionFs, PreguntaFs, ParametroFs, Diagnostico} from '../fichas-dashboard/models/appFichas';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ficha-salud',
@@ -19,7 +20,7 @@ export class FichaSaludComponent implements OnInit {
   public accion: 'add' | 'upt';
   public pregunta: PreguntaFs;
 
-  constructor(private srv: FichaSaludService, private userSrv: UsersService) {
+  constructor(private srv: FichaSaludService, private userSrv: UsersService, private router: Router) {
   }
 
   async ngOnInit() {
@@ -41,6 +42,10 @@ export class FichaSaludComponent implements OnInit {
     json += JSON.stringify(pregunta.respuestaPersona['diagnosticos']);
     json += '}';
     return json;
+  }
+
+  descartivarPreguntasHijas() {
+
   }
 
   /*
@@ -67,6 +72,15 @@ export class FichaSaludComponent implements OnInit {
     let json = '{"parametro":';
     json += this.generarJSONparametros(result);
     json += '}';
+
+    switch (result.titulo) {
+      case 'SI':
+        this.srv.activarPreguntas(pregunta, false);
+        break;
+      case 'NO':
+        this.srv.activarPreguntas(pregunta, true);
+        break;
+    }
 
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
@@ -110,5 +124,9 @@ export class FichaSaludComponent implements OnInit {
     this.pregunta = pregunta;
   }
 
+
+  confirmarFicha() {
+    this.router.navigate(['/fichas/confirmar']);
+  }
 
 }

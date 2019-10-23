@@ -4,7 +4,7 @@
 
   <ng-container *ngIf="ficha; else cargando">
 
-    <div *ngIf="false" class="row justify-content-center my-5">
+    <div class="row justify-content-center my-5">
       <div class="col py-3 border border-dark">
         <div class="text-justify">
           <h6>
@@ -36,12 +36,12 @@
             <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
-              <label [for]="pregunta.titulo">{{pregunta.posicion}}. {{pregunta.titulo}}
+              <label [for]="pregunta.titulo" aria-describedby="ayudaPregunta">{{pregunta.posicion}}. {{pregunta.titulo}}
 
                 <strong class="text-danger" *ngIf="pregunta.required">
                   (OBLIGATORIA)
                 </strong>
-                <small id="helpId" class="form-text help-text pl-3">{{pregunta.ayuda}}</small>
+                <small id="ayudaPregunta" class="form-text help-text pl-3">{{pregunta.ayuda}}</small>
 
               </label>
               <!-- TITULO DE LA PREGUNTA-->
@@ -54,6 +54,7 @@
                     type="checkbox"
                     [name]="parametro.titulo"
                     [checked]="parametro.check"
+                    [disabled]="pregunta['disabled']"
                     (change)="check(pregunta,parametro, $event.target)"
                   >
                   <label class="pl-1 input-check-ficha" [for]="parametro.titulo">{{parametro.titulo}}</label>
@@ -61,8 +62,11 @@
                 </div>
                 <form class="form-inline ">
                   <input class="form-control form-control-sm" type="text" minlength="2" placeholder="Agregar Otro"
-                         #nuevoIn>
-                  <button class="btn btn-ista btn-sm" (click)="agregarNuevo(pregunta, nuevoIn)">Agregar Otro</button>
+                         #nuevoIn [disabled]="pregunta['disabled']">
+                  <button class="btn btn-ista btn-sm"
+                          [disabled]="pregunta['disabled']"
+                          (click)="agregarNuevo(pregunta, nuevoIn)">Agregar Otro
+                  </button>
                 </form>
               </div>
               <!--RESPUESTAS DE SELECCION MULTIPLE-->
@@ -75,6 +79,7 @@
                   [id]="pregunta.id"
                   [(ngModel)]="pregunta.respuestaPersona['select']['id']"
                   [required]="pregunta.required"
+                  [disabled]="pregunta['disabled']"
                   (change)="select(pregunta, $event.target)"
                 >
                   <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
@@ -95,6 +100,7 @@
                   [max]="pregunta.max"
                   [step]="pregunta.step"
                   [value]="pregunta.respuestaPersona['simple']"
+                  [disabled]="pregunta['disabled']"
                   (change)="simple(pregunta,$event.target)"
                 >
               </div>
@@ -110,6 +116,7 @@
                   [max]="pregunta.max"
                   [step]="pregunta.step"
                   [value]="pregunta.respuestaPersona['simple']"
+                  [disabled]="pregunta['disabled']"
                   (change)="simple(pregunta,$event.target)"
                 >
               </div>
@@ -124,7 +131,7 @@
                   [maxLength]="pregunta.max || 10"
                   [id]="pregunta.id"
                   [pattern]="pregunta.regex"
-                  [disabled]="pregunta.dependeDe.respuestaPersona['select']['titulo'] == 'NO'"
+                  [disabled]="pregunta['disabled']"
                   [value]="pregunta.respuestaPersona['simple']"
                   (change)="simple(pregunta,$event.target)"
                 >
@@ -137,6 +144,7 @@
                   [name]="pregunta.titulo"
                   rows="2"
                   [value]="pregunta.respuestaPersona['simple']"
+                  [disabled]="pregunta['disabled']"
                   (change)="simple(pregunta,$event.target)"
                 ></textarea>
               </div>
@@ -203,7 +211,9 @@
       <!--DIV SECCIONES DE LA FICHA-->
 
       <div class="text-center my-4">
-        <button class="btn btn-success" [disabled]="form.invalid">Guardar y Confirmar</button>
+        <button class="btn btn-success" [disabled]="form.invalid" (click)="confirmarFicha()">
+          Guardar y Confirmar
+        </button>
       </div>
     </form>
 
