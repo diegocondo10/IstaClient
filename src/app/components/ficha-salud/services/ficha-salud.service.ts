@@ -47,7 +47,6 @@ export class FichaSaludService {
 
         } else if (res.diagnosticos) {
           pregunta.respuestaPersona['diagnosticos'] = res.diagnosticos as Diagnostico;
-          console.log(pregunta.respuestaPersona['diagnosticos']);
         }
       }
 
@@ -64,15 +63,13 @@ export class FichaSaludService {
   }
 
   public updateRespuestaFs(id: number, respuesta: string) {
-    this.apollo
-      .mutate({
-        mutation: UPDATE_RESPUESTA_FS,
-        variables: {
-          id: id,
-          respuesta: respuesta
-        }
-      })
-      .toPromise()
+    this.apollo.mutate({
+      mutation: UPDATE_RESPUESTA_FS,
+      variables: {
+        id: id,
+        respuesta: respuesta
+      }
+    }).toPromise()
       .then();
   }
 }

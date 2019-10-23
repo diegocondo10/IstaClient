@@ -155,23 +155,27 @@
                   </thead>
                   <tbody>
                   <tr *ngFor="let diagnostico of pregunta.respuestaPersona['diagnosticos']">
-                    <th>
+                    <td>
                       {{diagnostico.parentesco}}
-                    </th>
+                    </td>
+
                     <td>
                       {{diagnostico.medicacion}}
                     </td>
+
                     <td>
-                      <button class="btn btn-danger btn-sm" (click)="diagnosticoM(pregunta,'del')">
+                      <button class="btn btn-danger btn-sm" (click)="eliminarDiagnostico(pregunta,diagnostico)">
                         Eliminar
                       </button>
                     </td>
+
                     <td>
                       <button class="btn btn-ista btn-sm" data-toggle="modal" data-target="#modelId"
-                              (click)="diagnosticoM(pregunta,'upt')">
+                              (click)="abrirModal('upt',pregunta,diagnostico)">
                         Editar
                       </button>
                     </td>
+
                   </tr>
                   </tbody>
                 </table>
@@ -179,7 +183,7 @@
                 <div class="text-center">
 
                   <button type="button" class="btn btn-ista btn-sm" data-toggle="modal" data-target="#modelId"
-                          (click)="diagnosticoM(pregunta,'add')">
+                          (click)="abrirModal('add',pregunta)">
                     Agregar Nuevo Diagnostico
                   </button>
                 </div>
@@ -229,24 +233,38 @@
       </div>
       <div class="modal-body">
 
-        <form>
+        <form #formDiagnostico="ngForm">
 
           <div class="form-group">
-            <label for="">Parentesco:</label>
-            <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Parentesco"
-                   aria-describedby="helpId" [value]="diagnostico.parentesco">
+            <label for="parentescoIn">Parentesco:</label>
+            <input required type="text"
+                   name="parentescoIn"
+                   id="parentescoIn"
+                   class="form-control form-control-sm"
+                   placeholder="Parentesco"
+                   aria-describedby="helpId"
+                   minlength="3"
+                   [(ngModel)]="diagnostico.parentesco">
             <small id="helpId" class="text-muted">Parentesco del Familiar</small>
           </div>
 
           <div class="form-group">
-            <label for="">Diagnostico:</label>
-            <textarea class="form-control form-control-sm" rows="3" [value]="diagnostico.diagnostico"></textarea>
+            <label for="diagnosticoIn">Diagnostico:</label>
+            <textarea
+              required
+              class="form-control form-control-sm"
+              rows="3"
+              name="diagnosticoIn"
+              id="diagnosticoIn"
+              placeholder="Describa el diagnostico"
+              [(ngModel)]="diagnostico.diagnostico"
+            ></textarea>
             <!--<small id="helpId" class="text-muted">Parentesco del Familiar</small>-->
           </div>
 
           <div class="form-group">
-            <label for="">Medicacion</label>
-            <select class="custom-select custom-select-sm" name="" [value]="diagnostico.medicacion">
+            <label for="selectIn">Medicacion</label>
+            <select class="custom-select custom-select-sm" id="selectIn" name="" [value]="diagnostico.medicacion">
               <option value="SI">SI</option>
               <option value="NO">NO</option>
             </select>
@@ -258,7 +276,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-ista  btn-sm" data-dismiss="modal">Guardar</button>
+        <button
+          type="button"
+          class="btn btn-ista  btn-sm"
+          data-dismiss="modal"
+          [disabled]="formDiagnostico.invalid"
+          (click)="guardarDiagnostico()">
+          Guardar
+        </button>
       </div>
     </div>
   </div>

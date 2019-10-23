@@ -11,10 +11,13 @@ import {SeccionFs, PreguntaFs, ParametroFs, Diagnostico} from '../fichas-dashboa
 export class FichaSaludComponent implements OnInit {
   public ficha: SeccionFs[];
   public diagnostico: Diagnostico = {
-    parentesco: 'PADRE',
-    diagnostico: 'PRUEBA',
-    medicacion: 'NO'
+    parentesco: '',
+    diagnostico: '',
+    medicacion: 'SI'
   };
+
+  public accion: 'add' | 'upt';
+  public pregunta: PreguntaFs;
 
   constructor(private srv: FichaSaludService, private userSrv: UsersService) {
   }
@@ -31,6 +34,13 @@ export class FichaSaludComponent implements OnInit {
     return JSON.stringify(result)
       .replace(/,"__typename":"ParametroFsType"/g, '')
       .replace(/,"check":true/g, '');
+  }
+
+  generarJSONDiagnosticos(pregunta: PreguntaFs) {
+    let json = '{"diagnosticos":';
+    json += JSON.stringify(pregunta.respuestaPersona['diagnosticos']);
+    json += '}';
+    return json;
   }
 
   /*
@@ -75,11 +85,29 @@ export class FichaSaludComponent implements OnInit {
     }
   }
 
-  diagnosticoM(pregunta: PreguntaFs, accion: 'add' | 'upt' | 'del') {
-    let json = JSON.stringify(this.diagnostico);
-    console.log(pregunta.respuestaPersona);
-    // console.log(json);
 
+  guardarDiagnostico() {
+    if (this.accion === 'add') {
+      this.pregunta.respuestaPersona['diagnosticos'].push(this.diagnostico);
+    }
+    const json = this.generarJSONDiagnosticos(this.pregunta);
+    this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
+  }
+
+  eliminarDiagnostico(pregunta: PreguntaFs, diagnostico: Diagnostico) {
+    const index = pregunta.respuestaPersona['diagnosticos'].indexOf(diagnostico);
+    pregunta.respuestaPersona['diagnosticos'].splice(index, 1);
+    let json = null;
+    if (pregunta.respuestaPersona['diagnosticos'].length !== 0) {
+      json = this.generarJSONDiagnosticos(pregunta);
+    }
+    this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
+  }
+
+  abrirModal(accion: 'add' | 'upt', pregunta: PreguntaFs, diagnostico?: Diagnostico) {
+    this.diagnostico = diagnostico || this.diagnostico;
+    this.accion = accion;
+    this.pregunta = pregunta;
   }
 
 
