@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UPDATE_RESPUESTA_FS, BUSCAR_FICHA} from './queries';
 import {Apollo} from 'apollo-angular';
-import {SeccionFs, PreguntaFs, ParametroFs} from '../../fichas-dashboard/models/appFichas';
+import {SeccionFs, PreguntaFs, ParametroFs, Diagnostico} from '../../fichas-dashboard/models/appFichas';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +29,15 @@ export class FichaSaludService {
       const JSONstring = pregunta.respuestaPersona.respuestas as string;
 
       pregunta.respuestaPersona['select'] = {};
-
+      pregunta.respuestaPersona['simple'] = '';
+      pregunta.respuestaPersona['diagnosticos'] = [];
       if (JSONstring) {
 
         const res = JSON.parse(JSONstring);
 
-        if (res.parametro) {
+        if (res.simple) {
+          pregunta.respuestaPersona['simple'] = res.simple;
+        } else if (res.parametro) {
 
           pregunta.respuestaPersona['select'] = res.parametro as ParametroFs;
 
@@ -43,7 +46,8 @@ export class FichaSaludService {
           res.parametros.forEach(parametro => this.checkParams(pregunta, parametro));
 
         } else if (res.diagnosticos) {
-          /* this.resTemplate.diagnosticos = res.diagnosticos; */
+          pregunta.respuestaPersona['diagnosticos'] = res.diagnosticos as Diagnostico;
+          console.log(pregunta.respuestaPersona['diagnosticos']);
         }
       }
 

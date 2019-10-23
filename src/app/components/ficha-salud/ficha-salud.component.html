@@ -4,7 +4,7 @@
 
   <ng-container *ngIf="ficha; else cargando">
 
-    <div class="row justify-content-center my-5">
+    <div *ngIf="false" class="row justify-content-center my-5">
       <div class="col py-3 border border-dark">
         <div class="text-justify">
           <h6>
@@ -24,16 +24,16 @@
 
       <div *ngFor="let seccion of ficha" class="card border border-dark mb-5">
 
-        <div class="card-header text-center bg-ista">
+        <div *ngIf="seccion.posicion == 11" class="card-header text-center bg-ista">
           <h3 class="font-weight-light">{{seccion.posicion}}. {{seccion.nombre}}</h3>
         </div>
         <!--TITULO DE LA SECCION-->
 
-        <div class="card-body">
+        <div class="card-body" *ngIf="seccion.posicion == 11">
           <div class="form-group" *ngFor="let pregunta of seccion.preguntafsSet">
             <!--FOR DE LAS PREGUNTAS-->
 
-            <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
+            <ng-container *ngIf="pregunta.posicion == 45" class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
               <label [for]="pregunta.titulo">{{pregunta.posicion}}. {{pregunta.titulo}}
@@ -59,7 +59,7 @@
                   <label class="pl-1 input-check-ficha" [for]="parametro.titulo">{{parametro.titulo}}</label>
 
                 </div>
-                <form class="form-inline pl-3">
+                <form class="form-inline ">
                   <input class="form-control form-control-sm" type="text" minlength="2" placeholder="Agregar Otro"
                          #nuevoIn>
                   <button class="btn btn-ista btn-sm" (click)="agregarNuevo(pregunta, nuevoIn)">Agregar Otro</button>
@@ -70,7 +70,7 @@
 
               <div *ngSwitchCase="'select'">
                 <select
-                  class="form-control form-control-sm select-120px"
+                  class="form-control form-control-sm select-120px "
                   [name]="pregunta.titulo"
                   [id]="pregunta.id"
                   [(ngModel)]="pregunta.respuestaPersona['select']['id']"
@@ -88,13 +88,14 @@
 
               <div *ngSwitchCase="'month'">
                 <input
-                  class="form-control form-control-sm select-120px"
+                  class="form-control form-control-sm select-120px "
                   type="number"
                   [name]="pregunta.titulo"
                   [id]="pregunta.id" [min]="pregunta.min"
                   [max]="pregunta.max"
                   [step]="pregunta.step"
-                  (change)="simple($event.target)"
+                  [value]="pregunta.respuestaPersona['simple']"
+                  (change)="simple(pregunta,$event.target)"
                 >
               </div>
               <!--RESPUESTA MES -->
@@ -102,13 +103,14 @@
 
               <div *ngSwitchCase="'number'">
                 <input
-                  class="form-control form-control-sm select-120px"
+                  class="form-control form-control-sm select-120px "
                   type="number"
                   [id]="pregunta.id"
                   [min]="pregunta.min"
                   [max]="pregunta.max"
                   [step]="pregunta.step"
-                  (change)="simple($event.target)"
+                  [value]="pregunta.respuestaPersona['simple']"
+                  (change)="simple(pregunta,$event.target)"
                 >
               </div>
               <!--RESPUESTA NUMERO -->
@@ -116,27 +118,74 @@
 
               <div *ngSwitchCase="'text'">
                 <input
-                  class="form-control form-control-sm"
+                  class="form-control form-control-sm "
                   type="text"
                   [minLength]="pregunta.min"
                   [maxLength]="pregunta.max || 10"
                   [id]="pregunta.id"
                   [pattern]="pregunta.regex"
                   [disabled]="pregunta.dependeDe.respuestaPersona['select']['titulo'] == 'NO'"
-                  (change)="simple($event.target)"
+                  [value]="pregunta.respuestaPersona['simple']"
+                  (change)="simple(pregunta,$event.target)"
                 >
               </div>
               <!--INPUT PREGUNTA DE TIPO TEXTO-->
 
               <div *ngSwitchCase="'text_area'">
                 <textarea
-                  class="form-control"
+                  class="form-control "
                   [name]="pregunta.titulo"
                   rows="2"
-                  (change)="simple($event.target)"
+                  [value]="pregunta.respuestaPersona['simple']"
+                  (change)="simple(pregunta,$event.target)"
                 ></textarea>
               </div>
               <!--INPUT PREGUNTA DE TIPO TEXTO-GRANDE-->
+
+
+              <div *ngSwitchCase="'diagnostico'">
+                <table class="table table-sm text-center table-bordered table-responsive-sm">
+                  <thead class="bg-ista">
+                  <tr>
+                    <th scope="col">Parentesco</th>
+                    <th scope="col">Medicacion</th>
+                    <th scope="col">Eliminar</th>
+                    <th scope="col">Editar</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let diagnostico of pregunta.respuestaPersona['diagnosticos']">
+                    <th>
+                      {{diagnostico.parentesco}}
+                    </th>
+                    <td>
+                      {{diagnostico.medicacion}}
+                    </td>
+                    <td>
+                      <button class="btn btn-danger btn-sm" (click)="diagnosticoM(pregunta,'del')">
+                        Eliminar
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-ista btn-sm" data-toggle="modal" data-target="#modelId"
+                              (click)="diagnosticoM(pregunta,'upt')">
+                        Editar
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+                <div class="text-center">
+
+                  <button type="button" class="btn btn-ista btn-sm" data-toggle="modal" data-target="#modelId"
+                          (click)="diagnosticoM(pregunta,'add')">
+                    Agregar Nuevo Diagnostico
+                  </button>
+                </div>
+
+
+              </div>
 
 
             </ng-container>
@@ -161,7 +210,58 @@
   <ng-template #cargando>
     <loading [info]="{description:'POR FAVOR ESPERE'}"></loading>
   </ng-template>
-
-
 </div>
 <!--CONTAINER-->
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Dianostico Familiar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+
+          <div class="form-group">
+            <label for="">Parentesco:</label>
+            <input type="text" name="" id="" class="form-control form-control-sm" placeholder="Parentesco"
+                   aria-describedby="helpId" [value]="diagnostico.parentesco">
+            <small id="helpId" class="text-muted">Parentesco del Familiar</small>
+          </div>
+
+          <div class="form-group">
+            <label for="">Diagnostico:</label>
+            <textarea class="form-control form-control-sm" rows="3" [value]="diagnostico.diagnostico"></textarea>
+            <!--<small id="helpId" class="text-muted">Parentesco del Familiar</small>-->
+          </div>
+
+          <div class="form-group">
+            <label for="">Medicacion</label>
+            <select class="custom-select custom-select-sm" name="" [value]="diagnostico.medicacion">
+              <option value="SI">SI</option>
+              <option value="NO">NO</option>
+            </select>
+          </div>
+
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-ista  btn-sm" data-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

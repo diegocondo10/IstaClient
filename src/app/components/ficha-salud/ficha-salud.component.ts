@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FichaSaludService} from './services/ficha-salud.service';
 import {UsersService} from '../../services/users.service';
-import {SeccionFs, PreguntaFs, ParametroFs} from '../fichas-dashboard/models/appFichas';
+import {SeccionFs, PreguntaFs, ParametroFs, Diagnostico} from '../fichas-dashboard/models/appFichas';
 
 @Component({
   selector: 'app-ficha-salud',
@@ -10,6 +10,11 @@ import {SeccionFs, PreguntaFs, ParametroFs} from '../fichas-dashboard/models/app
 })
 export class FichaSaludComponent implements OnInit {
   public ficha: SeccionFs[];
+  public diagnostico: Diagnostico = {
+    parentesco: 'PADRE',
+    diagnostico: 'PRUEBA',
+    medicacion: 'NO'
+  };
 
   constructor(private srv: FichaSaludService, private userSrv: UsersService) {
   }
@@ -53,13 +58,12 @@ export class FichaSaludComponent implements OnInit {
     json += this.generarJSONparametros(result);
     json += '}';
 
-    pregunta.respuestaPersona
-
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
 
-  simple(event) {
-    console.log(event.value);
+  simple(pregunta: PreguntaFs, event) {
+    const json = `{"simple":"${event.value}"}`;
+    this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
 
   agregarNuevo(pregunta: PreguntaFs, event) {
@@ -69,6 +73,13 @@ export class FichaSaludComponent implements OnInit {
     } else {
 
     }
+  }
+
+  diagnosticoM(pregunta: PreguntaFs, accion: 'add' | 'upt' | 'del') {
+    let json = JSON.stringify(this.diagnostico);
+    console.log(pregunta.respuestaPersona);
+    // console.log(json);
+
   }
 
 
