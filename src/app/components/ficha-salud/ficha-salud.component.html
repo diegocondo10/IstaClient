@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container animated fadeIn">
 
   <h1 class="display-4 text-center mt-4">FICHA DE SALUD</h1>
 
-  <ng-container *ngIf="ficha; else cargando">
+  <div *ngIf="ficha; else cargando">
 
     <div class="row justify-content-center my-5">
       <div class="col py-3 border border-dark">
@@ -20,7 +20,7 @@
     </div>
 
 
-    <form class="border" #form="ngForm">
+    <form class="border animated fadeIn" #form="ngForm">
 
       <div *ngFor="let seccion of ficha" class="card border border-dark mb-5">
 
@@ -218,7 +218,7 @@
     </form>
 
 
-  </ng-container>
+  </div>
   <!--VALIDACION DE LA CARGA DE LA INFORMACION-->
 
   <ng-template #cargando>
@@ -232,7 +232,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal " id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
