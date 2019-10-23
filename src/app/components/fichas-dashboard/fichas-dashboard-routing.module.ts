@@ -1,15 +1,15 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { FichasDashboardComponent } from "./fichas-dashboard.component";
-import { FichaSaludComponent } from "../ficha-salud/ficha-salud.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {FichasDashboardComponent} from './fichas-dashboard.component';
+import {FichaSaludComponent} from '../ficha-salud/ficha-salud.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: FichasDashboardComponent
   },
   {
-    path: "salud",
+    path: 'salud',
     component: FichaSaludComponent
   }
 ];
@@ -18,4 +18,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FichasDashboardRoutingModule {}
+export class FichasDashboardRoutingModule {
+}

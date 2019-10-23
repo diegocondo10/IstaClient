@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
-import { UPDATE_RESPUESTA_FS, BUSCAR_FICHA } from "./queries";
-import { Apollo } from "apollo-angular";
-import { SeccionFs, PreguntaFs, ParametroFs, RespuestaFs } from '../../fichas-dashboard/models/appFichas';
+import {Injectable} from '@angular/core';
+import {UPDATE_RESPUESTA_FS, BUSCAR_FICHA} from './queries';
+import {Apollo} from 'apollo-angular';
+import {SeccionFs, PreguntaFs, ParametroFs} from '../../fichas-dashboard/models/appFichas';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class FichaSaludService {
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {
+  }
 
   public async buscarFichaSalud(personaId: number) {
     const query = await this.apollo.query({
@@ -15,25 +16,23 @@ export class FichaSaludService {
       variables: {
         personaId: personaId
       },
-      fetchPolicy: "no-cache"
+      fetchPolicy: 'no-cache'
     });
 
     const promise = await query.toPromise();
 
-    const ficha = promise.data["appFs"]["fichaSalud"] as SeccionFs[];
+    const ficha = promise.data['appFs']['fichaSalud'] as SeccionFs[];
 
     ficha.forEach(obj => {
       obj.preguntafsSet.forEach((prg: PreguntaFs) => {
         const JSONstring = prg.respuestaPersona.respuestas as string;
-
+        prg.respuestaPersona['select'] = {};
         if (JSONstring) {
 
           const res = JSON.parse(JSONstring);
 
           if (res.parametro) {
-            prg.respuestaPersona.respuestas = res.parametro as ParametroFs
-            console.log(prg.respuestaPersona.respuestas.id);
-
+            prg.respuestaPersona['select'] = res.parametro as ParametroFs;
           } else if (res.parametros) {
             res.parametros.forEach((obj: ParametroFs) => this.checkParams(prg, obj));
           } else if (res.diagnosticos) {
@@ -42,9 +41,9 @@ export class FichaSaludService {
         }
       });
       // FOR DE LAS PREGUNTAS
-    }); //FOR DE LAS SECCIONES
+    }); // FOR DE LAS SECCIONES
 
-    return ficha
+    return ficha;
 
   }
 

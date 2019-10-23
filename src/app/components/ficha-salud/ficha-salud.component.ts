@@ -1,17 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { FichaSaludService } from "./services/ficha-salud.service";
-import { UsersService } from "../../services/users.service";
-import { SeccionFs, PreguntaFs, ParametroFs } from '../fichas-dashboard/models/appFichas';
+import {Component, OnInit} from '@angular/core';
+import {FichaSaludService} from './services/ficha-salud.service';
+import {UsersService} from '../../services/users.service';
+import {SeccionFs, PreguntaFs, ParametroFs} from '../fichas-dashboard/models/appFichas';
 
 @Component({
-  selector: "app-ficha-salud",
-  templateUrl: "./ficha-salud.component.html",
-  styleUrls: ["./ficha-salud.component.css"]
+  selector: 'app-ficha-salud',
+  templateUrl: './ficha-salud.component.html',
+  styleUrls: ['./ficha-salud.component.css']
 })
 export class FichaSaludComponent implements OnInit {
   public ficha: SeccionFs[];
 
-  constructor(private srv: FichaSaludService, private userSrv: UsersService) { }
+  constructor(private srv: FichaSaludService, private userSrv: UsersService) {
+  }
 
   async ngOnInit() {
     this.ficha = await this.srv.buscarFichaSalud(this.userSrv.getUserLoggedIn().persona.id);
@@ -23,8 +24,8 @@ export class FichaSaludComponent implements OnInit {
 
   generarJSONparametros(result): string {
     return JSON.stringify(result)
-      .replace(/,"__typename":"ParametroFsType"/g, "")
-      .replace(/,"check":true/g, "");
+      .replace(/,"__typename":"ParametroFsType"/g, '')
+      .replace(/,"check":true/g, '');
   }
 
   /*
@@ -39,7 +40,7 @@ export class FichaSaludComponent implements OnInit {
     if (result.length > 0) {
       json = '{"parametros":';
       json += this.generarJSONparametros(result);
-      json += "}";
+      json += '}';
     }
 
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
@@ -50,9 +51,7 @@ export class FichaSaludComponent implements OnInit {
 
     let json = '{"parametro":';
     json += this.generarJSONparametros(result);
-    json += "}";
-
-    console.log(json);
+    json += '}';
 
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
