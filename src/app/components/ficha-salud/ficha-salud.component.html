@@ -32,6 +32,7 @@
         <div class="card-body">
           <div class="form-group" *ngFor="let pregunta of seccion.preguntafsSet">
             <!--FOR DE LAS PREGUNTAS-->
+
             <ng-container class="form-group" [ngSwitch]="pregunta.tipo | lowercase">
 
 
@@ -49,22 +50,24 @@
 
                 <div class="custom-control custom-checkbox" *ngFor="let parametro of pregunta.parametros">
 
-                  <label class="pl-1 input-check-ficha" [for]="parametro.titulo">
-                    <input type="checkbox" [id]="parametro.titulo"
-                           [checked]="parametro.check"
-                           (change)="check(pregunta,parametro, $event.target)">
-                    {{parametro.titulo}}
-                  </label>
+                  <input
+                    type="checkbox"
+                    [name]="parametro.titulo"
+                    [checked]="parametro.check"
+                    (change)="check(pregunta,parametro, $event.target)"
+                  >
+                  <label class="pl-1 input-check-ficha" [for]="parametro.titulo">{{parametro.titulo}}</label>
 
                 </div>
-
+                <form class="form-inline pl-3">
+                  <input class="form-control form-control-sm" type="text" minlength="2" placeholder="Agregar Otro" #nuevoIn>
+                  <button class="btn btn-ista btn-sm" (click)="agregarNuevo(pregunta, nuevoIn)">Agregar Otro</button>
+                </form>
               </div>
               <!--RESPUESTAS DE SELECCION MULTIPLE-->
 
 
               <div *ngSwitchCase="'select'">
-
-
                 <select
                   class="form-control form-control-sm select-120px"
                   [name]="pregunta.titulo"
@@ -76,32 +79,62 @@
                   <option [value]="parametro.id" *ngFor="let parametro of pregunta.parametros">
                     {{parametro.titulo}}
                   </option>
-                </select>
 
+                </select>
               </div>
               <!--RESPUESTA EN COMBO BOX-->
 
 
               <div *ngSwitchCase="'month'">
-                <input class="form-control form-control-sm select-120px" type="number"
-                       [name]="pregunta.titulo" [id]="pregunta.id" [min]="pregunta.min"
-                       [max]="pregunta.max" [step]="pregunta.step" (change)="simple($event.target)">
+                <input
+                  class="form-control form-control-sm select-120px"
+                  type="number"
+                  [name]="pregunta.titulo"
+                  [id]="pregunta.id" [min]="pregunta.min"
+                  [max]="pregunta.max"
+                  [step]="pregunta.step"
+                  (change)="simple($event.target)"
+                >
               </div>
               <!--RESPUESTA MES -->
 
 
               <div *ngSwitchCase="'number'">
-                <input class="form-control form-control-sm select-120px" type="number"
-                       [id]="pregunta.id" [min]="pregunta.min" [max]="pregunta.max" [step]="pregunta.step"
-                       (change)="simple($event.target)">
+                <input
+                  class="form-control form-control-sm select-120px"
+                  type="number"
+                  [id]="pregunta.id"
+                  [min]="pregunta.min"
+                  [max]="pregunta.max"
+                  [step]="pregunta.step"
+                  (change)="simple($event.target)"
+                >
               </div>
               <!--RESPUESTA NUMERO -->
 
 
               <div *ngSwitchCase="'text'">
-                <input class="form-control form-control-sm" type="text" [id]="pregunta.id"
-                       (change)="simple($event.target)">
+                <input
+                  class="form-control form-control-sm"
+                  type="text"
+                  [minLength]="pregunta.min"
+                  [maxLength]="pregunta.max || 10"
+                  [id]="pregunta.id"
+                  [pattern]="pregunta.regex"
+                  (change)="simple($event.target)"
+                >
               </div>
+              <!--INPUT PREGUNTA DE TIPO TEXTO-->
+
+              <div *ngSwitchCase="'text_area'">
+                <textarea
+                  class="form-control"
+                  [name]="pregunta.titulo"
+                  rows="2"
+                  (change)="simple($event.target)"
+                ></textarea>
+              </div>
+              <!--INPUT PREGUNTA DE TIPO TEXTO-GRANDE-->
 
 
             </ng-container>

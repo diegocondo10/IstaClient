@@ -59,4 +59,16 @@ export class FichaSaludComponent implements OnInit {
   simple(event) {
     console.log(event.value);
   }
+
+
+  agregarNuevo(pregunta: PreguntaFs, event) {
+    const result = pregunta.parametros.filter((param: ParametroFs) => param.titulo.toLowerCase().includes(event.value.toLowerCase()));
+    if (result.length > 0) {
+      alert('YA EXISTE ESE PARAMETRO!!');
+    } else {
+
+    }
+  }
+
+
 }

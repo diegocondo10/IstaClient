@@ -11,30 +11,34 @@ export class FichaSaludService {
   }
 
   public async buscarFichaSalud(personaId: number) {
-    const query = await this.apollo.query({
+    const query = this.apollo.query({
       query: BUSCAR_FICHA,
       variables: {
         personaId: personaId
       },
       fetchPolicy: 'no-cache'
     });
-
     const promise = await query.toPromise();
-
     const ficha = promise.data['appFs']['fichaSalud'] as SeccionFs[];
 
-    ficha.forEach(obj => {
-      obj.preguntafsSet.forEach((prg: PreguntaFs) => {
+    ficha.forEach(seccion => {
+
+      seccion.preguntafsSet.forEach((prg: PreguntaFs) => {
         const JSONstring = prg.respuestaPersona.respuestas as string;
         prg.respuestaPersona['select'] = {};
+
         if (JSONstring) {
 
           const res = JSON.parse(JSONstring);
 
           if (res.parametro) {
+
             prg.respuestaPersona['select'] = res.parametro as ParametroFs;
+
           } else if (res.parametros) {
-            res.parametros.forEach((obj: ParametroFs) => this.checkParams(prg, obj));
+
+            res.parametros.forEach((parametro: ParametroFs) => this.checkParams(prg, parametro));
+
           } else if (res.diagnosticos) {
             /* this.resTemplate.diagnosticos = res.diagnosticos; */
           }
