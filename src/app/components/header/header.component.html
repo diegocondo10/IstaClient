@@ -27,11 +27,11 @@
                 <p class="mt-2">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</p>
 
             </div> -->
-            <img class="img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt="" width="50">
-            <h6 class="mt-2 mx-3">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</h6>
+            <img class="align-self-center img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt="" width="40">
+            <h6 class=" mt-sm-2 mx-3">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</h6>
 
             <div class="form-group">
-                <button class="btn btn-outline-info" (click)="logOut()">Cerrar Sesion</button>
+                <button class="btn btn-ista btn-sm" (click)="logOut()">Cerrar Sesion</button>
             </div>
         </form>
     </div>
