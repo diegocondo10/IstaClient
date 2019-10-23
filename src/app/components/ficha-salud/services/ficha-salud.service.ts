@@ -7,10 +7,12 @@ import {SeccionFs, PreguntaFs, ParametroFs} from '../../fichas-dashboard/models/
   providedIn: 'root'
 })
 export class FichaSaludService {
+
   constructor(private apollo: Apollo) {
   }
 
   public async buscarFichaSalud(personaId: number) {
+
     const query = this.apollo.query({
       query: BUSCAR_FICHA,
       variables: {
@@ -18,42 +20,43 @@ export class FichaSaludService {
       },
       fetchPolicy: 'no-cache'
     });
+
     const promise = await query.toPromise();
     const ficha = promise.data['appFs']['fichaSalud'] as SeccionFs[];
 
-    ficha.forEach(seccion => {
+    ficha.forEach(seccion => seccion.preguntafsSet.forEach(pregunta => {
 
-      seccion.preguntafsSet.forEach((prg: PreguntaFs) => {
-        const JSONstring = prg.respuestaPersona.respuestas as string;
-        prg.respuestaPersona['select'] = {};
+      const JSONstring = pregunta.respuestaPersona.respuestas as string;
 
-        if (JSONstring) {
+      pregunta.respuestaPersona['select'] = {};
 
-          const res = JSON.parse(JSONstring);
+      if (JSONstring) {
 
-          if (res.parametro) {
+        const res = JSON.parse(JSONstring);
 
-            prg.respuestaPersona['select'] = res.parametro as ParametroFs;
+        if (res.parametro) {
 
-          } else if (res.parametros) {
+          pregunta.respuestaPersona['select'] = res.parametro as ParametroFs;
 
-            res.parametros.forEach((parametro: ParametroFs) => this.checkParams(prg, parametro));
+        } else if (res.parametros) {
 
-          } else if (res.diagnosticos) {
-            /* this.resTemplate.diagnosticos = res.diagnosticos; */
-          }
+          res.parametros.forEach(parametro => this.checkParams(pregunta, parametro));
+
+        } else if (res.diagnosticos) {
+          /* this.resTemplate.diagnosticos = res.diagnosticos; */
         }
-      });
-      // FOR DE LAS PREGUNTAS
-    }); // FOR DE LAS SECCIONES
+      }
 
+      if (pregunta.dependeDe) {
+        pregunta.dependeDe = seccion.preguntafsSet.filter(item => item.id === pregunta.dependeDe.id)[0];
+      }
+    })); // FOR DE LAS SECCIONES
     return ficha;
 
   }
 
-  private checkParams(pregunta: PreguntaFs, obj: ParametroFs): void {
-    const param = pregunta.parametros.filter(param => param.id === obj.id)[0];
-    param.check = true;
+  private checkParams(pregunta: PreguntaFs, parametro: ParametroFs): void {
+    pregunta.parametros.filter(param => param.id === parametro.id)[0].check = true;
   }
 
   public updateRespuestaFs(id: number, respuesta: string) {

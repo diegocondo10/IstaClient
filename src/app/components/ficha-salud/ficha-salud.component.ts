@@ -53,13 +53,14 @@ export class FichaSaludComponent implements OnInit {
     json += this.generarJSONparametros(result);
     json += '}';
 
+    pregunta.respuestaPersona
+
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
 
   simple(event) {
     console.log(event.value);
   }
-
 
   agregarNuevo(pregunta: PreguntaFs, event) {
     const result = pregunta.parametros.filter((param: ParametroFs) => param.titulo.toLowerCase().includes(event.value.toLowerCase()));

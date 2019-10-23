@@ -21,6 +21,9 @@ query buscarFichaSalud($personaId: Int!) {
           id
           titulo
         }
+        dependeDe {
+          id
+        }
         respuestaPersona(personaId: $personaId) {
           id
           respuestas
