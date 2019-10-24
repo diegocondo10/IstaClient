@@ -152,7 +152,8 @@
 
 
               <div *ngSwitchCase="'diagnostico'">
-                <table class="table table-sm text-center table-bordered table-responsive-sm">
+                <table class="table table-sm text-center table-bordered table-responsive-sm"
+                aria-disabled="true">
                   <thead class="bg-ista">
                   <tr>
                     <th scope="col">Parentesco</th>
@@ -190,8 +191,13 @@
 
                 <div class="text-center">
 
-                  <button type="button" class="btn btn-ista btn-sm" data-toggle="modal" data-target="#modelId"
-                          (click)="abrirModal('add',pregunta)">
+                  <button
+                    type="button"
+                    class="btn btn-ista btn-sm"
+                    data-toggle="modal"
+                    data-target="#modelId"
+                    [disabled]="pregunta['disabled']"
+                    (click)="abrirModal('add',pregunta)">
                     Agregar Nuevo Diagnostico
                   </button>
                 </div>

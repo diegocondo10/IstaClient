@@ -11,11 +11,7 @@ import {Router} from '@angular/router';
 })
 export class FichaSaludComponent implements OnInit {
   public ficha: SeccionFs[];
-  public diagnostico: Diagnostico = {
-    parentesco: '',
-    diagnostico: '',
-    medicacion: 'SI'
-  };
+  public diagnostico: Diagnostico = {};
 
   public accion: 'add' | 'upt';
   public pregunta: PreguntaFs;
@@ -125,7 +121,11 @@ export class FichaSaludComponent implements OnInit {
       this.diagnostico = diagnostico;
     } else {
 
-      this.diagnostico = {};
+      this.diagnostico = {
+        parentesco: '',
+        diagnostico: '',
+        medicacion: 'SI'
+      };
     }
   }
 

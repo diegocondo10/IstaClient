@@ -1,42 +1,43 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light border fixed-top">
 
-    <a class="navbar-brand" routerLink="/dash">
-        <img class="img-fluid mb-1" src="./assets/img/icon.ico" alt="" width="16">
-        INICIO
-    </a>
+  <a class="navbar-brand" routerLink="/dash">
+    <img class="img-fluid mb-1" src="./assets/img/icon.ico" alt="" width="16">
+    INICIO
+  </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+          aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
+  <div class="collapse navbar-collapse" id="navbarColor01">
 
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/fichas/" routerLinkActive="active"><strong>Fichas</strong></a>
-            </li>
-        </ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/fichas/" routerLinkActive="active"><strong>Fichas</strong></a>
+      </li>
+    </ul>
 
 
-        <form class="form-inline">
-            <!--             <div class="form-group mr-3">
-                <img class="img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt=""
-                    width="50">
+    <form class="form-inline">
+      <!--             <div class="form-group mr-3">
+          <img class="img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt=""
+              width="50">
 
-                <p class="mt-2">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</p>
+          <p class="mt-2">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</p>
 
-            </div> -->
-            <img class="align-self-center img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt="" width="40">
-            <h6 class=" mt-sm-2 mx-3">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</h6>
+      </div> -->
+      <img class="align-self-center img-fluid rounded-circle" src="data:image/jpeg;base64,{{user.persona.Foto}}" alt=""
+           width="40">
+      <h6 class=" mt-sm-2 mx-3">{{user.persona.primerNombre}} {{user.persona.primerApellido}}</h6>
 
-            <div class="form-group">
-                <button class="btn btn-ista btn-sm" (click)="logOut()">Cerrar Sesion</button>
-            </div>
-        </form>
-    </div>
+      <div class="form-group">
+        <button class="btn btn-ista btn-sm" (click)="logOut()">Cerrar Sesion</button>
+      </div>
+    </form>
+  </div>
 </nav>
 
 <div class="mt-100">
-    <router-outlet header></router-outlet>
+  <router-outlet header></router-outlet>
 </div>

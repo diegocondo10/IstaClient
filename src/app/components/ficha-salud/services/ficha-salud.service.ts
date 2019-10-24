@@ -52,10 +52,13 @@ export class FichaSaludService {
             case 'SI':
               this.activarPreguntas(pregunta, false);
               break;
-
             case 'NO':
               this.activarPreguntas(pregunta, true);
               break;
+            case undefined:
+              this.activarPreguntas(pregunta, true);
+              break;
+
           }
 
         } else if (res.parametros) {
@@ -65,7 +68,22 @@ export class FichaSaludService {
         } else if (res.diagnosticos) {
           pregunta.respuestaPersona['diagnosticos'] = res.diagnosticos as Diagnostico;
         }
+
+
       }
+
+      if (pregunta.required === true && pregunta.tipo === 'SELECT') {
+        const result = pregunta.respuestaPersona['select'].titulo;
+
+        if (result === undefined) {
+          const preguntasHijas = seccion.preguntafsSet.filter(item => item.dependeDe === pregunta);
+          if (preguntasHijas.length > 0) {
+            this.activarPreguntas(pregunta, true);
+          }
+        }
+
+      }
+
 
     })); // FOR DE LAS SECCIONES
     return ficha;
