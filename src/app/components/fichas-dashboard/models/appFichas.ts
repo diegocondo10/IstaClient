@@ -1,4 +1,4 @@
-import { Persona } from "../../../models/persona";
+import {Persona} from '../../../models/persona';
 
 export interface SeccionFs {
   id?: number;
@@ -52,7 +52,7 @@ export interface PersonaFs {
 
 export interface RespuestaFs {
   id?: number;
-  respuestas?: string | ParametroFs | ParametroFs[] | Diagnostico[];
+  respuestas?: string | ParametroFs | ParametroFs[] | Diagnostico[] | DiagnosticoDiscapacidad[];
   personaFs?: PersonaFs;
   pregunta?: PreguntaFs;
 }
@@ -60,6 +60,17 @@ export interface RespuestaFs {
 export interface Diagnostico {
   parentesco?: string;
   diagnostico?: string;
-  medicacion?: "SI" | "NO";
+  medicacion?: 'SI' | 'NO';
 }
 
+export interface DiagnosticoDiscapacidad {
+  tipoDiscapacidad?: string;
+  parentesco?: string;
+  noCarnet?: string;
+  porcentaje?: number;
+}
+
+export interface DiagnosticoMedicamento {
+  tipoMedicamento?: string;
+  parentesco?: string;
+}

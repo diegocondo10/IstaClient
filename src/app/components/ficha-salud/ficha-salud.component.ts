@@ -1,7 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FichaSaludService} from './services/ficha-salud.service';
 import {UsersService} from '../../services/users.service';
-import {SeccionFs, PreguntaFs, ParametroFs, Diagnostico} from '../fichas-dashboard/models/appFichas';
+import {
+  Diagnostico,
+  DiagnosticoDiscapacidad,
+  DiagnosticoMedicamento,
+  ParametroFs,
+  PreguntaFs,
+  SeccionFs
+} from '../fichas-dashboard/models/appFichas';
 import {Router} from '@angular/router';
 
 @Component({
@@ -12,6 +19,8 @@ import {Router} from '@angular/router';
 export class FichaSaludComponent implements OnInit {
   public ficha: SeccionFs[];
   public diagnostico: Diagnostico = {};
+  public diagnosticoDiscapacidad: DiagnosticoDiscapacidad = {};
+  public diagnosticoMedicamento: DiagnosticoMedicamento = {};
 
   public accion: 'add' | 'upt';
   public pregunta: PreguntaFs;
@@ -40,9 +49,20 @@ export class FichaSaludComponent implements OnInit {
     return json;
   }
 
-  descartivarPreguntasHijas() {
-
+  generarJSONDiagnosticosDiscapacidad(pregunta: PreguntaFs) {
+    let json = '{"diagnosticosDiscapacidad":';
+    json += JSON.stringify(pregunta.respuestaPersona['diagnosticos-discapacidad']);
+    json += '}';
+    return json;
   }
+
+  generarJSONDiagnosticosMedicamentos(pregunta: PreguntaFs) {
+    let json = '{"diagnosticosMedicamentos":';
+    json += JSON.stringify(pregunta.respuestaPersona['diagnosticos-medicamentos']);
+    json += '}';
+    return json;
+  }
+
 
   /*
    *   EVENTOS DEL TEMPLATE
@@ -114,9 +134,10 @@ export class FichaSaludComponent implements OnInit {
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
 
-  abrirModal(accion: 'add' | 'upt', pregunta: PreguntaFs, diagnostico?: Diagnostico) {
+  abrirModalDiagnostico(accion: 'add' | 'upt', pregunta: PreguntaFs, diagnostico?: DiagnosticoDiscapacidad) {
     this.accion = accion;
     this.pregunta = pregunta;
+
     if (accion === 'upt') {
       this.diagnostico = diagnostico;
     } else {
@@ -127,11 +148,83 @@ export class FichaSaludComponent implements OnInit {
         medicacion: 'SI'
       };
     }
+
+  }
+
+
+  guardarDiagnosticoDiscapacidad() {
+    if (this.accion === 'add') {
+      this.pregunta.respuestaPersona['diagnosticos-discapacidad'].push(this.diagnosticoDiscapacidad);
+    }
+    const json = this.generarJSONDiagnosticosDiscapacidad(this.pregunta);
+    this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
+  }
+
+
+  abrirModalDiscapacidad(accion: 'add' | 'upt', pregunta: PreguntaFs, diagnostico?: Diagnostico) {
+    this.accion = accion;
+    this.pregunta = pregunta;
+    if (accion === 'upt') {
+      this.diagnosticoDiscapacidad = diagnostico;
+    } else {
+
+      this.diagnosticoDiscapacidad = {
+        parentesco: '',
+        porcentaje: 1,
+        noCarnet: '',
+        tipoDiscapacidad: ''
+      };
+    }
+  }
+
+  eliminarDiagnosticoDiscapacidad(pregunta: PreguntaFs, diagnostico: Diagnostico) {
+    const index = pregunta.respuestaPersona['diagnosticos-discapacidad'].indexOf(diagnostico);
+    pregunta.respuestaPersona['diagnosticos-discapacidad'].splice(index, 1);
+    let json = null;
+    if (pregunta.respuestaPersona['diagnosticos-discapacidad'].length !== 0) {
+      json = this.generarJSONDiagnosticosDiscapacidad(pregunta);
+    }
+    this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
+  }
+
+
+  abrirModalMedicamentos(accion: 'add' | 'upt', pregunta: PreguntaFs, diagnostico?: Diagnostico) {
+    this.accion = accion;
+    this.pregunta = pregunta;
+    if (accion === 'upt') {
+      this.diagnosticoMedicamento = diagnostico;
+    } else {
+
+      this.diagnosticoMedicamento = {
+        parentesco: '',
+        tipoMedicamento: ''
+      };
+    }
+  }
+
+
+  eliminarDiagnosticoMedicamentos(pregunta: PreguntaFs, diagnostico: Diagnostico) {
+    const index = pregunta.respuestaPersona['diagnosticos-medicamentos'].indexOf(diagnostico);
+    pregunta.respuestaPersona['diagnosticos-medicamentos'].splice(index, 1);
+    let json = null;
+    if (pregunta.respuestaPersona['diagnosticos-medicamentos'].length !== 0) {
+      json = this.generarJSONDiagnosticosMedicamentos(pregunta);
+    }
+    this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
+  }
+
+  guardarMedicamento() {
+    if (this.accion === 'add') {
+      this.pregunta.respuestaPersona['diagnosticos-medicamentos'].push(this.diagnosticoMedicamento);
+    }
+    const json = this.generarJSONDiagnosticosMedicamentos(this.pregunta);
+    this.srv.updateRespuestaFs(this.pregunta.respuestaPersona.id, json);
   }
 
 
   confirmarFicha() {
     this.router.navigate(['/fichas/confirmar']);
   }
+
 
 }

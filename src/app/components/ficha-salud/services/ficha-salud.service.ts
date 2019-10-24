@@ -1,7 +1,14 @@
 import {Injectable} from '@angular/core';
 import {UPDATE_RESPUESTA_FS, BUSCAR_FICHA} from './queries';
 import {Apollo} from 'apollo-angular';
-import {SeccionFs, PreguntaFs, ParametroFs, Diagnostico} from '../../fichas-dashboard/models/appFichas';
+import {
+  SeccionFs,
+  PreguntaFs,
+  ParametroFs,
+  Diagnostico,
+  DiagnosticoDiscapacidad,
+  DiagnosticoMedicamento
+} from '../../fichas-dashboard/models/appFichas';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +44,12 @@ export class FichaSaludService {
       pregunta.respuestaPersona['select'] = {};
       pregunta.respuestaPersona['simple'] = '';
       pregunta.respuestaPersona['diagnosticos'] = [];
+      pregunta.respuestaPersona['diagnosticos-discapacidad'] = [];
+      pregunta.respuestaPersona['diagnosticos-medicamentos'] = [];
 
       if (JSONstring) {
 
         const res = JSON.parse(JSONstring);
-
         if (res.simple) {
           pregunta.respuestaPersona['simple'] = res.simple;
         } else if (res.parametro) {
@@ -55,9 +63,6 @@ export class FichaSaludService {
             case 'NO':
               this.activarPreguntas(pregunta, true);
               break;
-            case undefined:
-              this.activarPreguntas(pregunta, true);
-              break;
 
           }
 
@@ -66,7 +71,13 @@ export class FichaSaludService {
           res.parametros.forEach(parametro => this.checkParams(pregunta, parametro));
 
         } else if (res.diagnosticos) {
+
           pregunta.respuestaPersona['diagnosticos'] = res.diagnosticos as Diagnostico;
+
+        } else if (res.diagnosticosDiscapacidad) {
+          pregunta.respuestaPersona['diagnosticos-discapacidad'] = res.diagnosticosDiscapacidad as DiagnosticoDiscapacidad;
+        } else if (res.diagnosticosMedicamentos) {
+          pregunta.respuestaPersona['diagnosticos-medicamentos'] = res.diagnosticosMedicamentos as DiagnosticoMedicamento;
         }
 
 
