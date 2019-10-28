@@ -10,6 +10,7 @@ import {
   SeccionFs
 } from '../fichas-dashboard/models/appFichas';
 import {Router} from '@angular/router';
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-ficha-salud',
@@ -24,12 +25,14 @@ export class FichaSaludComponent implements OnInit {
 
   public accion: 'add' | 'upt';
   public pregunta: PreguntaFs;
+  public user: User;
 
   constructor(private srv: FichaSaludService, private userSrv: UsersService, private router: Router) {
   }
 
   async ngOnInit() {
     this.ficha = await this.srv.buscarFichaSalud(this.userSrv.getUserLoggedIn().persona.id);
+    this.user = this.userSrv.getUserLoggedIn();
   }
 
   /*
@@ -106,13 +109,35 @@ export class FichaSaludComponent implements OnInit {
     this.srv.updateRespuestaFs(pregunta.respuestaPersona.id, json);
   }
 
-  agregarNuevo(pregunta: PreguntaFs, event) {
-    const result = pregunta.parametros.filter((param: ParametroFs) => param.titulo.toLowerCase().includes(event.value.toLowerCase()));
-    if (result.length > 0) {
-      alert('YA EXISTE ESE PARAMETRO!!');
+  async agregarNuevo(pregunta: PreguntaFs, event) {
+
+    if (event.value === '') {
+
+      alert('TIENE QUE PONER UN NOMBRE PARA EL PARAMETRO!!!');
+
     } else {
 
+      const result = pregunta.parametros.filter((param: ParametroFs) => param.titulo.toLowerCase().includes(event.value.toLowerCase()));
+      if (result.length > 0) {
+        alert('YA EXISTE ESE PARAMETRO!!');
+      } else {
+
+        const result: ParametroFs = await this.srv.agregarParametro({
+          agregadoPor: this.user.persona.identificacion,
+          pregunta: pregunta.id,
+          titulo: event.value
+        });
+        result.check = true;
+        result.titulo = event.value;
+
+        pregunta.parametros.push(result);
+
+        event.value = '';
+
+      }
     }
+
+
   }
 
 

@@ -74,3 +74,11 @@ export interface DiagnosticoMedicamento {
   tipoMedicamento?: string;
   parentesco?: string;
 }
+
+
+export interface NuevoParametro {
+  titulo?: string;
+  agregadoPor?: string;
+  pregunta?: number;
+
+}

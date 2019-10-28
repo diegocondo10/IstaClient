@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {UPDATE_RESPUESTA_FS, BUSCAR_FICHA} from './queries';
+import {AGREGAR_PARAMETRO, BUSCAR_FICHA, UPDATE_RESPUESTA_FS} from './queries';
 import {Apollo} from 'apollo-angular';
 import {
-  SeccionFs,
-  PreguntaFs,
-  ParametroFs,
   Diagnostico,
   DiagnosticoDiscapacidad,
-  DiagnosticoMedicamento
+  DiagnosticoMedicamento,
+  NuevoParametro,
+  ParametroFs,
+  PreguntaFs,
+  SeccionFs
 } from '../../fichas-dashboard/models/appFichas';
 
 @Injectable({
@@ -120,4 +121,17 @@ export class FichaSaludService {
     }).toPromise()
       .then();
   }
+
+  public async agregarParametro(input: NuevoParametro) {
+    const mutation = this.apollo.mutate({
+      mutation: AGREGAR_PARAMETRO,
+      variables: {
+        input: input
+      }
+    });
+    const promise = await mutation.toPromise();
+    return promise.data['appFs']['agregarParametro'];
+
+  }
+
 }

@@ -46,3 +46,17 @@ mutation updateRespuestaFs($id: Int!, $respuesta: JSONString) {
   }
 }
 `;
+
+
+export const AGREGAR_PARAMETRO = gql`
+mutation agregarParametros($input: NuevoParametroInput!) {
+  appFs {
+    agregarParametro(input: $input) {
+      parametro {
+        id
+      }
+    }
+  }
+}
+
+`;
