@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AGREGAR_PARAMETRO, BUSCAR_FICHA, UPDATE_RESPUESTA_FS} from './queries';
+import {AGREGAR_PARAMETRO, BUSCAR_FICHA, CONFIRMAR_FICHA, UPDATE_RESPUESTA_FS} from './queries';
 import {Apollo} from 'apollo-angular';
 import {
   Diagnostico,
@@ -131,6 +131,19 @@ export class FichaSaludService {
     });
     const promise = await mutation.toPromise();
     return promise.data['appFs']['agregarParametro'];
+
+  }
+
+
+  confirmarFicha(idPersona: number) {
+    const mutation = this.apollo.mutate({
+      mutation: CONFIRMAR_FICHA,
+      variables: {
+        idPersona: idPersona
+      }
+    });
+
+    return mutation.toPromise().then(res => res.data['appFs']['confirmarFicha']);
 
   }
 

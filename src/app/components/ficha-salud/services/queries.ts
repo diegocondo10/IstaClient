@@ -60,3 +60,16 @@ mutation agregarParametros($input: NuevoParametroInput!) {
 }
 
 `;
+
+
+export const CONFIRMAR_FICHA = gql`
+mutation confirmarFicha($idPersona: Int!) {
+  appFs {
+    confirmarFicha(idPersona: $idPersona) {
+      personaFs {
+        id
+      }
+    }
+  }
+}
+`;

@@ -249,6 +249,8 @@ export class FichaSaludComponent implements OnInit {
 
   confirmarFicha() {
     this.router.navigate(['/fichas/confirmar']);
+    this.srv.confirmarFicha(this.user.persona.id)
+      .then(data => console.log(data));
   }
 
 
