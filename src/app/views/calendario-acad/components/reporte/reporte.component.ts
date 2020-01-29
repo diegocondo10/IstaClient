@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+/*
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
-
+*/
 @Component({
   selector: 'app-reporte',
   templateUrl: './reporte.component.html',
@@ -16,6 +16,7 @@ export class ReporteComponent implements OnInit {
   }
 
   generarPDF() {
+    /*
     html2canvas(document.getElementById('contenido'), {
       // Opciones
       allowTaint: true,
@@ -28,6 +29,7 @@ export class ReporteComponent implements OnInit {
       doc.addImage(img, 'PNG', 7, 20, 195, 105);
       doc.save('calendario.pdf');
     });
+    */
   }
 
 }
